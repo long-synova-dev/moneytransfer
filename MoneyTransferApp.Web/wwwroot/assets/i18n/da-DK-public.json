@@ -1,0 +1,13 @@
+{
+    "Dataprocessor": {
+        "Title": "[da] Title",
+        "Desc": "[da] Desc",
+        "CounterParty": "[da] CounterParty",
+        "DataprocessorType": "[da] DataprocessorType",
+        "Version": "[da] Version",
+        "Last-Revised": "[da] Last-Revised",
+        "Responsible": "[da] Responsible",
+        "DownloadAsPdf": "[da] DownloadAsPdf",
+        "Sign": "[da] Sign"
+    }
+}

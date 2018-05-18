@@ -1,0 +1,174 @@
+<modal-dialog [(modalDialog)]="confirmDialog">
+    <p>{{subscriptionMessage}}</p>
+    <div class="pmd-modal-bordered text-right">
+        <button *ngIf="redirectTo" class="btn pmd-ripple-effect btn-primary" type="button" (click)="goToSubscription()">OK</button>
+        <button *ngIf="!redirectTo" class="btn pmd-ripple-effect btn-primary" type="button" (click)="confirmDialog.visible = false">OK</button>
+    </div>
+</modal-dialog>
+<div class="container">
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+      <div class="account-help-block mb20">
+          <div class="text-center">
+              <img src="assets/images/icon-bubble.png" alt="" />
+          </div>
+          <h1 class="account-help-block__title">{{'Login.Motto' | translate}}</h1>
+          <p class="account-help-block__desc">{{'Login.Blurb' | translate}}</p>
+          <a title="" class="account-help-block__link" (click)="startChat()">{{'Login.StartChat' | translate}}</a>
+      </div>
+  </div>
+  <div class="col-md-5 col-md-offset-1">
+      <div class="panel panel-default">
+          <div class="panel-body">
+              <h2 class="title text-center">{{'Login.LoginFormTitle' | translate}}</h2>
+
+              <div class="from-error bg-danger" *ngIf="errorMessenger">
+                  <span *ngFor="let errorMessage of errorMessenger">{{errorMessage}}</span>
+                  <span *ngIf="resendEmail"><a (click)="resendEmailConfirm(loginForm.value)">Resend confirmation email?</a></span>
+              </div>
+
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label"
+                    [ngClass]="{
+                        'pmd-textfield-floating-label-completed': loginForm.controls['companyNumber'].value,
+                        'has-error':!loginForm.controls['companyNumber'].valid && loginForm.controls['companyNumber'].touched
+                    }">
+                        <label for="companyNumber" class="control-label pmd-input-group-label">{{'Login.CompanyNumb' | translate}}</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="material-icons">account_balance</i></div>
+                            <input class="form-control" id="companyNumber" type="text" name="companyNumber" [formControl]="loginForm.controls['companyNumber']"><span class="pmd-textfield-focused"></span>
+                        </div>
+                        <div *ngIf="loginForm.controls['companyNumber'].hasError('required') && loginForm.controls['companyNumber'].touched" class="help-block">
+                              {{'Login.CompanyNumbRequired' | translate}}
+                        </div>
+                    </div>
+                  <div class="form-group pmd-textfield pmd-textfield-floating-label"
+                  [ngClass]="{
+                        'pmd-textfield-floating-label-completed': loginForm.controls['email'].value,
+                        'has-error':!loginForm.controls['email'].valid && loginForm.controls['email'].touched
+                    }">
+                      <label for="loginEmail" class="control-label pmd-input-group-label">{{'Login.Email' | translate}}</label>
+                      <div class="input-group">
+                          <div class="input-group-addon"><i class="material-icons">mail_outline</i></div>
+                          <input class="form-control" id="loginEmail" type="email" name="email" [formControl]="loginForm.controls['email']"><span class="pmd-textfield-focused"></span>
+                      </div>
+                      <div *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched" class="help-block">
+                            {{'Login.EmailRequired' | translate}}
+                      </div>
+                      <div *ngIf="!loginForm.controls['email'].hasError('required') && loginForm.controls['email'].hasError('pattern') && loginForm.controls['email'].touched" class="help-block">
+                            {{'Login.EmailInvalid' | translate}}
+                      </div>
+                  </div>
+                  <div class="form-group pmd-textfield pmd-textfield-floating-label"
+                    [ngClass]="{
+                        'pmd-textfield-floating-label-completed': loginForm.controls['password'].value,
+                        'has-error':!loginForm.controls['password'].valid && loginForm.controls['password'].touched
+                    }">
+                      <label for="password" class="control-label pmd-input-group-label">{{'Login.Password' | translate}}</label>
+                      <div class="input-group">
+                          <div class="input-group-addon"><i class="material-icons">lock_outline</i></div>
+                          <input class="form-control" id="password" type="password" [formControl]="loginForm.controls['password']"><span class="pmd-textfield-focused"></span>
+                      </div>
+                      <div *ngIf="loginForm.controls['password'].hasError('required') 
+                                  && loginForm.controls['password'].touched" class="help-block">
+                                  {{'Login.PasswordRequired' | translate}}
+                      </div>
+                  </div>
+                  <button type="button" class="btn pmd-ripple-effect btn-primary btn-block hidden" [disabled]="loginForm.invalid" type="submit">{{'Login.Login' | translate}}</button>
+                </form>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <div class="pmd-switch remember-checkbox">
+                                <label>
+                                    <input id="isRememberMe" type="checkbox" [(ngModel)]="isRememberMe">
+                                    <span class="pmd-switch-label"></span>
+                                </label>
+                                <span class="pmd-switch__text">{{'Login.RememberMe' | translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="text-right">
+                            <a [routerLink]="['/account/forgot-password']">{{'Login.ForgotPassword' | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt10"></div>
+                <button type="button" class="btn pmd-ripple-effect btn-primary btn-block" [disabled]="loginForm.invalid" (click)="onSubmit(loginForm.value)">{{'Login.Login' | translate}}</button>
+                <p class="redirection-link text-center">{{'Login.NoAccount' | translate}} <a [routerLink]="['/account/signup']" class="login-register">{{'Login.SignUp' | translate}}</a>. </p>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="help-feature">
+  <h2 class="help-feature__heading">{{'Login.FreeSupport' | translate}}</h2>
+  <div class="row">
+      <div class="col-md-3">
+          <div class="help-feature__item pmd-z-depth">
+              <div class="help-feature__icon">
+                  <i class="material-icons">library_books</i>
+              </div>
+              <div class="">
+                  <h3 class="help-feature__title">{{'Login.Documentation' | translate}}</h3>
+                  <p>{{'Login.DocumentationText' | translate}}</p>
+                  <p><a href="http://help.complyto.com" target="_blank" role="button">{{'Login.Read' | translate}}</a></p>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="help-feature__item pmd-z-depth">
+              <div class="help-feature__icon">
+                  <i class="material-icons">phone</i>
+              </div>
+              <div class="">
+                  <h3 class="help-feature__title">{{'Login.CallUs' | translate}}</h3>
+                  <p>{{'Login.CallUsText' | translate}}</p>
+                  <p><a (click)="startChat()" role="button">{{'Login.Read' | translate}}</a></p>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="help-feature__item pmd-z-depth">
+              <div class="help-feature__icon">
+                  <i class="material-icons">chat</i>
+              </div>
+              <div class="">
+                  <h3 class="help-feature__title">{{'Login.TryToChat' | translate}}</h3>
+                  <p>{{'Login.TryToChatText' | translate}}</p>
+                  <p><a (click)="startChat()" role="button">{{'Login.Read' | translate}}</a></p>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="help-feature__item pmd-z-depth">
+              <div class="help-feature__icon">
+                  <i class="material-icons">ondemand_video</i>
+              </div>
+              <div class="">
+                  <h3 class="help-feature__title">{{'Login.Videos' | translate}}</h3>
+                  <p>{{'Login.VideosText' | translate}}</p>
+                  <p><a href="http://help.complyto.com/videos" target="_blank" role="button">{{'Login.Read' | translate}}</a></p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<div class="mobile-model" *ngIf="isOpenMobileAlert">
+    <div class="mobile-model__inner">
+        <div class="mobile-model__close-button" (click)="closeMoblieAlert()">
+            <i class="material-icons">close</i>
+        </div>
+        <div class="text-center">
+            <div class="mobile-model__icon">
+                <i class="material-icons">phonelink_erase</i>
+            </div>
+            <div class="mobile-model__title">
+                {{'MobileAlert.Title' | translate}}
+            </div>
+            <p>{{'MobileAlert.Text1' | translate}}</p>
+            <p>{{'MobileAlert.Text2' | translate}}</p>
+        </div>
+    </div>
+</div>

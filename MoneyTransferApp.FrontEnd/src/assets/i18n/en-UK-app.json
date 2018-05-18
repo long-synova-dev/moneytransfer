@@ -1,0 +1,66 @@
+{
+    "Header": {
+        "SearchFor": "Search for...",
+        "BillingHistory": "Billing History",
+        "AnotherAction": "Another Action",
+        "Settings": "Settings",
+        "Language": "Language",
+        "LogOut": "Log out",
+        "Home": "Home",
+        "GDPRProgram": "GDPR Program",
+        "Notifications": "Notifications",
+        "ProFeature": "Pro Feature",
+        "BillingPlans": "Subscription plans",
+        "HelpTitle": "Help",
+        "HelpBtn": "Help + support",
+        "HelpText": "Visit the help and support center to create or track a support ticket and monitor heath",
+        "LaunchTour": "Launch guided tour",
+        "KeyboarShortcuts": "Keyboard shortcuts",
+        "ShowDiagnostics": "Show diagnostics",
+        "FeedbackTitle": "Send us feedback",
+        "FeedbackText": "Thank you for taking the time to give us feedback about",
+        "FeedbackBtn": "Submit feedback",
+        "UserManagement": "User Management",
+        "AccountInfo": "Account info"
+    },
+    "Error": {
+        "UpgradeNow": "Please upgrade your subscription to get full access to our service.",
+        "RestrictedArea": "You are not authorized to access this area.",
+        "NoConnection": "It seems that we cannot connect to our server at the moment. Please try again shortly.",
+        "SessionExpired": "Your session has expired. You will be redirected to the login screen shortly.",
+        "NotFoundResource": "Your requested URL cannot be found. Please try a different URL.",
+        "ServerError": "An error has occurred with our server. Please try again.",
+        "GatewayTimeout": "The request timed out. Please try again."
+    },
+    "Warning": {
+        "ConfirmDelete": "Are you sure you want to delete?"
+    },
+    "Success": {
+        "SaveSuccess": "Save Success"
+    },
+    "Common": {
+        "DeleteBtn": "Delete",
+        "CancelBtn": "Cancel",
+        "SaveBtn": "Save"
+    },
+    "SessionExpiredModal": {
+        "ModalTitle": "Session expired",
+        "ModalDesc": "Session expired. Please login in again",
+        "LoginBtn": "Login"
+    },
+    "UserOwner": {
+        "Title": "Title",
+        "Description": "Description",
+        "BasicInfo": "BasicInfo",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone",
+        "email": "Email",
+        "Security": "Security",
+        "oldPassword": "Old Password",
+        "newPassword": "New Password",
+        "renewPassword": "Confirm Password",
+        "Setting": "Setting",
+        "Language": "Language"
+    }
+}

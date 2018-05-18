@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h1>{{ 'Policy.Title' | translate }}</h1>
+            <p>{{ 'Policy.Description' | translate }}</p>
+        </div>
+    </div>
+    <div class="row mt20">
+        <div class="col-xs-6">
+            <div class="panel-group pmd-accordion" role="tablist" aria-multiselectable="true" *ngFor="let policy of policies">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab">
+                        <h4 class="panel-title white-background">
+                            <div class="panel-title__innner">
+                                {{policy.documentName}}
+                                <i class="material-icons md-dark pmd-sm pmd-accordion-arrow" *ngIf="policy.isLocked">lock_outline</i>
+                                <i class="material-icons md-dark pmd-sm pmd-accordion-arrow" *ngIf="!policy.isLocked">lock_open</i>
+                                <button class="btn btn-link pmd-accordion-arrow" (click)="viewDetail(policy.documentId)">{{'General.View' | translate}}</button>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

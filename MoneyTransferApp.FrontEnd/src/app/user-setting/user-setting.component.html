@@ -1,0 +1,159 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h1>{{ 'UserOwner.Title' | translate }}</h1>
+            <p>{{ 'UserOwner.Description' | translate }}</p>
+        </div>
+    </div>
+    <mat-accordion class="main-accordion" *ngIf="ready">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h2 class="title-no-margin">{{ 'UserOwner.BasicInfo' | translate }}</h2>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="basicForm" (ngSubmit)="basicFormSubmit(basicForm.value)">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': basicForm.controls['firstName'].value,
+                            'has-error': basicForm.controls['firstName'].invalid && basicForm.controls['firstName'].touched
+                        }">
+                            <label for="firstName" class="control-label pmd-input-group-label"> {{'UserOwner.firstName' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <input maxlength="128" class="form-control" id="firstName" [formControl]="basicForm.controls['firstName']" type="text">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': basicForm.controls['phone'].value,
+                            'has-error': basicForm.controls['phone'].invalid && basicForm.controls['phone'].touched
+                        }">
+                            <label for="phone" class="control-label pmd-input-group-label"> {{'UserOwner.phone' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">phone</i>
+                                </div>
+                                <input maxlength="128" class="form-control" id="phone" type="text" [formControl]="basicForm.controls['phone']">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': basicForm.controls['email'].value
+                        }">
+                            <label for="email" class="control-label pmd-input-group-label"> {{'UserOwner.email' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">mail_outline</i>
+                                </div>
+                                <input maxlength="128" class="form-control" id="email" type="text" [formControl]="basicForm.controls['email']" disabled>
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': basicForm.controls['lastName'].value,
+                            'has-error': basicForm.controls['lastName'].invalid && basicForm.controls['lastName'].touched
+                        }">
+                            <label for="lastName" class="control-label pmd-input-group-label"> {{'UserOwner.lastName' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <input maxlength="128" class="form-control" id="lastName" type="text" [formControl]="basicForm.controls['lastName']">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" type="submit">{{'Common.SaveBtn'| translate}}</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h2 class="title-no-margin">{{ 'UserOwner.Security' | translate }}</h2>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="securityForm" (ngSubmit)="securityFormSubmit(securityForm.value)">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': securityForm.controls['oldPassword'].value,
+                            'has-error': securityForm.controls['oldPassword'].invalid && securityForm.controls['oldPassword'].touched
+                        }">
+                            <label for="oldPassword" class="control-label pmd-input-group-label"> {{'UserOwner.oldPassword' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">lock_outline</i>
+                                </div>
+                                <input maxlength="128" class="form-control" id="oldPassword" type="password" [formControl]="securityForm.controls['oldPassword']">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': securityForm.controls['password'].value,
+                            'has-error': securityForm.controls['password'].invalid && securityForm.controls['password'].touched
+                        }">
+                            <label for="password" class="control-label pmd-input-group-label"> {{'UserOwner.newPassword' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">lock_outline</i>
+                                </div>
+                                <input maxlength="128" class="form-control" id="password" type="password" [formControl]="securityForm.controls['password']">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': securityForm.controls['confirmPassword'].value,
+                            'has-error': securityForm.controls['confirmPassword'].invalid && securityForm.controls['confirmPassword'].touched
+                        }">
+                            <label for="confirmPassword" class="control-label pmd-input-group-label"> {{'UserOwner.renewPassword' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">lock_outline</i>
+                                </div>
+                                <input maxlength="128" class="form-control" id="confirmPassword" type="password" [formControl]="securityForm.controls['confirmPassword']">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" type="submit">{{'Common.SaveBtn'| translate}}</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h2 class="title-no-margin">{{ 'UserOwner.Setting' | translate }}</h2>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                        'pmd-textfield-floating-label-completed': ctrl.value,
+                        'has-error': ctrl.invalid && ctrl.touched
+                    }">
+                        <label for="language" class="control-label">
+                            {{'UserOwner.Language' | translate}}
+                        </label>
+                        <ng-select [options]="defineLanguage" [(ngModel)]="seletedLang" #ctrl="ngModel" noFilter="10">
+                        </ng-select>
+                        <span class="pmd-textfield-focused"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <button class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" type="submit" (click)="setingFormInit()">{{'Common.SaveBtn'| translate}}</button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

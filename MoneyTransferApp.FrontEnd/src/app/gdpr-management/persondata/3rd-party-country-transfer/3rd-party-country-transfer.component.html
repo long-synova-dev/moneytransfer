@@ -1,0 +1,95 @@
+<div class="persondata-bar">
+    <div class="panel">
+        <div class="panel-body">
+            <ul class="list list-unstyled list-inline">
+                <li>1. {{'Persondata.ChooseProcess' | translate}}</li>
+                <li *ngFor="let process of allProcesses" [ngClass]="{'active': process.value == selectedProcess.value}" (click)="_data.changeLoadStatus(true); selectProcess(process)">
+                    <span>{{process.label}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="persondata-bar">
+    <div class="panel">
+        <div class="panel-body">
+            <ul class="list list-unstyled list-inline">
+                <li>2. {{'Persondata.ChoosePersonCategory' | translate}}</li>
+                <li  *ngFor="let personGroup of allPersonGroups" [ngClass]="{'active': personGroup.value == selectedPersonGroup.value}" (click)="_data.changeLoadStatus(true); selectPersonGroup(personGroup)">
+                    <span>{{personGroup.label}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<h2 class="fs18" *ngIf="selectedProcess && selectedPersonGroup" [innerHtml]="'Persondata.YourPurposes'| translate:{process: selectedProcess.label, personGroup: selectedPersonGroup.label}"></h2>
+<mat-accordion class="main-accordion" *ngIf="allPurposes">
+    <mat-expansion-panel *ngFor="let purpose of allPurposes" (opened)="selectPurpose(purpose)" [expanded]="selectedPurpose ? (purpose.purposeId == selectedPurpose.purposeId) : false">
+        <mat-expansion-panel-header >
+            <mat-panel-title>
+                <h2 class="title-no-margin">{{purpose.purposeName}}</h2>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+            <h3>{{'Persondata.Your3rdPartVendor' | translate}} <span class="help-group__icon"><i class="material-icons">help_outline</i><span class="help-group__help-text">{{'Persondata.Your3rdPartVendorTooltip' | translate}}</span></span></h3>
+            <div class="table-scroll">
+                <table class="table pmd-table table-bordered table-martrix mt20 table-no-responsive table-diag">
+                    <thead>
+                        <tr class="table-active">
+                            <th></th>
+                            <th *ngFor="let header of purpose.dataTypes">{{header.name}}</th>
+                            <th>{{'Persondata.Your3rdPartVendorAction' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="!purpose.vendorDataTypes">
+                        <tr>
+                            <td [colSpan]="purpose.dataTypes.length + 2"><div class="text-center">{{'Persondata.NoVendorData' | translate}}</div></td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="purpose.vendorDataTypes">
+                        <tr *ngFor="let vendor of purpose.vendorDataTypes">
+                            <td>{{vendor.vendorName}}</td>
+                            <td *ngFor="let item of vendor.dataTypes" (click)="clickMatrix(purpose,vendor.vendorId,item.id)" class="table-martrix__check" [ngClass]="{'active': item.selected}">
+                                <div class="table-martrix__check-inner">
+                                </div>
+                                <i class="material-icons">check</i>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <a class="block-inline-link" href="javascript:void(0);" (click)="vendorView(vendor)">{{'Persondata.3rdPartVendorViewBtn' | translate}}</a> 
+                                    <a class="block-inline-link" href="javascript:void(0);" (click)="deleteVendor(purpose, vendor.vendorId)"><i class="material-icons">delete</i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>{{'Persondata.AddVendor' | translate}} <span class="help-group__icon"><i class="material-icons">help_outline</i><span class="help-group__help-text">{{'Persondata.AddVendorTooltip' | translate}}</span></span></h3>
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <div  class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'pmd-textfield-floating-label-completed': NameOf3rdPartyVendor}">
+                        <label for="NameOf3rdPartyVendor" class="control-label">
+                            {{'Persondata.NameOf3rdPartyVendor' | translate}}
+                        </label>
+                        <input type="text" [(ngModel)]="NameOf3rdPartyVendor" class="form-control">
+                        <span class="pmd-textfield-focused"></span>
+                    </div>
+                    <div  class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'pmd-textfield-floating-label-completed': vendorCategory}">
+                        <label for="AddVendorCategory" class="control-label">
+                            {{'Persondata.AddVendorCategory' | translate}}
+                        </label>
+                        <ng-select 
+                            id="suggestion-list" [options]="listSuggestions"  (noOptionsFound)="onNoOptionsFound($event)" 
+                            [(ngModel)]="vendorCategory" filterPlaceholder="{{'Persondata.SelectFromList' | translate}}" 
+                        ></ng-select>
+                        <span class="pmd-textfield-focused"></span>
+                    </div>
+                    <button type="button" class="btn btn-primary" [disabled]="!NameOf3rdPartyVendor || !vendorCategory" (click)="addVendor(purpose)"> {{'Persondata.AddVendorSubmitBtn' | translate}}</button>
+                </div>
+            </div>
+            <div class="text-right">
+                <button class="btn btn-lg btn-default" (click)="selectPurpose(purpose)">{{'Persondata.Cancel' | translate}}</button>
+                <button class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" (click)="savePurpose(purpose)">{{'Persondata.Save' | translate}}</button>
+            </div>
+    </mat-expansion-panel>
+</mat-accordion>
+<router-outlet></router-outlet>

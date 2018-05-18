@@ -1,0 +1,39 @@
+.alert-toaster {
+    width: 400px;
+    top: 15px;
+    position: fixed;
+    left: 50%;
+    margin-left: -200px;
+    z-index: 100000;
+}
+
+.alert-toaster div {
+    animation-duration: 0.5s;
+    animation-fill-mode: both; 
+    animation-name: fadeInUp;
+    color: white;
+    
+}
+
+
+.alert-toaster .alert-success {
+    border-color: #8bb63b;
+    background-color: #8bb63b;
+}
+
+.alert-toaster .alert-danger {
+    border-color: #d0661c;
+    background-color: #d0661c;
+}
+
+.alert-toaster .alert-warning {
+    border-color: #f2cb2a;
+    background-color: #f2cb2a;
+    color: #343d4b;
+}
+
+.alert-toaster div a {
+    float:right; 
+    cursor: pointer;
+    padding: 0 5px 0 5px;
+}

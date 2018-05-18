@@ -1,0 +1,441 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+/***************** font ************/
+@font-face {
+    font-family: 'TitilliumWeb-SemiBold';
+    src: url('../fonts/TitilliumWeb-SemiBold.eot?#iefix') format('embedded-opentype'), url('../fonts/TitilliumWeb-SemiBold.woff') format('woff'), url('../fonts/TitilliumWeb-SemiBold.ttf') format('truetype'), url('../fonts/TitilliumWeb-SemiBold.svg#TitilliumWeb-SemiBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TitilliumWeb-Regular';
+    src: url('../fonts/TitilliumWeb-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/TitilliumWeb-Regular.woff') format('woff'), url('../fonts/TitilliumWeb-Regular.ttf') format('truetype'), url('../fonts/TitilliumWeb-Regular.svg#TitilliumWeb-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TitilliumWeb-Light';
+    src: url('../fonts/TitilliumWeb-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/TitilliumWeb-Light.woff') format('woff'), url('../fonts/TitilliumWeb-Light.ttf') format('truetype'), url('../fonts/TitilliumWeb-Light.svg#TitilliumWeb-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TitilliumWeb-Bold';
+    src: url('../fonts/TitilliumWeb-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/TitilliumWeb-Bold.woff') format('woff'), url('../fonts/TitilliumWeb-Bold.ttf') format('truetype'), url('../fonts/TitilliumWeb-Bold.svg#TitilliumWeb-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani-Light';
+    src: url('../fonts/Rajdhani-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/Rajdhani-Light.woff') format('woff'), url('../fonts/Rajdhani-Light.ttf') format('truetype'), url('../fonts/Rajdhani-Light.svg#Rajdhani-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani-Semibold';
+    src: url('../fonts/Rajdhani-Semibold.eot?#iefix') format('embedded-opentype'), url('../fonts/Rajdhani-Semibold.woff') format('woff'), url('../fonts/Rajdhani-Semibold.ttf') format('truetype'), url('../fonts/Rajdhani-Semibold.svg#Rajdhani-Semibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani-Bold';
+    src: url('../fonts/Rajdhani-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/Rajdhani-Bold.woff') format('woff'), url('../fonts/Rajdhani-Bold.ttf') format('truetype'), url('../fonts/Rajdhani-Bold.svg#Rajdhani-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani-Regular';
+    src: url('../fonts/Rajdhani-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Rajdhani-Regular.woff') format('woff'), url('../fonts/Rajdhani-Regular.ttf') format('truetype'), url('../fonts/Rajdhani-Regular.svg#Rajdhani-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rajdhani-Medium';
+    src: url('../fonts/Rajdhani-Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/Rajdhani-Medium.woff') format('woff'), url('../fonts/Rajdhani-Medium.ttf') format('truetype'), url('../fonts/Rajdhani-Medium.svg#Rajdhani-Medium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/************* end font **************/
+
+a {
+    color: #278bc5;
+    outline: none !important;
+    text-decoration: underline;
+}
+
+    a:hover, a:active, a:focus {
+        color: #24abe2;
+        text-decoration: none;
+    }
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: inside;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+}
+
+button {
+    outline: none !important;
+}
+
+.complyto-page {
+    max-width: 1386px;
+    padding: 0;
+}
+
+    .complyto-page .container {
+        width: 100%;
+        padding: 0 36px;
+    }
+
+#logo {
+    padding-top: 25px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+}
+
+    #logo img {
+        max-width: 100%;
+    }
+
+/***************** overblikket *************/
+.overblikket {
+    padding-top: 20px;
+}
+
+    .overblikket h3 {
+        text-align: center;
+        font-size: 25pt;
+        line-height: 30px;
+        color: #343d4b;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        font-family: 'TitilliumWeb-Regular', sans-serif;
+    }
+
+    .overblikket .content {
+        font-size: 12pt;
+        line-height: 14pt;
+        color: #343d4b;
+        font-family: 'Rajdhani-Regular', sans-serif;
+    }
+
+        .overblikket .content h5 {
+            font-family: 'Rajdhani-Bold', sans-serif;
+            padding-right: 35px;
+            font-size: 12pt;
+            line-height: 14pt;
+        }
+
+        .overblikket .content h4 {
+            font-family: 'Rajdhani-Bold', sans-serif;
+            padding-right: 35px;
+            font-size: 14pt;
+            line-height: 14pt;
+            margin-bottom: 5px;
+        }
+
+        .overblikket .content p:last-child {
+            margin-bottom: 0;
+        }
+
+    .overblikket .content-right h5 {
+        margin-bottom: 0;
+    }
+
+    .overblikket .content-left p {
+        margin-bottom: 5px;
+    }
+
+    .overblikket .content-right p {
+        margin-bottom: 5px;
+    }
+
+    .overblikket .main-overblikket {
+        margin-bottom: 20px;
+        /*height: 125px;
+	overflow: hidden;*/
+    }
+
+.icon-click {
+    height: 22px;
+    cursor: pointer;
+}
+
+    .icon-click.less {
+        background: url('../images/arrow-down.png') no-repeat center;
+    }
+
+    .icon-click.more {
+        background: url('../images/arrow-up.png') no-repeat center;
+    }
+
+/************ footer *********/
+#footer {
+    padding: 40px 0 35px;
+}
+
+    #footer p {
+        font-size: 15px;
+        line-height: 20px;
+        font-family: 'Rajdhani-Regular', sans-serif;
+        color: #343d4b;
+        margin-bottom: 0;
+    }
+
+        #footer p:first-child {
+            font-family: 'Rajdhani-Medium', sans-serif;
+        }
+
+        #footer p:last-child {
+            margin-bottom: 0;
+        }
+
+        #footer p a {
+            color: #343d4b;
+            text-decoration: underline;
+        }
+
+    #footer .footer-content {
+        margin-bottom: 15px;
+    }
+
+.social {
+    text-align: center;
+    margin-top: 85px;
+}
+
+    .social a {
+        margin: 0 8px;
+    }
+
+        .social a i {
+            font-size: 28px;
+            color: #5e7087;
+        }
+
+        .social a:hover > i {
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+.back-top {
+    text-align: right;
+    margin-top: 80px;
+    cursor: pointer;
+}
+/*********** responsive ************/
+@media (max-width: 767px) {
+    .complyto-page p {
+        font-size: 30px;
+        line-height: 38px;
+    }
+
+    .overblikket h3 {
+        font-size: 38px;
+        line-height: 45px;
+        font-family: 'TitilliumWeb-SemiBold', sans-serif;
+    }
+
+    .overblikket .content h5 {
+        font-size: 30px;
+        line-height: 38px;
+        padding: 0;
+    }
+
+    .overblikket .content-right h5 {
+        margin-bottom: 0;
+    }
+
+    .overblikket .content {
+        font-size: 30px;
+        line-height: 38px;
+    }
+
+    .overblikket .content-left {
+        margin-bottom: 42px;
+    }
+
+    .complyto-page .container {
+        padding: 0 36px;
+    }
+
+    .main-banner .content-banner {
+        width: 100%;
+    }
+
+        .main-banner .content-banner h2 {
+            margin-bottom: 54px;
+        }
+
+    #footer p {
+        font-size: 30px;
+        line-height: 38px;
+    }
+
+        #footer p:first-child {
+            text-transform: uppercase;
+            font-family: 'Rajdhani-Medium', sans-serif;
+        }
+
+    #logo {
+        padding-top: 0;
+        padding-bottom: 18px;
+    }
+
+    .social {
+        text-align: right;
+        margin-top: 40px;
+    }
+
+        .social a {
+            display: inline-block;
+            margin: 0;
+            margin-right: 25px;
+        }
+
+            .social a i {
+                font-size: 56px;
+                color: #5e7087;
+            }
+
+            .social a:last-child {
+                margin-right: 20px;
+            }
+
+    #footer .footer-content {
+        margin-bottom: 35px;
+    }
+
+    .back-top {
+        margin-top: 40px;
+    }
+
+    #footer p {
+        font-family: 'Rajdhani-Light', sans-serif
+    }
+}
+
+@media (max-width: 600px) {
+    .complyto-page p {
+        font-size: 15px;
+        line-height: 19px;
+    }
+
+    .overblikket h3 {
+        font-size: 19px;
+        line-height: 22px;
+        font-family: 'TitilliumWeb-SemiBold', sans-serif;
+    }
+
+    .overblikket .content h5 {
+        font-size: 15px;
+        line-height: 19px;
+        padding: 0;
+    }
+
+    .overblikket .content-right h5 {
+        margin-bottom: 0;
+    }
+
+    .overblikket .content {
+        font-size: 15px;
+        line-height: 19px;
+    }
+
+    .overblikket .content-left {
+        margin-bottom: 5px;
+    }
+
+    .complyto-page .container {
+        padding: 0 18px;
+    }
+
+    .main-banner .content-banner h2 {
+        margin-bottom: 27px;
+    }
+
+    #footer p {
+        font-size: 15px;
+        line-height: 19px;
+    }
+
+        #footer p:first-child {
+            text-transform: uppercase;
+            font-family: 'Rajdhani-Medium', sans-serif;
+        }
+
+    #logo {
+        padding-top: 0;
+        padding-bottom: 9px;
+    }
+
+    .social {
+        text-align: right;
+        margin-top: 20px;
+    }
+
+        .social a {
+            display: inline-block;
+            margin: 0;
+            margin-right: 12px;
+        }
+
+            .social a i {
+                font-size: 28px;
+                color: #5e7087;
+            }
+
+            .social a img {
+                width: 25px;
+            }
+
+            .social a:last-child {
+                margin-right: 10px;
+            }
+
+    #footer .footer-content {
+        margin-bottom: 17px;
+    }
+
+    .back-top {
+        margin-top: 20px;
+    }
+
+        .back-top img {
+            width: 18px;
+        }
+
+    .icon-click {
+        height: 11px;
+        width: 16px;
+        background-size: cover !important;
+        margin: 0 auto;
+    }
+
+    .overblikket .main-overblikket {
+        margin-bottom: 20px;
+    }
+
+    #logo {
+        max-width: 179px;
+    }
+
+    .content-test-om {
+        margin-bottom: 20px;
+    }
+}

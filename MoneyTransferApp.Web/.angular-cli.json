@@ -1,0 +1,63 @@
+{
+  "$schema": "../MoneyTransferApp.FrontEnd/node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "my-app"
+  },
+  "apps": [
+    {
+      "root": "../MoneyTransferApp.FrontEnd/src",
+      "outDir": "/wwwroot",
+      "assets": [
+        {
+          "glob": "assets",
+          "input": "./",
+          "output": "./"
+        }
+      ],
+      "index": "../MoneyTransferApp.FrontEnd/index.html",
+      "main": "../MoneyTransferApp.FrontEnd/main.ts",
+      "polyfills": "../MoneyTransferApp.FrontEnd/polyfills.ts",
+      "test": "../MoneyTransferApp.FrontEnd/test.ts",
+      "tsconfig": "../MoneyTransferApp.FrontEnd/tsconfig.app.json",
+      "testTsconfig": "../MoneyTransferApp.FrontEnd/tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../MoneyTransferApp.FrontEnd/src/theme.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "../MoneyTransferApp.FrontEnd/src/environments/environment.ts",
+      "environments": {
+        "dev": "../MoneyTransferApp.FrontEnd/src/environments/environment.ts",
+        "prod": "../MoneyTransferApp.FrontEnd/src/environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

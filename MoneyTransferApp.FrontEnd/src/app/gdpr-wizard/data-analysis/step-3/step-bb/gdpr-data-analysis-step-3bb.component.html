@@ -1,0 +1,123 @@
+<div class="side-backdrop" (click)="back()"></div>
+<div class="side-form-2">
+    <div *ngIf="ready1 && ready2">
+        <button class="btn-link no-padding" (click)="back()">
+            <i class="material-icons">arrow_back</i>
+        </button>
+        <div class="step-title">
+            <h2>{{'SecondStep.ResponsibleOrProcessor' | translate}} <span class="help-group__icon help-group__icon-bottom"><i class="material-icons">help_outline</i><span class="help-group__help-text">{{ 'SecondStep.ResponsibleOrProcessorTooltip' | translate}}</span></span></h2>
+        </div>
+        <table class="detail-table">
+            <tbody>
+                <tr>
+                    <td item-width="200">{{'SecondStep.Process' | translate}}:</td>
+                    <td>
+                        <strong>{{source[0]?.tagName}}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{'SecondStep.PersonType' | translate}}:</td>
+                    <td>
+                        <strong>{{source[1]?.tagName}}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{'SecondStep.Purpose' | translate}}:</td>
+                    <td>
+                        <strong>{{source[3]?.tagName}}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{'SecondStep.DataType' | translate}}:</td>
+                    <td>
+                        <strong>{{source[2]?.tagName}}</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt30">
+            <div class="radio" *ngFor="let owner of listDataOwners">
+                <label class="pmd-radio pmd-radio-ripple-effect">
+                    <input type="radio" name="dataOwnerRadio" id="{{owner.tagId}}" [(ngModel)]="selectedDataOwnerId" [value]="owner.tagId" (change)="selectOwner(owner)">
+                    <span class="pmd-radio-label">&nbsp;</span>
+                    <span>{{owner.tagName}}</span>
+                </label>
+            </div>
+            <div class="mt10" *ngIf="selectedDataOwnerId === outSourceId">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group pmd-textfield" [ngClass]="{'pmd-textfield-floating-label': !dataOwnerName}">
+                            <ng-select placeholder="{{(selectedDataOwnerId == outSourceId ? 'SecondStep.CustomerSupplierName' : '') | translate}}" id="suggestion-list" [options]="listSuggestions"  (noOptionsFound)="onNoOptionsFound($event)" [(ngModel)]="dataOwnerName" filterPlaceholder="{{'SecondStep.SelectFromList' | translate}}" [disabled]="selectedDataOwnerId != outSourceId"></ng-select>
+                            <span class="pmd-textfield-focused"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt10">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="help-form-group help-form-group__bottom">
+                            <div class="help-form-group__icon">
+                                <i class="material-icons pmd-tooltip">help_outline</i>
+                                <div class="help-form-group__help-text">
+                                    {{'SecondStep.TransferOfDataToolTip' | translate}}
+                                </div>
+                            </div>
+                            <div class="help-form-group__form">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                                        'pmd-textfield-floating-label-completed': transferOfData
+                                    }">
+                                    <label for="lastYearResult" class="control-label">
+                                        {{'SecondStep.TransferOfData' | translate}}
+                                    </label>
+                                    <ng-select id="suggestion-list" [options]="listTransferOfData"  [(ngModel)]="transferOfData" noFilter="10">
+                                    </ng-select>
+                                    <span class="pmd-textfield-focused"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group pmd-textfield" [ngClass]="{'pmd-textfield-floating-label': !transferOfData}">
+                            <ng-select placeholder="{{'SecondStep.TransferOfData' | translate}}" id="suggestion-list" [options]="listTransferOfData"  [(ngModel)]="transferOfData"></ng-select>
+                            <span class="pmd-textfield-focused"></span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="mt30">
+                <h3>
+                    <strong>{{'SecondStep.DeletionOfData' | translate}}</strong> <span class="help-group__icon help-group__icon-right"><i class="material-icons">help_outline</i><span class="help-group__help-text">{{ 'SecondStep.DeletionOfDataTooltip' | translate}}</span></span>
+                </h3>
+                <div class="radio" *ngFor="let deletion of listDeletionPeriods">
+                    <label class="pmd-radio pmd-radio-ripple-effect">
+                        <input type="radio" name="deletionPeriodRadio" id="{{deletion.tagId}}" [(ngModel)]="selectedDeletionPeriodId" [value]="deletion.tagId"
+                            (click)="selectDeletion(deletion)">
+                        <span class="pmd-radio-label">&nbsp;</span>
+                        <span>{{deletion.tagName}}</span>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="pmd-radio pmd-radio-ripple-effect">
+                        <input type="radio" name="deletionPeriodRadio" id="0" [(ngModel)]="selectedDeletionPeriodId" [value]="0">
+                        <span class="pmd-radio-label">&nbsp;</span>
+                        <span>{{'SecondStep.Others' | translate}}:</span>
+                    </label>
+                </div>
+            </div>
+            <div *ngIf="selectedDeletionPeriodId == 0">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="Default" class="control-label">{{'SecondStep.YourOwnDeletionPeriod' | translate}}</label>
+                            <input [disabled]="selectedDeletionPeriodId != 0" id="Default" class="form-control" type="text" [(ngModel)]="deletionPeriodName"
+                                (change)="editCustomDeletionPeriod()">
+                            <span class="pmd-textfield-focused"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" class="mt50">           
+                <button type="submit" class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" (click)="save()">{{'General.SaveBack' | translate}}</button>
+        </div>
+    </div>
+</div>

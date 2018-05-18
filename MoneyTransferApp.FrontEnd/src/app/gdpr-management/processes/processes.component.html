@@ -1,0 +1,310 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>{{'Processes.Title' | translate}}</h2>
+            <p>{{'Processes.Description' | translate}}</p>
+        </div>
+    </div>
+    <div class="processes-bar">
+        <div class="panel">
+            <div class="panel-body">
+                <ul class="list list-unstyled list-inline">
+                    <li>{{'Processes.Processes' | translate}}</li>
+                    <li>
+                        <span (click)="processesBarClick(null)" [ngClass]="{'active': !taskFilter.processId}">{{'Processes.AllProcesses' | translate}}</span>
+                    </li>
+                    <li *ngFor="let processes of listProcesses" [ngClass]="{'active': taskFilter.processId == processes.value}">
+                        <span (click)="processesBarClick(processes.value)">{{processes.label}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="filter-bar">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="check-box-group">
+                            <strong class="pull-left">{{'Processes.FilterText' | translate}}</strong>
+                            <div class="pmd-switch pull-left">
+                                <label>
+                                    <input type="checkbox" [(ngModel)]="checkboxTaskFilter" (change)="checkboxClick()">
+                                    <span class="pmd-switch-label"></span>
+                                </label>
+                                <span class="pmd-switch__text">{{'Processes.FilterTask' | translate}}</span>
+                            </div>
+                            <div class="pmd-switch pmd-switch-info pull-left ">
+                                <label>
+                                    <input type="checkbox" [(ngModel)]="checkboxControlFilter" (change)="checkboxClick()">
+                                    <span class="pmd-switch-label"></span>
+                                </label>
+                                <span class="pmd-switch__text">{{'Processes.FilterTaskAndControl' | translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="form-group pmd-textfield">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="material-icons">sort</i>
+                                </div>
+                                <input class="form-control" id="filterText" type="text" [(ngModel)]="taskFilter.taskTitle" name="filterText" placeholder="{{'Processes.FilterTextBox' | translate}}">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="form-group pmd-textfield">
+                            <ng-select
+                                class="users-select"
+                                placeholder="{{ 'Processes.PerformerSelect' | translate}}"
+                                [options]="defineUserInCompany"
+                                noFilter="10"
+                                [allowClear]="true"
+                                [(ngModel)]="taskFilter.taskPerformerId">
+                                <ng-template
+                                    #optionTemplate
+                                    let-option="option">
+                                    <div class="select-avatar">{{option?.label.toLowerCase()}}</div>
+                                    {{option?.label}}
+                                </ng-template>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-eq-height custom-row">
+        <div class="col-1per5">
+            {{ 'Processes.NewsAndProposed' | translate }}
+            <div class="panel task-list-area" style="height: 100%; background:#dadada">
+                <div class="panel-body">
+                    <button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-primary" routerLink="/gdpr/tasks">{{ 'Processes.AddNewBtn' | translate}}</button>
+                    <div class="mt20"></div>
+                    <div class="list-tasks">
+                        <div class="pull-left" *ngFor="let item of listTasks | filterBy: taskFilter">
+                            <div class="task-item" *ngIf="item.taskStatus == 0 || item.taskStatus == 1" [ngClass]="{'task-item--info': item.isControl, 'task-item--error': isRejected(item.taskStatus)}">
+                                <div class="task-item__inner">
+                                    <div class="task-item__name" (click)="editTask(item.taskId)">
+                                        <div class="task-item__error" *ngIf="item.isError">
+                                            <i class="material-icons">error_outline</i>
+                                        </div>
+                                        <div class="task-item__icon">
+                                            <i class="material-icons" *ngIf="!item.isAutoGenerated">assignment</i>
+                                            <img src="assets/images/icon-complyto.png" alt="" width="16" *ngIf="item.isAutoGenerated">
+                                        </div>
+                                        {{item.taskTitle}}
+                                    </div>
+                                    <div class="task-item__responsbility">
+                                        <ng-select
+                                            class="users-select"
+                                            placeholder="{{ 'Processes.PerformerSelect' | translate}}"
+                                            [options]="defineUserInCompany"
+                                            noFilter="10"
+                                            [(ngModel)]="item.taskPerformerId"
+                                            (selected)="changeResponsible(item, $event)">
+                                            <ng-template
+                                                #optionTemplate
+                                                let-option="option">
+                                                <div class="select-avatar">{{option?.label.toLowerCase()}}</div>
+                                                {{option?.label}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    <div class="task-item__ratio">
+                                        <i class="material-icons">assignment</i> {{item.totalCompletedToDos}}/{{item.totalTodos}}
+                                    </div>
+                                    <div class="task-item__status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1per5">
+            {{ 'Processes.Scheduled' | translate }}
+            <div class="panel task-list-area" style="height: 100%; background:#e6e6e6">
+                <div class="panel-body">
+                    <div class="list-tasks">
+                        <div class="pull-left" *ngFor="let item of listTasks | filterBy: taskFilter">
+                            <div class="task-item" *ngIf="item.taskStatus == 2" [ngClass]="{'task-item--info': item.isControl, 'task-item--error': isRejected(item.taskStatus)}">
+                                <div class="task-item__inner">
+                                    <div class="task-item__name" (click)="editTask(item.taskId)">
+                                        <div class="task-item__error" *ngIf="item.isError">
+                                            <i class="material-icons">error_outline</i>
+                                        </div>
+                                        <div class="task-item__icon">
+                                            <i class="material-icons" *ngIf="!item.isAutoGenerated">assignment</i>
+                                            <img src="assets/images/icon-complyto.png" alt="" width="16" *ngIf="item.isAutoGenerated">
+                                        </div>
+                                        {{item.taskTitle}}
+                                    </div>
+                                    <div class="task-item__responsbility">
+                                        <ng-select
+                                            class="users-select"
+                                            placeholder="{{ 'Processes.PerformerSelect' | translate}}"
+                                            [options]="defineUserInCompany"
+                                            noFilter="10"
+                                            [(ngModel)]="item.taskPerformerId"
+                                            (selected)="changeResponsible(item, $event)">
+                                            <ng-template
+                                                #optionTemplate
+                                                let-option="option">
+                                                <div class="select-avatar">{{option?.label.toLowerCase()}}</div>
+                                                {{option?.label}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    <div class="task-item__ratio">
+                                        <i class="material-icons">assignment</i> {{item.totalCompletedToDos}}/{{item.totalTodos}}
+                                    </div>
+                                    <div class="task-item__status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1per5">
+            {{ 'Processes.InProgress' | translate }}
+            <div class="panel task-list-area" style="height: 100%;">
+                <div class="panel-body">
+                    <div class="list-tasks">
+                        <div class="pull-left" *ngFor="let item of listTasks | filterBy: taskFilter">
+                            <div class="task-item" *ngIf="item.taskStatus == 3 || item.taskStatus == 5" [ngClass]="{'task-item--info': item.isControl, 'task-item--error': isRejected(item.taskStatus)}">
+                                <div class="task-item__inner">
+                                    <div class="task-item__name" (click)="openPerformDialog(item.taskId)">
+                                        <div class="task-item__error" *ngIf="item.isError">
+                                            <i class="material-icons">error_outline</i>
+                                        </div>
+                                        <div class="task-item__icon">
+                                            <i class="material-icons" *ngIf="!item.isAutoGenerated">assignment</i>
+                                            <img src="assets/images/icon-complyto.png" alt="" width="16" *ngIf="item.isAutoGenerated">
+                                        </div>
+                                        {{item.taskTitle}}
+                                    </div>
+                                    <div class="task-item__responsbility">
+                                        <ng-select disabled
+                                            class="users-select"
+                                            placeholder="{{ 'Processes.PerformerSelect' | translate}}"
+                                            [options]="defineUserInCompany"
+                                            noFilter="10"
+                                            [(ngModel)]="item.taskPerformerId"
+                                            (selected)="changeResponsible(item, $event)">
+                                            <ng-template
+                                                #optionTemplate
+                                                let-option="option">
+                                                <div class="select-avatar">{{option?.label.toLowerCase()}}</div>
+                                                {{option?.label}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    <div class="task-item__ratio">
+                                        <i class="material-icons">assignment</i> {{item.totalCompletedToDos}}/{{item.totalTodos}}
+                                    </div>
+                                    <div class="task-item__status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1per5">
+            {{ 'Processes.PendingReview' | translate }}
+            <div class="panel task-list-area" style="height: 100%;">
+                <div class="panel-body">
+                    <div class="list-tasks">
+                        <div class="pull-left" *ngFor="let item of listTasks | filterBy: taskFilter">
+                            <div class="task-item" *ngIf="item.taskStatus == 4" [ngClass]="{'task-item--info': item.isControl, 'task-item--error': isRejected(item.taskStatus)}">
+                                <div class="task-item__inner">
+                                    <div class="task-item__name" (click)="openReviewDialog(item.taskId)">
+                                        <div class="task-item__error" *ngIf="item.isError">
+                                            <i class="material-icons">error_outline</i>
+                                        </div>
+                                        <div class="task-item__icon">
+                                            <i class="material-icons" *ngIf="!item.isAutoGenerated">assignment</i>
+                                            <img src="assets/images/icon-complyto.png" alt="" width="16" *ngIf="item.isAutoGenerated">
+                                        </div>
+                                        {{item.taskTitle}}
+                                    </div>
+                                    <div class="task-item__responsbility">
+                                        <ng-select disabled
+                                            class="users-select"
+                                            placeholder="{{ 'Processes.PerformerSelect' | translate}}"
+                                            [options]="defineUserInCompany"
+                                            noFilter="10"
+                                            [(ngModel)]="item.taskPerformerId"
+                                            (selected)="changeResponsible(item, $event)">
+                                            <ng-template
+                                                #optionTemplate
+                                                let-option="option">
+                                                <div class="select-avatar">{{option?.label.toLowerCase()}}</div>
+                                                {{option?.label}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    <div class="task-item__ratio">
+                                        <i class="material-icons">assignment</i> {{item.totalCompletedToDos}}/{{item.totalTodos}}
+                                    </div>
+                                    <div class="task-item__status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1per5">
+            {{ 'Processes.Done' | translate }}
+            <div class="panel task-list-area" style="height: 100%;">
+                <div class="panel-body">
+                    <div class="list-tasks">
+                        <div class="pull-left" *ngFor="let item of listTasks | filterBy: taskFilter">
+                            <div class="task-item" *ngIf="item.taskStatus == 6" [ngClass]="{'task-item--info': item.isControl, 'task-item--error': isRejected(item.taskStatus)}">
+                                <div class="task-item__inner">
+                                    <div class="task-item__name" (click)="openDetailDialog(item.taskId)">
+                                        <div class="task-item__error" *ngIf="item.isError">
+                                            <i class="material-icons">error_outline</i>
+                                        </div>
+                                        <div class="task-item__icon">
+                                            <i class="material-icons" *ngIf="!item.isAutoGenerated">assignment</i>
+                                            <img src="assets/images/icon-complyto.png" alt="" width="16" *ngIf="item.isAutoGenerated">
+                                        </div>
+                                        {{item.taskTitle}}
+                                    </div>
+                                    <div class="task-item__responsbility">
+                                        <ng-select disabled
+                                            class="users-select"
+                                            placeholder="{{ 'Processes.PerformerSelect' | translate}}"
+                                            [options]="defineUserInCompany"
+                                            noFilter="10"
+                                            [(ngModel)]="item.taskPerformerId"
+                                            (selected)="changeResponsible(item, $event)">
+                                            <ng-template
+                                                #optionTemplate
+                                                let-option="option">
+                                                <div class="select-avatar">{{option?.label.toLowerCase()}}</div>
+                                                {{option?.label}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    <div class="task-item__ratio">
+                                        <i class="material-icons">assignment</i> {{item.totalCompletedToDos}}/{{item.totalTodos}}
+                                    </div>
+                                    <div class="task-item__status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt30"></div>
+</div>

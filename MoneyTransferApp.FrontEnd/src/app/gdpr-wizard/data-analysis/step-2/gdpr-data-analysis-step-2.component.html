@@ -1,0 +1,89 @@
+<div class="container-fluid" *ngIf="ready">
+    <!-- <button class="btn-link no-padding pull-right" routerLink="/gdpr-wizard/data-analysis/step-3">
+        <i class="material-icons">arrow_forward</i>
+    </button> -->
+    <div class="row">
+        <div class="col-xs-6">
+            <button class="btn-link no-padding" routerLink="../step-1">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <div class="step-title">
+                <h1>{{'SecondStep.StepTitle' | translate}} - {{'SecondStep.Step2Of2' | translate}}</h1>
+                <p>{{'SecondStep.Subtitle2Of2' | translate}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default mt20">
+        <div class="panel-body pmd-z-depth ph50">
+            <h3>{{'SecondStep.WhichKindsOfPersons' | translate}}</h3>
+            <div class="table-scroll">
+                <table class="table pmd-table table-bordered table-martrix table-no-responsive mt20 table-diag">
+                    <thead>
+                        <tr class="table-active">
+                            <th>
+                                <div class="table-diag__line"></div>
+                                <span class="table-diag__top">{{'SecondStep.Process' | translate}}
+                                    <span class="help-group__icon">
+                                        <i class="material-icons">help_outline</i>
+                                        <span class="help-group__help-text">{{ 'SecondStep.ProcessTooltip' | translate}}</span>
+                                    </span>
+                                </span>
+                                <span class="table-diag__bottom">{{'SecondStep.TypeOfPerson' | translate}}
+                                    <span class="help-group__icon">
+                                        <i class="material-icons">help_outline</i>
+                                        <span class="help-group__help-text">{{ 'SecondStep.TypeOfPersonTooltip' | translate}}</span>
+                                    </span>
+                                </span>
+                            </th>
+                            <th [@tableColumnHighlightTransition]="process.validateState" *ngFor="let process of listSelectedProcesses">{{process.tagName}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr [@tableAddRowTransition]="''" *ngFor="let personGroup of listPersonGroups" [ngClass]="{'active': personGroup.isCustom}">
+                            <th>{{personGroup.tagName}}</th>
+                            <td *ngFor="let process of personGroup.rowData" [@tableColumnHighlightTransition]="process.validateState" class="table-martrix__check"
+                                [ngClass]="{'active': process.marked && !process.deleting, 'show-edit': process.marked && process.editing}">
+                                <div class="table-martrix__check-inner" (click)="click(personGroup, process, $event)">
+                                </div>
+                                <i class="material-icons">check</i>
+                                <div class="table-martrix__edit">
+                                    <div class="table-martrix__edit-btn" (click)="edit(personGroup, process, $event)">
+                                        <i class="material-icons">mode_edit</i>
+                                    </div>
+                                    <div class="table-martrix__edit-btn">
+                                        <i class="material-icons" (click)="uncheck(personGroup, process, $event)">clear</i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <h3>{{'SecondStep.AddYourOwnCategory' | translate}}</h3>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="categoryName" class="control-label">
+                                    {{'SecondStep.CategoryName' | translate}}*
+                                </label>
+                                <input type="text" [(ngModel)]="customCategory" id="categoryName" class="form-control">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn mt20" (click)="addCustomCategory()" [ngClass]="{'btn-primary': customCategory, 'btn-default active': !customCategory}">{{'SecondStep.AddCategory' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt30">
+        <button (click)="saveAndProceed(false)" class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-info">{{'General.Save' | translate}}</button>
+        <button (click)="saveAndProceed(true)" class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" type="button">{{'General.SaveContinue' | translate}}</button>
+    </div>
+    <div class="mt50"></div>
+</div>
+<router-outlet></router-outlet>

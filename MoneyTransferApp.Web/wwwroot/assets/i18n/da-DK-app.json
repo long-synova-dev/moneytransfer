@@ -1,0 +1,70 @@
+{
+    "Header": {
+        "SearchFor": "Søg...",
+        "BillingHistory": "Faktura historik",
+        "AnotherAction": "Yderligere handling",
+        "Settings": "Indstillinger",
+        "Language": "Sprog",
+        "LogOut": "Log ud",
+        "Home": "Hjem",
+        "GDPRProgram": "GDPR Program",
+        "Notifications": "Notifikationer",
+        "ProFeature": "Pro version",
+        "BillingPlans": "Abonnementsmuligheder",
+        "HelpTitle": "Hjælp",
+        "HelpBtn": "Hjælp og support",
+        "HelpText": "...Brug vores hjælp og support center til at ...",
+        "LaunchTour": "Tag den guidede tour",
+        "KeyboarShortcuts": "Tastatur genveje",
+        "ShowDiagnostics": "Vis diagnostik",
+        "FeedbackTitle": "Send os feedback",
+        "FeedbackText": "Tak for at du tog dig tid til at give os din feedback",
+        "FeedbackBtn": "Send feedback",
+        "UserManagement": "Bruger administration",
+        "AccountInfo": "Account info"
+    },
+    "Error": {
+        "UpgradeNow": "For at få fuld adgang til vores services skal du opgradere dit abonnemen",
+        "RestrictedArea": "Du har ikke adgangsrettigheder til denne funktion",
+        "NoConnection": "Det lader til vi har et problem med at tilgå vores server lige nu. Prøv venligst igen om et øjeblik.",
+        "SessionExpired": "Vi har logget dig ud af sikkerhedsmæssige grunde, da du har være inaktiv i en periode. Vi sender dig tilbage til log-in siden om et øjeblik, hvor du kan logge ind igen.",
+        "NotFoundResource": "Den webadresse som du søger kan ikke findes. Prøv venligst med en anden webadresse.",
+        "ServerError": "Det lader til der er sket en fejl på vores server. Prøv venligst igen",
+        "GatewayTimeout": "Det tager vist for lang tid. Prøv venligst igen"
+    },
+    "Warning": {
+        "ConfirmDelete": "Er du sikker på du vil slette?"
+    },
+    "Success": {
+        "SaveSuccess": "Save Success"
+    },
+    "Common": {
+        "DeleteBtn": "Delete",
+        "CancelBtn": "Cancel",
+        "SaveBtn": "Save"
+    },
+    "User": {
+        "Active": "aktiv",
+        "Expired": "Udløbet"
+    },
+    "SessionExpiredModal": {
+        "ModalTitle": "Sessionen er udløbet",
+        "ModalDesc": "Sessionen er udløbet. Log venligst ind igen",
+        "LoginBtn": "Login"
+    },
+    "UserOwner": {
+        "Title": "Title",
+        "Description": "Description",
+        "BasicInfo": "BasicInfo",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "phone": "phone",
+        "email": "email",
+        "Security": "Security",
+        "oldPassword": "oldPassword",
+        "newPassword": "newPassword",
+        "renewPassword": "renewPassword",
+        "Setting": "Setting",
+        "Language": "Language"
+    }
+}

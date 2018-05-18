@@ -1,0 +1,17 @@
+<h3>{{'General.EnterDataProcessorCopyName' | translate}}</h3>
+
+<div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'pmd-textfield-floating-label-completed': processorNewName}">
+    <label for="companyName" class="control-label pmd-input-group-label">{{'General.DataProcessorCopyName' | translate}}</label>
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="material-icons">content_copy</i>
+        </div>
+        <input maxlength="100" class="form-control" type="text" [(ngModel)]="processorNewName" (keyup.enter)="save()">
+        <span class="pmd-textfield-focused"></span>
+    </div>
+
+    <div class="pull-right">
+        <button mat-dialog-close class="mt20 btn btn-default pmd-ripple-effect">{{'General.Cancel' | translate}}</button>
+        <button (click)="save()" class="mt20 btn pmd-btn-raised pmd-ripple-effect btn-primary">{{'General.Create' | translate}}</button>
+    </div>
+</div>

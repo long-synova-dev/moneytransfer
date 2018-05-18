@@ -1,0 +1,149 @@
+<div class="container-fluid" *ngIf="ready">
+    <modal-dialog [(modalDialog)]="deleteProcessConfirm">
+        <div class="form-group">
+            {{ 'DataProcessing.ProcessConfirmDelete' | translate }}
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-danger" (click)="deleteProcess()">{{ 'General.DeleteBtn' | translate }}</button>
+            <button type="submit" class="btn btn-default" (click)="closeDelete(true)">{{ 'General.CancelBtn' | translate }}</button>
+        </div>
+    </modal-dialog>
+    <modal-dialog [(modalDialog)]="deleteITSystemConfirm">
+        <div class="form-group">
+            {{ 'DataProcessing.ITConfirmDelete' | translate }}
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-danger" (click)="deleteItSystem()">{{ 'General.DeleteBtn' | translate }}</button>
+            <button type="submit" class="btn btn-default" (click)="closeDelete(true)">{{ 'General.CancelBtn' | translate }}</button>
+        </div>
+    </modal-dialog>
+    <button class="btn-link no-padding" routerLink="../../first-step">
+        <i class="material-icons">arrow_back</i>
+    </button>
+    <!-- <button class="btn-link no-padding pull-right" routerLink="/gdpr-wizard/data-analysis/step-2">
+        <i class="material-icons">arrow_forward</i>
+    </button> -->
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="step-title">
+                <h1>{{'SecondStep.StepTitle' | translate}} - {{'SecondStep.Step1Of2' | translate}}</h1>
+                <p>{{'SecondStep.Subtitle1Of2' | translate}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default mt20">
+        <div class="panel-body pmd-z-depth ph50">
+            <div class="">
+                <div class="row">
+                    <div class="col-xs-8 col-md-6">
+                        <h3>{{'SecondStep.WhichProcess' | translate}}</h3>
+                        <p>{{'General.AdjustLater' | translate}}</p>
+                        <h3>{{'SecondStep.SelectProcesses' | translate}}</h3>
+                        <strong>{{'SecondStep.ChooseFromExisting' | translate}}</strong>
+                        <div class="form-group">
+                            <div class="check-button" *ngFor="let tag of listProcesses">
+                                <input (change)="clickProcess(tag)" [(ngModel)]="tag.marked" type="checkbox" id="{{tag.tagId}}" class="check-button__input">
+                                <label [@tableColumnHighlightTransition]="processState" for="{{tag.tagId}}" class="check-button__label pmd-z-depth-1 text-ellipsis">{{tag.tagName}}</label>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <strong>{{'SecondStep.GiveYourOwnName' | translate}}</strong>
+                        <div class="form-group">
+                            <div class="col-xs-8 col-md-4">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    <label for="companyName" class="control-label">
+                                        {{'SecondStep.ProcessName' | translate}}*
+                                    </label>
+                                    <input type="text" id="companyName" class="form-control" [(ngModel)]="customProcess">
+                                    <span class="pmd-textfield-focused"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-md-4">
+                                <button (click)="addCustomProcess()" type="button" class="btn mt20" [ngClass]="{'btn-primary': customProcess, 'btn-default active': !customProcess}">{{'SecondStep.CreateProcess' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-md-3 col-md-offset-3">
+                        <h3>{{'SecondStep.MyCreatedProcesses' | translate}}</h3>
+                        <div class="list-process">
+                            <ul class="list-group pmd-z-depth pmd-list pmd-list-avatar pmd-card-list">
+                                <li *ngIf="selectedProcesses.length == 0"><i>No item selected</i></li>
+                                <div *ngFor="let tag of selectedProcesses">
+                                    <li class="list-group-item" *ngIf="!tag.deleting" [ngClass]="{'is-custom': tag.isCustom}">
+                                        <div class="media-body media-middle">
+                                            {{tag.tagName}}
+                                        </div>
+                                        <i (click)="confirmDeleteProcess(tag)" class="material-icons md-dark pmd-sm media-middle media-right">delete</i>
+                                    </li>
+                                </div>
+                            </ul>
+                            <div class="list-group__note mt10">
+                                <div class="list-group__note-box"></div>
+                                <div class="list-group__note-text"><i>is custom Processes</i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default mt20">
+        <div class="panel-body pmd-z-depth ph50">
+            <div class="row">
+                <div class="col-xs-8 col-md-6">
+                    <h3>{{'SecondStep.WhichITSystem' | translate}}</h3>
+                    <p>{{'General.AdjustLater' | translate}}</p>
+                    <h3>{{'SecondStep.IdentifyITSystem' | translate}}</h3>
+                    <strong>{{'SecondStep.ChooseFromExisting' | translate}}</strong>
+                    <div class="form-group">
+                        <div class="check-button" *ngFor="let tag of listItSystems">
+                            <input type="checkbox" (change)="clickItSystem(tag)" [(ngModel)]="tag.marked" id="{{tag.tagId}}" class="check-button__input">
+                            <label [@tableColumnHighlightTransition]="itSystemState" for="{{tag.tagId}}" class="check-button__label pmd-z-depth-1 text-ellipsis">{{tag.tagName}}</label>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <strong>{{'SecondStep.GiveYourOwnName' | translate}}</strong>
+                    <div class="form-group">
+                        <div class="col-xs-8 col-md-4">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="companyName" class="control-label">
+                                    {{'SecondStep.ITSystemName' | translate}}*
+                                </label>
+                                <input type="text" [(ngModel)]="customItSystem" id="companyName" class="form-control">
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <button type="button" class="btn mt20" (click)="addCustomItSystem()" [ngClass]="{'btn-primary': customItSystem, 'btn-default active': !customItSystem}"> {{'SecondStep.CreateITSystem' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-3 col-md-offset-3">
+                    <h3>{{'SecondStep.MyITSystems' | translate}}</h3>
+                    <div class="list-process">
+                        <ul class="list-group pmd-z-depth pmd-list pmd-list-avatar pmd-card-list">
+                            <li class="list-group-item" *ngIf="selectedItSystems.length == 0"><i>No item selected</i></li>
+                            <div *ngFor="let tag of selectedItSystems">
+                                <li class="list-group-item" *ngIf="!tag.deleting" [ngClass]="{'is-custom': tag.isCustom}">
+                                    <div class="media-body media-middle">
+                                        {{tag.tagName}}
+                                    </div>
+                                    <i (click)="confirmDeleteIT(tag)" class="material-icons md-dark pmd-sm media-middle media-right list-group__delete-btn">delete</i>
+                                </li>
+                            </div>
+                        </ul>
+                        <div class="list-group__note mt10">
+                            <div class="list-group__note-box"></div>
+                            <div class="list-group__note-text"><i>is custom IT System</i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt30">
+        <button (click)="save(false)"  class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-info">{{'General.Save' | translate}}</button>
+        <button (click)="save(true)" class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" type="button">{{'General.SaveContinue' | translate}}</button>
+    </div>
+    <div class="mt20"></div>
+</div>

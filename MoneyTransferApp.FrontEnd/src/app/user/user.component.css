@@ -1,0 +1,60 @@
+.signup-form {
+    margin-top: 20px;
+}
+.remember-checkbox {
+    padding-left: 10px;
+}
+.remember-checkbox .pmd-checkbox-label {
+    display: inline-block;
+}
+.from-error {
+    padding: 15px;
+}
+.account-help-block {
+    margin-top: 20px;
+    color: #111;
+    font-size: 16px;
+}
+
+.account-help-block__title {
+    color: #111;
+}
+.account-help-block__link {
+    color: #8bb63b;
+}
+.redirection-link {
+    margin-top: 20px;
+}
+
+.help-feature__heading {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #111;
+    font-size: 24px;
+}
+.help-feature__item {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.help-feature__title {
+    color: #82898d;
+    font-size: 24px;
+}
+.help-feature__icon {
+    padding-top: 20px;
+    color: #bac3ca;
+    text-align: center;
+}
+    .help-feature__icon .material-icons {
+        font-size: 96px;
+    }
+
+.vat-selectbox {
+    margin-top: 25px;
+}
+.vat-icon {
+    margin-top: 30px;
+}

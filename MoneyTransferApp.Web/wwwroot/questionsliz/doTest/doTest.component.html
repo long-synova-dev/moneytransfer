@@ -1,0 +1,75 @@
+<div id="header">
+    <section class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-8">
+                <div id="logo">
+                    <a href="#"><img src="../../images/logo-quizz.png" alt="logo" class="hidden-xs hidden-sm"> <img src="../../images/logo-mobile.png" alt="logo" class="visible-xs visible-sm"></a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-4">
+                <div id="number-slider">
+                    <p>Side <span class="number">{{curPage}}</span>/<span class="total">{{totalPages}}</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="main-content">
+    <section class="container">
+        <div class="form-questions">
+            <div class="item-questions" *ngFor="let item of pagedItems">
+                <div class="help">
+                    <div class="btn-help">
+                        <!--<a (click)="openDialog(item.HelpText)">Hjælp</a>-->
+                        <a href="#" id="showhelp" data-toggle="modal" data-target=".form-help">Hjælp</a>
+                    </div>
+                    <div class="modal fade form-help" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content help-content">
+                                <div class="main-help">
+                                    <div class="main-title">
+                                        <h2>{{item.HelpTitle}}</h2>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="../../images/close-box.png" alt=""></button>
+                                    </div>
+                                    <div class="content-page content-help">
+                                        <div class="main-body">
+                                            {{item.HelpText}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="questions">
+                    <span>{{item.Id}})</span> {{item.Question}}
+                </div>
+                <div class="answer">
+                    <div class="form-group">
+                        <label class="control control-checkbox" *ngFor="let choice of item.Choices">
+                            {{choice.Name}}
+
+                            <input type="checkbox" [checked]="choice.IsSelected" (change)="answerChanged(choice.Id, item)" />
+                            <div class="control_indicator"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="next-pre-question" *ngIf="pager.pages && pager.pages.length">
+            <div [ngClass]="{'invisible':pager.currentPage === 1, 'pre': true}">
+                <a (click)="setPage(pager.currentPage - 1)">Tilbage</a>
+            </div>
+            <div [ngClass]="{'invisible':pager.currentPage === pager.totalPages || (!isCanGoNext && numOfDone < pager.currentPage), 'next': true}">
+                <a (click)="setPage(pager.currentPage + 1)">Videre</a>
+            </div>
+            <div [ngClass]="{'invisible':pager.currentPage !== pager.totalPages || !isCanGoNext, 'next': true}">
+                <a (click)="gotoSubmitTest()">Færdig</a>
+            </div>
+        </div>
+    </section>
+</div>
+<footer>
+    <div id="footer">
+    </div>
+</footer>

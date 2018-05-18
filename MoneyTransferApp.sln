@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyTransferApp.Web", "MoneyTransferApp.Web\MoneyTransferApp.Web.csproj", "{81094EDA-91BD-4AD9-B905-6B76998F4D9C}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MoneyTransferApp.FrontEnd", "MoneyTransferApp.FrontEnd", "{A9F5FFDF-110F-48CA-8E78-A9337814A064}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_61907"
+		Debug.AspNetCompiler.PhysicalPath = "MoneyTransferApp.FrontEnd\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61907\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_61907"
+		Release.AspNetCompiler.PhysicalPath = "MoneyTransferApp.FrontEnd\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61907\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "61907"
+		SlnRelativePath = "MoneyTransferApp.FrontEnd\"
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyTransferApp.Core", "MoneyTransferApp.Core\MoneyTransferApp.Core.csproj", "{361F0A58-42AE-495D-B5FC-1BB8D88A913B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyTransferApp.Infrastructure", "MoneyTransferApp.Infrastructure\MoneyTransferApp.Infrastructure.csproj", "{7F2FB254-2639-44EF-A867-6E1A6B68BA38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyTransferApp.Auth", "MoneyTransferApp.Auth\MoneyTransferApp.Auth.csproj", "{3D67B2A9-5B29-42D3-BB22-F34C736E0030}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyTransferApp.Logger", "MoneyTransferApp.AppLogger\MoneyTransferApp.Logger.csproj", "{56D51F0C-0D12-483A-8A17-C605C6ABED77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81094EDA-91BD-4AD9-B905-6B76998F4D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81094EDA-91BD-4AD9-B905-6B76998F4D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81094EDA-91BD-4AD9-B905-6B76998F4D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81094EDA-91BD-4AD9-B905-6B76998F4D9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F5FFDF-110F-48CA-8E78-A9337814A064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F5FFDF-110F-48CA-8E78-A9337814A064}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{361F0A58-42AE-495D-B5FC-1BB8D88A913B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361F0A58-42AE-495D-B5FC-1BB8D88A913B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361F0A58-42AE-495D-B5FC-1BB8D88A913B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361F0A58-42AE-495D-B5FC-1BB8D88A913B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2FB254-2639-44EF-A867-6E1A6B68BA38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2FB254-2639-44EF-A867-6E1A6B68BA38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2FB254-2639-44EF-A867-6E1A6B68BA38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2FB254-2639-44EF-A867-6E1A6B68BA38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D67B2A9-5B29-42D3-BB22-F34C736E0030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D67B2A9-5B29-42D3-BB22-F34C736E0030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D67B2A9-5B29-42D3-BB22-F34C736E0030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D67B2A9-5B29-42D3-BB22-F34C736E0030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56D51F0C-0D12-483A-8A17-C605C6ABED77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56D51F0C-0D12-483A-8A17-C605C6ABED77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56D51F0C-0D12-483A-8A17-C605C6ABED77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56D51F0C-0D12-483A-8A17-C605C6ABED77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00862247-207C-4D95-A4B4-85F69B14D964}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://complytosolutions.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MoneyTransferApp.Core\\MoneyTransferApp.Core.csproj
+		SccProjectName1 = MoneyTransferApp.Core
+		SccLocalPath1 = MoneyTransferApp.Core
+		SccWebProject2 = true
+		SccProjectUniqueName2 = MoneyTransferApp.FrontEnd
+		SccProjectName2 = MoneyTransferApp.FrontEnd
+		SccLocalPath2 = MoneyTransferApp.FrontEnd
+		SccProjectEnlistmentChoice2 = 2
+		SccProjectUniqueName3 = MoneyTransferApp.Infrastructure\\MoneyTransferApp.Infrastructure.csproj
+		SccProjectName3 = MoneyTransferApp.Infrastructure
+		SccLocalPath3 = MoneyTransferApp.Infrastructure
+		SccProjectUniqueName4 = MoneyTransferApp.Web\\MoneyTransferApp.Web.csproj
+		SccProjectName4 = MoneyTransferApp.Web
+		SccLocalPath4 = MoneyTransferApp.Web
+		SccProjectUniqueName5 = MoneyTransferApp.Auth\\MoneyTransferApp.Auth.csproj
+		SccProjectName5 = MoneyTransferApp.Auth
+		SccLocalPath5 = MoneyTransferApp.Auth
+		SccProjectUniqueName6 = MoneyTransferApp.AppLogger\\MoneyTransferApp.Logger.csproj
+		SccProjectName6 = MoneyTransferApp.AppLogger
+		SccLocalPath6 = MoneyTransferApp.AppLogger
+	EndGlobalSection
+EndGlobal

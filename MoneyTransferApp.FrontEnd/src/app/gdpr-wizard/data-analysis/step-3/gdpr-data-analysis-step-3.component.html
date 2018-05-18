@@ -1,0 +1,111 @@
+<div class="container-fluid" *ngIf="ready">
+    <!-- <button class="btn-link no-padding pull-right" routerLink="/gdpr-wizard/data-processing">
+        <i class="material-icons">arrow_forward</i>
+    </button> -->
+    <button class="btn-link no-padding" routerLink="../step-2">
+        <i class="material-icons">arrow_back</i>
+    </button>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="step-title">
+                <h1>{{'SecondStep.StepTitle' | translate}} - {{'SecondStep.Step3Of2' | translate}}</h1>
+                <p>{{'SecondStep.Subtitle3Of2' | translate}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default mt20">
+        <div class="panel-body pmd-z-depth ph50">
+            <h3>{{'SecondStep.WhichDataTypes' | translate}}</h3>
+            <div class="table-scroll">
+                <table class="table pmd-table table-bordered table-martrix table-no-responsive mt20 table-diag">
+                    <thead>
+                        <tr class="table-active">
+                            <th>
+                                <span class="table-diag__line"></span>
+                                <span class="table-diag__top">{{'SecondStep.Process' | translate}}
+                                    <span class="help-group__icon">
+                                        <i class="material-icons">help_outline</i>
+                                        <span class="help-group__help-text">{{ 'SecondStep.ProcessTooltip' | translate}}</span>
+                                    </span>
+                                </span>
+                                <span class="table-diag__bottom">{{'SecondStep.DataType' | translate}}
+                                    <span class="help-group__icon">
+                                        <i class="material-icons">help_outline</i>
+                                        <span class="help-group__help-text">{{ 'SecondStep.DataTypeTooltip' | translate}}</span>
+                                    </span>
+                                </span>
+                            </th>
+                            <th [@tableColumnHighlightTransition]="process.validateState" *ngFor="let process of listSelectedProcesses">{{process.tagName}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr [@tableAddRowTransition]="''" *ngFor="let dataType of listPersonalDataTypes; let i = index" [ngClass]="{'active': listPersonalDataTypes.isCustom}">
+                            <th>{{dataType.tagName}}</th>
+                            <td *ngFor="let process of dataType.rowData" class="table-martrix__check" [ngClass]="{'active': process.marked, 'notCompelete': process.step3NoCompleted}"
+                                [@tableColumnHighlightTransition]="process.validateState">
+                                <div class="table-martrix__check-inner" (click)="click(dataType, process, $event)">
+                                </div>
+                                <i class="material-icons">check</i>
+                                <div class="table-martrix__edit">
+                                    <div class="table-martrix__edit-btn" (click)="edit(dataType, process, $event)">
+                                        <i class="material-icons">mode_edit</i>
+                                    </div>
+                                    <div class="table-martrix__edit-btn">
+                                        <i class="material-icons" (click)="uncheck(dataType, process, $event)">clear</i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>
+                        <strong>{{'SecondStep.AddYourOwnDataType' | translate}}</strong>
+                        <span class="help-group__icon">
+                            <i class="material-icons">help_outline</i>
+                            <span class="help-group__help-text">{{ 'SecondStep.AddYourOwnDataTypeTooltip' | translate}}</span>
+                        </span>
+                    </h3>
+
+                    <div class="form-group pmd-textfield" [ngClass]="{'pmd-textfield-floating-label': !customDataType}">
+                        <label for="dataTypeName" class="control-label">
+                            {{'SecondStep.DatatypeName' | translate}}*
+                        </label>
+                        <input type="text" id="dataTypeName" class="form-control" [(ngModel)]="customDataType">
+                        <span class="pmd-textfield-focused"></span>
+                    </div>
+                    <div class="help-form-group">
+                        <div class="help-form-group__icon">
+                            <i class="material-icons pmd-tooltip">help_outline</i>
+                            <div class="help-form-group__help-text">
+                                {{'SecondStep.ChooseTypeTooltip' | translate}}
+                            </div>
+                        </div>
+                        <div class="help-form-group__form">
+                            <div class="form-group pmd-textfield" [ngClass]="{'pmd-textfield-floating-label': !customDataTypeTagTypeId}">
+                                <label for="tag-type" class="control-label">
+                                    {{'SecondStep.ChooseType' | translate}}*
+                                </label>
+                                <ng-select id="tag-type" [options]="defineTagType" noFilter="10" [(ngModel)]="customDataTypeTagTypeId">
+                                </ng-select>
+                                <span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addCustomDataType()" type="submit" class="btn" [ngClass]="{'btn-primary': customDataType && customDataTypeTagTypeId, 'btn-default active': !customDataTypeTagTypeId || !customDataType}">
+                    {{'SecondStep.CreateDataType' | translate}}*</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="mt30">
+        <button (click)="save(false)" class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-info">{{'General.Save' | translate}}</button>
+        <button (click)="save(true)" class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" type="button">{{'General.SaveContinue' | translate}}</button>
+    </div>
+    <div class="mt50"></div>
+</div>
+<router-outlet></router-outlet>

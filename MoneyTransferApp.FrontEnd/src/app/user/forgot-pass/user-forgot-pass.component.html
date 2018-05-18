@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <div class="account-help-block">
+                <div class="text-center">
+                    <img src="assets/images/icon-bubble.png" alt="" />
+                </div>
+                <h1 class="account-help-block__title">{{'Login.Motto' | translate}}</h1>
+                <p class="account-help-block__desc">{{'Login.Blurb' | translate}}</p>
+                <a href="#" title="" class="account-help-block__link">{{'Login.StartChat' | translate}}</a>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="title text-center">{{'ResetPass.ResetTitle' | translate}}</h2>
+                    <div class="from-error bg-danger" *ngIf="errorMessenger">
+                        <span *ngFor="let errorMessage of errorMessenger">{{errorMessage}}</span>
+                    </div>
+                    <form [formGroup]="resetForm" (ngSubmit)="onSubmit(resetForm.value)">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label"
+                            [ngClass]="{'has-error':!resetForm.controls['email'].valid && resetForm.controls['email'].touched}">
+                            <label for="loginEmail" class="control-label pmd-input-group-label">{{'ResetPass.Email' | translate}}</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="material-icons">mail_outline</i></div>
+                                <input class="form-control" id="loginEmail" type="email" name="email" [formControl]="resetForm.controls['email']"><span class="pmd-textfield-focused"></span>
+                            </div>
+                            <div *ngIf="resetForm.controls['email'].hasError('required') && resetForm.controls['email'].touched" class="help-block">
+                                    {{'ResetPass.EmailRequired' | translate}}
+                            </div>
+                            <div *ngIf="!resetForm.controls['email'].hasError('required') && resetForm.controls['email'].hasError('pattern') && resetForm.controls['email'].touched" class="help-block">
+                                    {{'ResetPass.EmailInvalid' | translate}}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn pmd-ripple-effect btn-primary btn-block" [disabled]="resetForm.invalid">{{'ResetPass.ResetBtn' | translate}}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="help-feature">
+        <h2 class="help-feature__heading">{{'Login.FreeSupport' | translate}}</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="help-feature__item pmd-z-depth">
+                    <div class="help-feature__icon">
+                        <i class="material-icons">library_books</i>
+                    </div>
+                    <div class="">
+                        <h3 class="help-feature__title">{{'Login.Documentation' | translate}}</h3>
+                        <p>{{'Login.DocumentationText' | translate}}</p>
+                        <p><a href="http://help.complyto.com" target="_blank" role="button">{{'Login.Read' | translate}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="help-feature__item pmd-z-depth">
+                    <div class="help-feature__icon">
+                        <i class="material-icons">phone</i>
+                    </div>
+                    <div class="">
+                        <h3 class="help-feature__title">{{'Login.CallUs' | translate}}</h3>
+                        <p>{{'Login.CallUsText' | translate}}</p>
+                        <p><a (click)="startChat()" role="button">{{'Login.Read' | translate}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="help-feature__item pmd-z-depth">
+                    <div class="help-feature__icon">
+                        <i class="material-icons">chat</i>
+                    </div>
+                    <div class="">
+                        <h3 class="help-feature__title">{{'Login.TryToChat' | translate}}</h3>
+                        <p>{{'Login.TryToChatText' | translate}}</p>
+                        <p><a (click)="startChat()" role="button">{{'Login.Read' | translate}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="help-feature__item pmd-z-depth">
+                    <div class="help-feature__icon">
+                        <i class="material-icons">ondemand_video</i>
+                    </div>
+                    <div class="">
+                        <h3 class="help-feature__title">{{'Login.Videos' | translate}}</h3>
+                        <p>{{'Login.VideosText' | translate}}</p>
+                        <p><a href="http://help.complyto.com/videos" target="_blank" role="button">{{'Login.Read' | translate}}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

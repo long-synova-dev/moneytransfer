@@ -1,0 +1,110 @@
+<div class="side-container">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <button class="btn-link no-padding" (click)="cancel()">
+                <i class="material-icons">arrow_back</i>
+            </button>
+        </div>
+    </div>
+    <h2>{{'Manage.UserManage' | translate}}</h2>
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="mt20">
+                <div class="tab-content">
+                    <form action="" [formGroup]="userInfoForm" (ngSubmit)="onSubmit(userInfoForm.value)">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                                'pmd-textfield-floating-label-completed': userInfoForm.controls['firstName'].value,
+                                'has-error': userInfoForm.controls['firstName'].invalid && userInfoForm.controls['firstName'].touched
+                            }">
+                            <label for="FirstName" class="control-label">
+                                {{'SignUp.firstName' | translate }}*
+                            </label>
+                            <input maxlength="128" type="text" id="FirstName" class="form-control" [formControl]="userInfoForm.controls['firstName']">
+                            <span class="pmd-textfield-focused"></span>
+                            <div *ngIf="userInfoForm.controls['firstName'].hasError('required') && userInfoForm.controls['firstName'].touched" class="help-block">
+                                {{'SignUp.firstNameRequired' | translate}}
+                            </div>
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                                'pmd-textfield-floating-label-completed': userInfoForm.controls['lastName'].value,
+                                'has-error': userInfoForm.controls['lastName'].invalid && userInfoForm.controls['lastName'].touched
+                            }">
+                            <label for="lastName" class="control-label">
+                                {{'SignUp.lastName' | translate }}*
+                            </label>
+                            <input maxlength="128" type="text" id="lastName" class="form-control" [formControl]="userInfoForm.controls['lastName']">
+                            <span class="pmd-textfield-focused"></span>
+                            <div *ngIf="userInfoForm.controls['lastName'].hasError('required') && userInfoForm.controls['lastName'].touched" class="help-block">
+                                {{'SignUp.lastNameRequired' | translate}}
+                            </div>
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{
+                            'pmd-textfield-floating-label-completed': userInfoForm.controls['email'].value,
+                            'has-error': userInfoForm.controls['email'].invalid && userInfoForm.controls['email'].touched
+                        }">
+                            <label for="email" class="control-label">
+                                {{'SignUp.Email' | translate }}*
+                            </label>
+                            <input maxlength="128" type="text" id="email" class="form-control" [formControl]="userInfoForm.controls['email']">
+                            <span class="pmd-textfield-focused"></span>
+                            <div *ngIf="userInfoForm.controls['email'].hasError('required') && userInfoForm.controls['email'].touched" class="help-block">
+                                {{'Login.EmailRequired' | translate}}
+                            </div>
+                            <div *ngIf="!userInfoForm.controls['email'].hasError('required') && userInfoForm.controls['email'].hasError('pattern') && userInfoForm.controls['email'].touched"
+                                class="help-block">
+                                {{'Login.EmailInvalid' | translate}}
+                            </div>
+                        </div>
+                        <div class="help-form-group__form">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'
+                                    pmd-textfield-floating-label-completed': userInfoForm.controls['roleId'].value,
+                                    'has-error': userInfoForm.controls['roleId'].invalid && userInfoForm.controls['roleId'].touched
+                                }">
+                                <label for="roles" class="control-label">
+                                    {{'SignUp.UserRole' | translate}}*
+                                </label>
+                                <ng-select formControlName="roleId" [options]="roleList" noFilter="10">
+                                </ng-select>
+                                <span class="pmd-textfield-focused"></span>
+                                <div *ngIf="userInfoForm.controls['roleId'].hasError('required') && userInfoForm.controls['roleId'].touched" class="help-block">
+                                    {{'SignUp.UserRoleRequired' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="help-form-group__form">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'
+                                    pmd-textfield-floating-label-completed': userInfoForm.controls['languageId'].value,
+                                    'has-error': userInfoForm.controls['languageId'].invalid && userInfoForm.controls['languageId'].touched
+                                }">
+                                <label for="roles" class="control-label">
+                                    {{'SignUp.PreferredLang' | translate}}*
+                                </label>
+                                <ng-select formControlName="languageId" [options]="langList" noFilter="10">
+                                </ng-select>
+                                <span class="pmd-textfield-focused"></span>
+                                <div *ngIf="userInfoForm.controls['languageId'].hasError('required') && userInfoForm.controls['languageId'].touched" class="help-block">
+                                    {{'SignUp.PreferredLangRequired' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="help-form-group__form">
+                        <div class="form-group">
+                            <div class="pmd-switch">
+                                <label>
+                                    <input type="checkbox" [formControl]="userInfoForm.controls['isActive']">
+                                    <span class="pmd-switch-label"></span>
+                                </label>
+                                <span class="pmd-switch__text">{{'SignUp.Active' | translate}}</span>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt20">
+        <button class="btn btn-danger" *ngIf="!isNew" (click)="delete(userId)">{{'Manage.Delete' | translate}}</button>
+        <button class="btn btn-info" (click)="saveUser(userInfoForm.value)"[disabled]="!userInfoForm.valid" >{{'Manage.Save' | translate}}</button>
+    </div>
+</div>

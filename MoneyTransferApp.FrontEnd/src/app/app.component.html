@@ -1,0 +1,68 @@
+<div class="application-view-box__inner">
+    <div class="progress appLoading" *ngIf="isAppLoading">
+        <div class="indeterminate"></div>
+    </div>
+    <nav class="navbar navbar-default navbar--account">
+        <div class="container-fluid" [ngClass]="{'container-response': !userInfo}">
+            <div class="navbar-header">
+                <a class="navbar-brand" routerLink="home">
+                    <img alt="Brand" src="assets/images/logo.png" class="img-responsive">
+                </a>
+            </div>
+            <div class="nav navbar-nav navbar-right dropdown pmd-dropdown clearfix hidden-xs navbar__user-btn" [ngClass]="{hidden : !userInfo}">
+                <button class="btn pmd-ripple-effect btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+                    <span class="btn-avatar">
+                        <div class="user_logo">{{userLogo}}</div>
+                    </span>
+                    <div class="text-ellipsis navbar__user-btn-text">
+                        {{firstName}}
+                    </div>
+                </button>
+                <ul aria-labelledby="dropdownMenu2" role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li *ngIf="userRole == 'R2' && userPlan != 'trial' || userRole == 'R2,R3' && userPlan != 'trial'" role="presentation"><a href="javascript:void(0);" routerLink="billing-plan/history">{{'Header.BillingHistory' | translate}}</a></li>
+                    <li *ngIf="userRole == 'R2' || userRole == 'R2,R3'" role="presentation"><a class="pmd-ripple-effect" href="javascript:void(0)" (click)="goToBilling()">{{'Header.BillingPlans' | translate}}</a></li>
+                    <!-- <li role="presentation"><a href="javascript:void(0);">{{'Header.AnotherAction' | translate}}</a></li> -->
+                    <li role="presentation" class="language-item">
+                        <a href="javascript:void(0);" tabindex="-1" role="menuitem">{{'Header.Language' | translate}}</a>
+                        <ul class="list-unstyled pmd-z-depth">
+                            <li *ngFor="let lang of allLanguages" role="presentation" ><a [ngClass]="{'active': lang.languageCode == preferredLang}" href="javascript:void(0);" tabindex="-1" role="menuitem" (click)="switchLanguage(lang)">{{lang.languageName}}</a></li>
+                        </ul>
+                    </li>
+                    <li *ngIf="userRole == 'R2' || userRole == 'R3' || userRole == 'R2,R3'" role="presentation">
+                        <a href="javascript:void(0);" tabindex="-1" routerLink="user-manage" role="presentation">{{'Header.UserManagement' | translate}}</a>
+                    </li>
+                    <li role="presentation"><a href="javascript:void(0);" routerLink="/account-owner">{{'Header.AccountInfo' | translate}}</a></li>
+                    <li role="presentation"><a href="javascript:void(0);" (click)="userLogout()">{{'Header.LogOut' | translate}}</a></li>
+                </ul>
+            </div>
+            <span class="dropdown pmd-dropdown clearfix pull-right language-btn navbar__icon-btn hidden-xs" [ngClass]="{hidden: userInfo}">
+                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default" type="button" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">language</i></button>
+                <ul aria-labelledby="dropdownMenuDivider" role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li *ngFor="let lang of allLanguages" role="presentation"><a [ngClass]="{'active': lang.languageCode == preferredLang}" href="javascript:void(0);" tabindex="-1" role="menuitem" (click)="switchLanguage(lang)">{{lang.languageName}}</a></li>
+                </ul>
+            </span>
+            <span class="pull-right help-btn navbar__icon-btn hidden-xs" [ngClass]="{hidden : !userInfo}">
+                <a class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default" title="Help" href="http://help.complyto.com/" target="_blank"><i class="material-icons">help_outline</i></a>
+            </span>
+        </div>
+    </nav>
+    <div class="pmd-tabs" *ngIf="userInfo && gdprRoute" [ngClass]="{hidden : !userInfo || !gdprRoute}" #mainNav>
+        <ul class="nav nav-tabs" role="tablist">
+            <li [routerLinkActive]="['active']"><a class="pmd-ripple-effect" routerLink="{{gdprRoute}}">{{'Header.GDPRProgram' | translate}} <span *ngIf="goLiveDate">(Live on {{goLiveDate | date}})</span></a></li>
+        </ul>
+    </div>
+    <section class="main-wrapper">
+        <div class="pmd-sidebar-overlay"></div>
+        <div class="main-wrapper__inner">
+            <alert></alert>
+            <router-outlet></router-outlet>
+        </div>
+    </section>
+</div>
+
+<modal-dialog [(modalDialog)]="sessionExpiredModal">
+    <span>{{'SessionExpiredModal.ModalDesc' | translate}}</span>
+    <div class="pmd-modal-action text-right mt30">
+        <!-- <button class="btn pmd-ripple-effect btn-primary" type="button" (click)="this.sessionExpiredModal.visible = false">{{'SessionExpiredModal.LoginBtn' | translate}}</button> -->
+    </div>
+</modal-dialog>

@@ -1,0 +1,16 @@
+body {
+    color: #4d575d;
+}
+.footer {
+    margin-top: 50px;
+}
+.navbar--account {
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 0;
+}
+.navbar--account .navbar-brand {
+    max-width: 205px;
+    height: auto;
+    padding: 5px 0;
+}

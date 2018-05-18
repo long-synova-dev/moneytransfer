@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup Label="Globals">
+	  <SccProjectName>SAK</SccProjectName>
+	  <SccProvider>SAK</SccProvider>
+	  <SccAuxPath>SAK</SccAuxPath>
+	  <SccLocalPath>SAK</SccLocalPath>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net47</TargetFramework>
+		<UserSecretsId>aspnet-MoneyTransferApp.Web-21A75A2F-B82F-48B6-856A-9BD068CF9D2D</UserSecretsId>
+		<TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Data\**" />
+	  <Compile Remove="wwwroot_backup\**" />
+	  <Content Remove="Data\**" />
+	  <Content Remove="wwwroot_backup\**" />
+	  <EmbeddedResource Remove="Data\**" />
+	  <EmbeddedResource Remove="wwwroot_backup\**" />
+	  <None Remove="Data\**" />
+	  <None Remove="wwwroot_backup\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Controllers\CaiControllers\GDPRTestController.cs" />
+	  <Compile Remove="Interfaces\IFormFile.cs" />
+	  <Compile Remove="Services\AnonymousResultsService.cs" />
+	  <Compile Remove="Services\DoTestService.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="appsettings.Development.json" />
+	  <Content Remove="wwwroot\assets\js\reepay.config.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DocumentFormat.OpenXml" Version="2.7.2" />
+		<PackageReference Include="itext7.pdfhtml" Version="2.0.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="2.0.0" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+		<PackageReference Include="microsoft.entityframeworkcore.tools" Version="2.0.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="3.19.1" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.1.4" />
+		<PackageReference Include="Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider" Version="2.1.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+		<PackageReference Include="PdfSharp" Version="1.50.4589-beta4" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.4" />
+		<PackageReference Include="WindowsAzure.Storage" Version="8.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+		<DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+		<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\MoneyTransferApp.AppLogger\MoneyTransferApp.Logger.csproj" />
+	  <ProjectReference Include="..\MoneyTransferApp.Auth\MoneyTransferApp.Auth.csproj" />
+	  <ProjectReference Include="..\MoneyTransferApp.Core\MoneyTransferApp.Core.csproj" />
+	  <ProjectReference Include="..\MoneyTransferApp.Infrastructure\MoneyTransferApp.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+  <Folder Include="Areas\" />
+  <Folder Include="StaticFiles\" />
+  <Folder Include="UploadFiles\" />
+	</ItemGroup>
+
+</Project>

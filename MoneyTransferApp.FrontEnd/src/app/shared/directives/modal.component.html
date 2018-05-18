@@ -1,0 +1,19 @@
+<div [@dialog] *ngIf="modalDialog.visible" class="dialog">
+    <div class="modal-dialog {{modalDialog.sizeClass}}">
+        <div class="modal-content">
+            <div class="modal-header pmd-modal-bordered">
+                <button *ngIf="!modalDialog.isModal" (click)="close()" aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h2 class="pmd-card-title-text">{{modalDialog.title}}</h2>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+            <!-- <div class="pmd-modal-action pmd-modal-bordered text-right" *ngIf="modalDialog.buttons">
+                <button *ngFor="let button of modalDialog.buttons" data-dismiss="modal" class="btn pmd-ripple-effect {{button.class}}" type="button"
+                    (click)="button.action()">{{button.name}}</button>
+                <button data-dismiss="modal" class="btn pmd-ripple-effect btn-default" type="button" (click)="close()">Cancel</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div *ngIf="modalDialog.visible" class="overlay" (click)="close()"></div>

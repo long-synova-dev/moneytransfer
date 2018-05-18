@@ -1,0 +1,69 @@
+<div class="side-form-2" style="width: 30%;">
+    <button class="btn-link no-padding" routerLink="../">
+        <i class="material-icons">arrow_back</i>
+    </button>
+    <h3>{{'Persondata.AddVendorInformation'| translate}} <span class="help-group__icon"><i class="material-icons">help_outline</i><span class="help-group__help-text">{{'Persondata.AddVendorInformationTooltip' | translate}}</span></span></h3>
+    <div class="row" *ngIf="vendorData">
+        <div class="col-xs-8">
+            <div  class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'pmd-textfield-floating-label-completed': vendorData.vendorName}">
+                <label for="NameOf3rdPartyVendor" class="control-label">
+                    {{'Persondata.NameOf3rdPartyVendor' | translate}}
+                </label>
+                <input type="text" [(ngModel)]="vendorData.vendorName" class="form-control">
+                <span class="pmd-textfield-focused"></span>
+            </div>
+            <div  class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'pmd-textfield-floating-label-completed': vendorData.salesGroup}">
+                <label for="AddVendorCategory" class="control-label">
+                    {{'Persondata.AddSalesGroup' | translate}}
+                </label>
+                <ng-select 
+                    [(ngModel)]="vendorData.salesGroup"
+                    [options]="listSuggestions"  (noOptionsFound)="onNoOptionsFound($event)" filterPlaceholder="{{'Persondata.SelectFromList' | translate}}">
+                </ng-select>
+                <span class="pmd-textfield-focused"></span>
+            </div>
+        </div>
+    </div>
+    <div class="mt20 clearfix"></div>
+    <strong>{{ 'Persondata.UploadVendorAgreement' | translate }}</strong>
+    <form method="post" enctype="multipart/form-data" *ngIf="!isUploaded">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="form-group pmd-textfield">
+                    <label for="Upload" class="control-label">
+                        {{ 'General.ClickToUpload' | translate }}
+                    </label>
+                    <input type="file" accept="image/png,image/bmp,image/gif,image/jpeg,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/pdf,application/zip,text/*" class="btn btn-sm btn-default" ng2FileSelect [uploader]="uploader" class="form-control">
+                    <span class="pmd-textfield-focused"></span>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-sm btn-primary mt20" type="button" (click)="uploader.uploadAll()">
+                    <i class="material-icons pmd-xs upload-button">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <ul class="list-group" *ngIf="isUploaded">
+        <li class="list-group-item">
+            <div class="media-left media-middle">
+                <i class="material-icons pmd-xs">attach_file</i>
+            </div>
+            <div class="media-body media-middle">
+                {{fileName}}
+            </div>
+            <i class="material-icons md-dark media-middle download" (click)="download()" title="{{'General.Download' | translate}}">cloud_download</i>
+            <i class="material-icons md-dark media-middle delete" (click)="confirmDelete()" title="{{'General.Delete' | translate}}">delete</i>
+        </li>
+    </ul>
+    <button class="btn btn-lg pmd-btn-raised pmd-ripple-effect btn-primary" (click)="saveVendor()">{{'Persondata.Save' | translate}}</button>
+</div>
+<modal-dialog [(modalDialog)]="deleteConfirm">
+    <div class="form-group">
+        {{ 'Persondata.ConfirmDelete' | translate }}
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-danger" (click)="delete()">{{ 'General.DeleteBtn' | translate }}</button>
+        <button type="submit" class="btn btn-default" (click)="closeDelete()">{{ 'General.CancelBtn' | translate }}</button>
+    </div>
+</modal-dialog>

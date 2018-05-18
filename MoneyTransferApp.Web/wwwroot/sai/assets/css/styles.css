@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+.navbar--account {
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 0;
+}
+.navbar--account .navbar-brand {
+  max-width: 205px;
+  height: auto;
+  padding: 5px 0;
+}

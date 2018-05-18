@@ -1,0 +1,309 @@
+<modal-dialog [(modalDialog)]="confirmDialog" *ngIf="selectedPlan">
+    <p>{{'Subscription.Summary' | translate}}</p>
+    <table class="table pmd-table table-sm">
+        <thead>
+            <tr>
+                <th>{{'Subscription.Description' | translate}}</th>
+                <th><div class="text-right">{{'Subscription.MonthlyPrice' | translate}}</div></th>
+                <th><div class="text-right">{{'Subscription.Vat' | translate}}</div></th>
+                <th><div class="text-right">{{'Subscription.TotalNoVat' | translate}}</div></th>
+                <th><div class="text-right">{{'Subscription.TotalVat' | translate}}</div></th>
+                <th><div class="text-right">{{'Subscription.TotalIncVat' | translate}}</div></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{selectedPlan?.planName}}</td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{selectedPlan?.amount/100 | number: '1.0-0'| replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.vat | percent}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedPlan.amountInclVat ? selectedPlan?.amount / (1+selectedPlan?.vat)/100 : selectedPlan?.amount/100) | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedPlan.amountInclVat ? selectedPlan?.amount * (selectedPlan?.vat / (1+selectedPlan?.vat)) / 100  : selectedPlan?.amount * selectedPlan?.vat/100) | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedPlan.amountInclVat ? selectedPlan?.amount/100 : selectedPlan?.amount/100 + selectedPlan?.amount * selectedPlan?.vat/100) | number: '1.0-0' | replace}}</span>
+                </td>
+            </tr>
+            <tr *ngIf="selectedUserAddOns">
+                <td>{{selectedUserAddOns?.addOnName}}</td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{selectedUserAddOns?.amount/100 | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedUserAddOns?.vat | percent}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedUserAddOns.amountInclVat ? selectedUserAddOns?.amount / (1+selectedUserAddOns?.vat)/100 : selectedUserAddOns?.amount/100) | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedUserAddOns.amountInclVat ? selectedUserAddOns?.amount * (selectedUserAddOns?.vat / (1+selectedUserAddOns?.vat)) / 100  : selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedUserAddOns.amountInclVat ? selectedUserAddOns?.amount/100 : selectedUserAddOns?.amount/100 + selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) | number: '1.0-0' | replace}}</span>
+                </td>
+            </tr>
+            <tr *ngIf="selectedSedaAddOns">
+                <td>{{selectedSedaAddOns?.addOnName}}</td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{selectedSedaAddOns?.amount/100 | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedSedaAddOns?.vat | percent}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedSedaAddOns.amountInclVat ? selectedSedaAddOns?.amount / (1+selectedSedaAddOns?.vat)/100 : selectedSedaAddOns?.amount/100) | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedSedaAddOns.amountInclVat ? selectedSedaAddOns?.amount * (selectedSedaAddOns?.vat / (1+selectedSedaAddOns?.vat)) / 100  : selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) | number: '1.0-0' | replace}}</span>
+                </td>
+                <td>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{(selectedSedaAddOns.amountInclVat ? selectedSedaAddOns?.amount/100 : selectedSedaAddOns?.amount/100 + selectedSedaAddOns?.amount * selectedUserAddOns?.vat/100) | number: '1.0-0' | replace}}</span>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="5">
+                    <span class="pull-right">Total (excl. VAT)</span>
+                </th>
+                <th>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{
+                        ((selectedPlan.amountInclVat ? selectedPlan?.amount / (1+selectedPlan?.vat)/100 : selectedPlan?.amount/100) + 
+                        (selectedUserAddOns ? (selectedUserAddOns.amountInclVat ? selectedUserAddOns?.amount / (1+selectedUserAddOns?.vat)/100 : selectedUserAddOns?.amount/100) : 0) +
+                        (selectedSedaAddOns ? (selectedSedaAddOns.amountInclVat ? selectedSedaAddOns?.amount / (1+selectedSedaAddOns?.vat)/100 : selectedSedaAddOns?.amount/100) : 0))
+                        | number: '1.0-0' | replace}}</span>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="5">
+                    <span class="pull-right">Total VAT</span>
+                </th>
+                <th>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{
+                        ((selectedPlan.amountInclVat ? selectedPlan?.amount * (selectedPlan?.vat / (1+selectedPlan?.vat)) / 100  : selectedPlan?.amount * selectedPlan?.vat/100) +
+                        (selectedUserAddOns ? (selectedUserAddOns?.amountInclVat ? selectedUserAddOns?.amount * (selectedUserAddOns?.vat / (1+selectedUserAddOns?.vat)) / 100  : selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) : 0) + 
+                        (selectedSedaAddOns ? (selectedSedaAddOns?.amountInclVat ? selectedSedaAddOns?.amount * (selectedSedaAddOns?.vat / (1+selectedSedaAddOns?.vat)) / 100  : selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) : 0)
+                        )
+                        | number: '1.0-0' | replace}}</span>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="5">
+                    <span class="pull-right">Total (incl. VAT)</span>
+                </th>
+                <th>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{
+                        ((selectedPlan.amountInclVat ? selectedPlan?.amount/100 : selectedPlan?.amount/100 + selectedPlan?.amount * selectedPlan?.vat/100) +
+                        (selectedUserAddOns ? (selectedUserAddOns?.amountInclVat ? selectedUserAddOns?.amount/100 : selectedUserAddOns?.amount/100 + selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) : 0) + 
+                        (selectedSedaAddOns ? (selectedSedaAddOns?.amountInclVat ? selectedSedaAddOns?.amount/100 : selectedSedaAddOns?.amount/100 + selectedSedaAddOns?.amount * selectedUserAddOns?.vat/100) : 0)                       
+                        )
+                        | number: '1.0-0' | replace}}</span>
+                </th>
+            </tr>
+            <tr *ngIf="selectedCouponCode">
+                <th colspan="5">
+                    <span class="pull-right">Coupon ({{selectedCouponCode.name}})</span>
+                </th>
+                <th>
+                    <span class="pull-right">{{selectedPlan?.currency}} - {{
+                        ( 
+                            selectedCouponCode.amount ? selectedCouponCode.amount/100 : ((selectedPlan.amountInclVat ? selectedPlan?.amount/100 : selectedPlan?.amount/100 + selectedPlan?.amount * selectedPlan?.vat/100) +
+                            (selectedUserAddOns ? (selectedUserAddOns?.amountInclVat ? selectedUserAddOns?.amount/100 : selectedUserAddOns?.amount/100 + selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) : 0) + 
+                            (selectedSedaAddOns ? (selectedSedaAddOns?.amountInclVat ? selectedSedaAddOns?.amount/100 : selectedSedaAddOns?.amount/100 + selectedSedaAddOns?.amount * selectedUserAddOns?.vat/100) : 0))/100*selectedCouponCode.percentage
+                        )
+                        
+                        | number: '1.0-0' | replace}}</span>
+                </th>
+            </tr>
+            <tr *ngIf="selectedCouponCode">
+                <th colspan="5">
+                    <span class="pull-right">Total</span>
+                </th>
+                <th>
+                    <span class="pull-right">{{selectedPlan?.currency}} {{
+                        ((selectedPlan.amountInclVat ? selectedPlan?.amount/100 : selectedPlan?.amount/100 + selectedPlan?.amount * selectedPlan?.vat/100) +
+                        (selectedUserAddOns ? (selectedUserAddOns?.amountInclVat ? selectedUserAddOns?.amount/100 : selectedUserAddOns?.amount/100 + selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) : 0) + 
+                        (selectedSedaAddOns ? (selectedSedaAddOns?.amountInclVat ? selectedSedaAddOns?.amount/100 : selectedSedaAddOns?.amount/100 + selectedSedaAddOns?.amount * selectedUserAddOns?.vat/100) : 0)) -
+                        ( 
+                            selectedCouponCode.amount ? selectedCouponCode.amount/100 : ((selectedPlan.amountInclVat ? selectedPlan?.amount/100 : selectedPlan?.amount/100 + selectedPlan?.amount * selectedPlan?.vat/100) +
+                            (selectedUserAddOns ? (selectedUserAddOns?.amountInclVat ? selectedUserAddOns?.amount/100 : selectedUserAddOns?.amount/100 + selectedUserAddOns?.amount * selectedUserAddOns?.vat/100) : 0) + 
+                            (selectedSedaAddOns ? (selectedSedaAddOns?.amountInclVat ? selectedSedaAddOns?.amount/100 : selectedSedaAddOns?.amount/100 + selectedSedaAddOns?.amount * selectedUserAddOns?.vat/100) : 0))/100*selectedCouponCode.percentage
+                        )
+                        | number: '1.0-0' | replace}}</span>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+    <p>{{'Subscription.Explanation' | translate}}</p>
+    <p *ngIf="card"><span [innerHtml]="'Subscription.ReuseCard'| translate:{maskedCard: card?.masked_card}"></span> <a href='javascript:void(0)' (click)='continue(true)'>{{'Subscription.Here' | translate}}</a>.</p>
+
+    <div class="pmd-modal-action pmd-modal-bordered text-right">
+        <button class="btn pmd-ripple-effect btn-primary" type="button" (click)="continue(false)" *ngIf="selectedPlan.isCancelled">{{'Subscription.ConfirmReactivate' | translate}}</button>
+        <button class="btn pmd-ripple-effect btn-primary" type="button" (click)="continue(false)" *ngIf="!isViewCurrentPlan && !selectedPlan.isCancelled">{{'Subscription.Confirm' | translate}}</button>
+        <button class="btn pmd-ripple-effect btn-primary" type="button" (click)="cancelPlan()" *ngIf="isViewCurrentPlan">{{'Subscription.CancelSubcription' | translate}}</button>
+        <button class="btn pmd-ripple-effect btn-default" type="button" (click)="close()">{{'Subscription.Cancel' | translate}}</button>
+    </div>
+</modal-dialog>
+<div class="container" *ngIf="ready">
+    <div class="text-center">
+        <h2>{{'Subscription.Title' | translate}}</h2>
+    </div>
+    <div class="row mt30 row-eq-height">
+        <div class="col-xs-4 col-xs-offset-2">
+            <div class="pmd-card pmd-z-depth" style="height: 100%; margin-bottom: 0;">
+                <div class="pmd-card-body">
+                    <h2>{{'Subscription.YourCurrentUsage' | translate}}</h2>
+                    <table class="current-plan-info">
+                        <tr>
+                            <td>{{'Subscription.NumberOfProcesses' | translate}}</td>
+                            <td><strong>{{currentStatus.noOfProcesses}}/{{currentStatus.maxProcesses}} {{'Subscription.Available' | translate}}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{{'Subscription.NumberOfUsers' | translate}}</td>
+                            <td><strong>{{currentStatus.noOfUsers}}/{{currentStatus.maxUsers}} {{'Subscription.Available' | translate}}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{{'Subscription.StorageInUse' | translate}}</td>
+                            <td><strong>{{currentStatus.noOfStorage}}MB/{{currentStatus.maxStorage}}MB {{'Subscription.Available' | translate}}</strong></td>
+                        </tr>
+                    </table>
+                    <i>{{'Subscription.CurrentBlockSmallText' | translate}}</i>
+                </div>
+             </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="pmd-card pmd-z-depth" style="height: 100%; margin-bottom: 0;">
+                <div class="pmd-card-body">
+                    <h2>{{'Subscription.ChooseYourBilling' | translate}}</h2>
+                    <table class="subscription-type">
+                        <tr>
+                            <td><span class="text-uppercase">{{'Subscription.Monthly' | translate}}</span> </td>
+                            <td>
+                                <label class="custom-switch" for="custom-switch">
+                                    <input type="checkbox" id="custom-switch" [(ngModel)]="frequency" (change)="frequencyChange()">
+                                    <span class="custom-switch__button"></span>
+                                </label>
+                            </td>
+                            <td> <span class="text-uppercase">{{'Subscription.Annually' | translate}}</span></td>
+                        </tr>
+                    </table>
+                    <i>{{'Subscription.IntervalBlockSmallText' | translate}}</i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt30">
+        <div class="col-xs-4 col-xs-offset-4">
+            <div class="text-center">
+                {{'Subscription.SmallTextDescription' | translate}}<br/>
+                <a href="https://www.complyto.com/da/priser" target="_blank" *ngIf="lang == 'da'">{{'Subscription.SmallLink' | translate}}</a>
+                <a href="https://www.complyto.com/da/priser" target="_blank" *ngIf="lang == 'en'">{{'Subscription.SmallLink' | translate}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4" *ngFor="let plan of billingPlans | filterBy: billingPlansFilter">
+            <div class="cancel-alert" [ngClass]="{'active': plan.isCancelled}" *ngIf="currentStatus.isCancelled">
+                <div class="cancel-alert__title">
+                    <i class="material-icons">error</i> {{'Subscription.CancelErrorTitle' | translate}}
+                </div>
+                <div class="cancel-alert__exp">
+                    {{'Subscription.CancelErrorExp' | translate}}: {{currentStatus.expireDate | dateformatpipe:true}}
+                </div>
+                <a href="javascript:void(0)" class="cancel-alert__link" (click)="onClickPurchasePlan(plan)">{{'Subscription.CancelErrorLinkText' | translate}}</a>
+            </div>
+            <!--Media, Title, Description and Action area -->
+            <div class="pmd-card pmd-card-default pmd-z-depth price-card" [ngClass]="{'price-card-active': plan.billingPlanId == selectedPlan?.billingPlanId, 'open': plan.isOpen, 'active': plan.isCurrent,  'disable': plan.isDisabled, 'has-coupon': !currentStatus.currentPlan}">
+                <div class="price-card__overlay" (click)="clickPlan(plan)"></div>
+                <div class="price-card__label" *ngIf="plan.isCurrent">{{'Subscription.CurrentPlan' | translate}}</div>
+                <!-- Card header -->
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text text-center">{{plan.planName}}</h2>
+                </div>
+
+                <!-- Card body -->
+                <div class="pmd-card-body">
+                    <div class="price">
+                        <span class="price__unit">{{plan.currency}}</span>
+                        <span class="price__number">{{plan.amount/100 | number: '1.0-0' | replace}}</span>
+                        <span class="price__ex" *ngIf="!frequency">/ {{'Subscription.Month' | translate}}</span>
+                        <span class="price__ex" *ngIf="frequency">/ {{'Subscription.Year' | translate}}</span>
+                    </div>
+                    <ul class="feature-list">
+                        <!-- <li>
+                            <strong>{{plan.vat | percent}} {{'Subscription.VatIncluded' | translate}}</strong>
+                        </li>
+                        <li>
+                            <strong>{{plan.maximumUsers}} {{'Subscription.TeamMembers' | translate}}</strong>
+                        </li> -->
+                        <li *ngFor="let line of plan.description.split('\n')">
+                            <strong>{{line}}</strong>
+                        </li>
+                    </ul>
+                    <div class="add-ons-block">
+                        <ul class="list-unstyled addons">
+                            <li><strong>{{'Subscription.AdditionalUsers' | translate}}:</strong></li>
+                            <li *ngFor="let addOn of listAddOns | filterBy: {addOnType: 'user'} | filterBy: addOnsFilter">
+                                <div class="radio" *ngIf="addOn.amount == 0" [ngClass]="{'disabled': addOn.isDisabled}">
+                                    <label class="pmd-radio pmd-radio-ripple-effect">
+                                        <input type="radio" name=`{{plan.planName}}AdditionalUsers` (change)="onCheckAddOns(addOn, plan)" [disabled]="addOn.isDisabled" [checked]="addOn.isChecked">
+                                        <span class="pmd-radio-label">&nbsp;</span>
+                                        <span>{{'Subscription.AdditionalUsersNoThank' | translate}}</span>
+                                    </label>
+                                </div>
+                                <div class="radio" *ngIf="addOn.amount > 0" [ngClass]="{'disabled': addOn.isDisabled}">
+                                    <label class="pmd-radio pmd-radio-ripple-effect">
+                                        <input type="radio" name=`{{plan.planName}}AdditionalUsers` (change)="onCheckAddOns(addOn, plan)" [disabled]="addOn.isDisabled" [checked]="addOn.isChecked">
+                                        <span class="pmd-radio-label">&nbsp;</span>
+                                        <span>{{addOn.addOnName}}, {{plan.currency}} {{addOn.amount/100 | number: '1.0-0' | replace}}</span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="list-unstyled addons">
+                            <li><strong>{{'Subscription.AddExtraStorage' | translate}}:</strong></li>
+                            <li *ngFor="let addOn of listAddOns | filterBy: {addOnType: 'seda'} | filterBy: addOnsFilter">
+                                <div class="radio" *ngIf="addOn.amount == 0" [ngClass]="{'disabled': addOn.isDisabled}">
+                                    <label class="pmd-radio pmd-radio-ripple-effect">
+                                        <input type="radio" name=`{{plan.planName}}AddExtraStorage` (change)="onCheckAddOns(addOn, plan)" [disabled]="addOn.isDisabled" [checked]="addOn.isChecked">
+                                        <span class="pmd-radio-label">&nbsp;</span>
+                                        <span>{{'Subscription.AddExtraStorageNoThank' | translate}}</span>
+                                    </label>
+                                </div>
+                                <div class="radio" *ngIf="addOn.amount > 0" [ngClass]="{'disabled': addOn.isDisabled}">
+                                    <label class="pmd-radio pmd-radio-ripple-effect">
+                                        <input type="radio" name=`{{plan.planName}}AddExtraStorage` (change)="onCheckAddOns(addOn, plan)" [disabled]="addOn.isDisabled" [checked]="addOn.isChecked">
+                                        <span class="pmd-radio-label">&nbsp;</span>
+                                        <span>{{addOn.addOnName}}, {{plan.currency}} {{addOn.amount/100 | number: '1.0-0' | replace}}</span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div *ngIf="!currentStatus.currentPlan" class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'pmd-textfield-floating-label-completed': couponCode}">
+                            <label for="couponCode" class="control-label">
+                                {{'Subscription.CouponQuestion' | translate}}
+                            </label>
+                            <input maxlength="256" type="text" class="form-control" name="couponCode" [(ngModel)]="couponCode">
+                            <span class="pmd-textfield-focused"></span>
+                        </div>
+                        <button type="button"class="btn btn-block pmd-ripple-effect btn-primary" *ngIf="plan.isCancelled && currentStatus.isCancelled" (click)="onClickPurchasePlan(plan)">{{'Subscription.ViewOrResubscribe' | translate}}</button>
+                        <button type="button"class="btn btn-block pmd-ripple-effect btn-default active" *ngIf="plan.isCurrent && !changeCurrentPlanBtn && !plan.isCancelled" (click)="viewCurrentPlan(plan)">{{'Subscription.ViewOrCancelPlan' | translate}}</button>
+                        <button type="button" (click)="onClickPurchasePlan(plan)" class="btn btn-block pmd-ripple-effect btn-primary" *ngIf="!plan.isCancelled && !plan.isCurrent || (plan.isCurrent && changeCurrentPlanBtn)">{{'Subscription.SubscribeNow' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="reepay-card-token" />
+<input type="hidden" id="reepay-masked-card-number" />
+<input type="hidden" id="reepay-exp-year" />
+<input type="hidden" id="reepay-exp-month" />
+<input type="hidden" id="reepay-fingerprint" />
+<input type="hidden" id="reepay-card-type" />
