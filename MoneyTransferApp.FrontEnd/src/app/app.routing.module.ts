@@ -25,62 +25,6 @@ const routes: Routes = [
   {
     path: 'account',
     loadChildren: './user/user.module#UserModule'
-  },
-  {
-    path: 'user-manage',
-    loadChildren: './user-management/user-manage.module#UserManageModule',
-    canActivate: [AuthGuardComponent, RoleGuard, PlanGuard, IsCompleteWizardComponent],
-    data: {
-      roles: ['R2','R3'],
-      plans: ['trial', 'small', 'medium', 'large']
-    }
-  },
-  {
-    path: 'account-owner',
-    component: UserSettingComponent,
-    canActivate: [AuthGuardComponent, RoleGuard, PlanGuard, IsCompleteWizardComponent],
-    data: {
-      roles: ['R2', 'R3', 'R4', 'R5', 'R6'],
-      plans: ['trial', 'small', 'medium', 'large']
-    }
-  },
-  {
-    path: 'gdpr',
-    loadChildren: './gdpr/gdpr.module#GdprModule',
-    canActivate: [AuthGuardComponent, RoleGuard, PlanGuard, IsCompleteWizardComponent],
-    data: {
-      roles: ['R2', 'R3', 'R4', 'R5', 'R6'],
-      plans: ['trial', 'small', 'medium', 'large']
-    }
-  },
-  {
-    path: 'gdpr-wizard',
-    loadChildren: './gdpr-wizard/gdpr-wizard.module#GdprWizardModule',
-    canActivate: [AuthGuardComponent, RoleGuard, PlanGuard],
-    data: {
-      roles: ['R2', 'R3', 'R4', 'R5', 'R6'],
-      plans: ['trial', 'small', 'medium', 'large']
-    }
-  },
-  {
-    path: 'billing-plan',
-    loadChildren: './billing-plan/billing-plan.module#BillingPlanModule',
-    canActivate: [AuthGuardComponent, RoleGuard],
-    data: {
-      roles: ['R2', 'R3', 'R4', 'R5', 'R6']
-    }
-  },
-  {
-    path: 'pro-feature',
-    canActivate: [AuthGuardComponent, RoleGuard, PlanGuard],
-    data: {
-      roles: ['R2', 'R3', 'R4', 'R5', 'R6'],
-      plans: ['medium', 'large']
-    }
-  },
-  {
-    path: '**',
-    redirectTo: '/gdpr/dashboard'
   }
 ];
  
