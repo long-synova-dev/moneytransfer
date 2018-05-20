@@ -51,7 +51,7 @@ namespace MoneyTransferApp.Web.Controllers
             {
                 return new OkObjectResult(new { Errors = new[] { "IncorrectLogin" } });
             }
-            return await GenerateTokenWithRoles(user, model, RoleConstant.CaiRoleList);
+            return await GenerateTokenWithRoles(user, model, RoleConstant.AllRoleList);
         }
         
         /// <summary>

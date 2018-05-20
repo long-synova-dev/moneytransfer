@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MoneyTransferApp.Web.Controllers.CaiControllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = RoleConstant.CaiRolesOnly, Policy = PolicyNames.AllPlansPolicy)]
+    [Authorize(Roles = RoleConstant.AllRoles, Policy = PolicyNames.AllPlansPolicy)]
     public class HomeController : BaseController
     {
         [HttpGet("[action]")]
