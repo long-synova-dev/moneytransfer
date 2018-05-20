@@ -6,8 +6,6 @@ import { RoleGuard } from './shared/guards/role.guard';
 import { PlanGuard } from './shared/guards/plan.guard';
 import { IsCompleteWizardComponent } from './shared/guards/complete-wizard.guard';
 
-import { BillingPlanComponent } from './billing-plan/billing-plan.component';
-import { ProFeatureComponent } from './pro-feature/pro-feature.component';
 import { NotFoundComponent } from './404.component';
 import { NotHavePermissionComponent } from './403.component';
 import { UserManageComponent } from './user-management/user-manage.component';
@@ -74,7 +72,6 @@ const routes: Routes = [
   },
   {
     path: 'pro-feature',
-    component: ProFeatureComponent,
     canActivate: [AuthGuardComponent, RoleGuard, PlanGuard],
     data: {
       roles: ['R2', 'R3', 'R4', 'R5', 'R6'],

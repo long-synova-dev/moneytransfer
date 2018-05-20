@@ -21,7 +21,6 @@ import { DataService } from './shared/services/data.service';
 import { CompanyInfoService } from './shared/services/company-info.service';
 import { HttpCustomInterceptor } from './shared/interceptors/http-custom.interceptor';
 
-import { ProFeatureComponent } from './pro-feature/pro-feature.component';
 import { AlertComponent } from './shared/directives/alert.component';
 import { AlertService } from './shared/services/alert.service';
 import { SessionManagementService } from './shared/services/session-management.service';
@@ -33,7 +32,6 @@ import { IntercomModule } from 'ng-intercom';
 import { ModalModule } from './shared/directives/modal.module';
 import { UserSettingComponent } from './user-setting/user-setting.component'
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ReplacePipe } from './shared/pipes/replace.pipes';
 
 @NgModule({
     imports: [
@@ -59,12 +57,11 @@ import { ReplacePipe } from './shared/pipes/replace.pipes';
             updateOnRouterChange: true
         }),
         ModalModule,
-        MatExpansionModule,
+        MatExpansionModule
     ],
     declarations: [
         AppComponent,
         AlertComponent,
-        ProFeatureComponent,
         UserSettingComponent
     ],
     providers: [
