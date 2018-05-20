@@ -11,27 +11,23 @@ namespace MoneyTransferApp.Web.Utilities
 {
     public static class ClaimHelper
     {
-        public static IEnumerable<Claim> GetClaims(User user, IEnumerable<string> roles, string activePlanId, Guid? companyId = null, string companyNumber = null)
+        public static IEnumerable<Claim> GetClaims(User user, IEnumerable<string> roles)
         {
             //Add claims for all users
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(CustomClaimTypes.Id, user.Id.ToString()),
                 new Claim(CustomClaimTypes.Name, user.FirstName + Constant.SPACE + user.LastName),
-                new Claim(CustomClaimTypes.Email, user.Email, ClaimValueTypes.String),
-                new Claim(CustomClaimTypes.Language, (user.LanguageId??Constant.DEFAULT_LANGUAGE).ToString(), ClaimValueTypes.Integer),
-                new Claim(CustomClaimTypes.CompanyId, companyId.ToString(), ClaimValueTypes.Integer),
-                new Claim(CustomClaimTypes.Locale, user.Language?.LanguageCode, ClaimValueTypes.Integer),
-                new Claim(CustomClaimTypes.CompanyNo, companyNumber ?? string.Empty, ClaimValueTypes.String)
+                new Claim(CustomClaimTypes.PhoneNumber, user.PhoneNumber, ClaimValueTypes.String),
             };
 
             // Add roles as claims
             claims.AddRange(roles.Select(role => new Claim(CustomClaimTypes.Roles, role, ClaimValueTypes.String)));
 
             // Add billing plan as claims
-            claims.Add(new Claim(CustomClaimTypes.Plan, activePlanId, ClaimValueTypes.String));
+            claims.Add(new Claim(CustomClaimTypes.Plan, ClaimValueTypes.String));
 
             // Return
             return claims;

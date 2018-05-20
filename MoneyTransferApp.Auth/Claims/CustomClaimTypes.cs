@@ -15,7 +15,5 @@
         public const string Plan = "plan";
         public const string Language = "lang";
         public const string Locale = "locale";
-        public const string CompanyId = "company";
-        public const string CompanyNo = "companyNo";
     }
 }

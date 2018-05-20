@@ -10,8 +10,8 @@ namespace MoneyTransferApp.Auth
 {
     public static class TokenGenerator
     {
-        public static object Generate(IEnumerable<Claim> claims, IEnumerable<string> roles, string planId,
-            string subscriptionState, bool? inTrial, IConfiguration config, string refreshToken)
+        public static object Generate(IEnumerable<Claim> claims, IEnumerable<string> roles,
+            IConfiguration config, string refreshToken)
         {
             var jwtKey = config["JwtTokens:Key"];
             var jwtIssuer = config["JwtTokens:Issuer"];
@@ -37,10 +37,7 @@ namespace MoneyTransferApp.Auth
                 SessionTime = sessionTime,
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
                 RefreshToken = refreshToken,
-                Roles = roles,
-                Plan = planId,
-                State = subscriptionState,
-                InTrial = inTrial
+                Roles = roles
             };
         }
     }

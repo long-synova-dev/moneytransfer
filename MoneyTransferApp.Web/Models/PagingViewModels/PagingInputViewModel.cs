@@ -18,7 +18,5 @@ namespace MoneyTransferApp.Web.Models.PagingViewModels
         public string OrderBy { get; set; }
 
         public bool? IsDesc { get; set; }
-
-        public SubscriptionStatus Type { get; set; }
     }
 }

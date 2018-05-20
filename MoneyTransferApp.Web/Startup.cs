@@ -2,18 +2,12 @@ using System.IO;
 using System.Net;
 using System.Text;
 using MoneyTransferApp.Auth;
-using MoneyTransferApp.Core.Entities.Internal;
 using MoneyTransferApp.Core.Entities.Users;
 using MoneyTransferApp.Core.Interfaces;
 using MoneyTransferApp.Core.Settings;
 using MoneyTransferApp.Infrastructure.Data;
 using MoneyTransferApp.Infrastructure.Services;
-using MoneyTransferApp.Infrastructure.Common;
-using MoneyTransferApp.Logger;
 using MoneyTransferApp.Web.Filters;
-using MoneyTransferApp.Web.Interfaces;
-using MoneyTransferApp.Web.Services;
-using MoneyTransferApp.Web.Utilities;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +22,6 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
@@ -215,11 +208,8 @@ namespace MoneyTransferApp.Web
             });
 
             //Configure database encryption
-            InitializeAzureKeyVaultProvider(Configuration["Azure:AppRegistrationId"], Configuration["Azure:AppRegistrationKey"]);
-
-            //Add custom logger provider.
-            loggerFactory.AddComplyToLogger<ApplicationDbContext, AppLog>(app.ApplicationServices);
-        
+            //InitializeAzureKeyVaultProvider(Configuration["Azure:AppRegistrationId"], Configuration["Azure:AppRegistrationKey"]);
+            
             app.UseSession();
 
             app.UseAuthentication();
@@ -237,15 +227,7 @@ namespace MoneyTransferApp.Web
             services.AddTransient(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddTransient<ISQLCommandExecutor, SQLCommandExecutor>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IDoTestService, DoTestService>();
-            services.AddScoped<IUsersInfoService, UsersInfoService>();
-            //services.AddScoped<IAnonymousResultsService, AnonymousResultsService>();
             services.AddScoped<IEmailServices, EmailServices>();
-            services.AddScoped<IUserService, UserService>();
-
-            // Test for Logger START
-            services.AddSingleton<ILoggerFactory, LoggerFactory>();
-            // Test for Logger END
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 

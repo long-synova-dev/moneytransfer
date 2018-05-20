@@ -7,6 +7,5 @@ namespace MoneyTransferApp.Web.Models.UserViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        public int? LanguageId { get; set; }
     }
 }

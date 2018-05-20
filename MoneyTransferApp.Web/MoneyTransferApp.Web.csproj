@@ -29,13 +29,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Controllers\CaiControllers\GDPRTestController.cs" />
-	  <Compile Remove="Interfaces\IFormFile.cs" />
-	  <Compile Remove="Services\AnonymousResultsService.cs" />
-	  <Compile Remove="Services\DoTestService.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Content Remove="appsettings.Development.json" />
 	  <Content Remove="wwwroot\assets\js\reepay.config.js" />
 	</ItemGroup>
@@ -72,7 +65,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\MoneyTransferApp.AppLogger\MoneyTransferApp.Logger.csproj" />
 	  <ProjectReference Include="..\MoneyTransferApp.Auth\MoneyTransferApp.Auth.csproj" />
 	  <ProjectReference Include="..\MoneyTransferApp.Core\MoneyTransferApp.Core.csproj" />
 	  <ProjectReference Include="..\MoneyTransferApp.Infrastructure\MoneyTransferApp.Infrastructure.csproj" />
@@ -80,6 +72,7 @@
 
 	<ItemGroup>
   <Folder Include="Areas\" />
+  <Folder Include="Services\" />
   <Folder Include="StaticFiles\" />
   <Folder Include="UploadFiles\" />
 	</ItemGroup>

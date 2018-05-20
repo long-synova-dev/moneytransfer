@@ -7,7 +7,6 @@ using MoneyTransferApp.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 using System.Text;
-using MoneyTransferApp.Core.Entities.Internal;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
@@ -17,6 +16,15 @@ namespace MoneyTransferApp.Logger
         where TDbContext : DbContext
         where TEntity : AppLog, new()
     {
+        public const int MaxThreadLength = 255;
+        public const int MaxLoggerLength = 255;
+        public const int MaxLevelLength = 50;
+        public const int MaxApplicationLength = 255;
+        public const int MaxHostLength = 50;
+        public const int MaxIpAddressLength = 50;
+        public const int MaximumExceptionLength = 4000;
+        public const int MaximumMessageLength = 8000;
+
         private readonly IServiceProvider _services;
         private readonly string _name;
 
@@ -101,11 +109,11 @@ namespace MoneyTransferApp.Logger
                     Username = userName,
                     Url = httpContext == null ? "" : httpContext.Request.Path.Value,
                     Date = DateTime.UtcNow,
-                    Message = Trim(message, AppLog.MaximumMessageLength),
-                    Level = Trim($"{logLevel}", AppLog.MaxLoggerLength),
-                    Logger = Trim($"{_name}", AppLog.MaxLoggerLength),
-                    Thread = Trim($"{eventId}", AppLog.MaxThreadLength),
-                    HostAddress = Trim($"{hostAddress}", AppLog.MaxHostLength)
+                    Message = Trim(message, MaximumMessageLength),
+                    Level = Trim($"{logLevel}", MaxLoggerLength),
+                    Logger = Trim($"{_name}", MaxLoggerLength),
+                    Thread = Trim($"{eventId}", MaxThreadLength),
+                    HostAddress = Trim($"{hostAddress}", MaxHostLength)
                 };
 
                 switch (logLevel)

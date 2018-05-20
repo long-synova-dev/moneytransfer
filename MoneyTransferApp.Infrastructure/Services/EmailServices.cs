@@ -64,47 +64,6 @@ namespace MoneyTransferApp.Infrastructure.Services
 			return isSuccess;
 		}
 
-		public bool SendMailWithTemplate(int eventId, int? languageId, string recipientEmail, string subjectData = "", string bodyData = "")
-		{
-		    MailMessage mail = new MailMessage();
-
-			StringBuilder body = new StringBuilder();
-
-			string message = String.Empty;
-			string subject = String.Empty;
-
-			var objMessageTemplate = _unitOfWork.NotificationTemplateRepository.All().SingleOrDefault(s => s.NotificationEventId == eventId);
-			if (objMessageTemplate != null)
-			{
-				var translation = _unitOfWork.TranslationRepository.All().Where(s => s.LanguageId == languageId);
-				message = translation.SingleOrDefault(s => s.TranslationId == objMessageTemplate.MessageTranslationId)?.TranslatedText;
-				subject = translation.SingleOrDefault(s => s.TranslationId == objMessageTemplate.SubjectTranslationId)?.TranslatedText;
-			}
-
-            //Replace template with data
-		    subject = ReplaceTemplateWithData(subject, subjectData);
-            message = ReplaceTemplateWithData(message, bodyData);
-
-            body.Append(message);
-			body.Append("\n");
-
-			//signature
-			body.Append(Signature);
-
-			mail.Body = body.ToString();
-			mail.Subject = subject;
-			mail.To.Add(recipientEmail);
-			if (!_emailSettings.Bcc.Equals(string.Empty))
-			{
-				mail.Bcc.Add(_emailSettings.Bcc);
-			}
-
-            ComplyToSmtp smtp = new ComplyToSmtp(_emailSettings, _logger);
-			var isSuccess = smtp.Send(mail);
-
-			return isSuccess;
-		}
-
 		public async Task<bool> SendMailAsync(string mailAddress, string subject, string message)
 		{
 			MailMessage mail = new MailMessage();

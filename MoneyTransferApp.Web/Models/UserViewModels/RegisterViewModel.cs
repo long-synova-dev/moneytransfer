@@ -14,7 +14,10 @@ namespace MoneyTransferApp.Web.Models.UserViewModels
 
         [Required]
         [StringLength(300)]
-        public string CompanyName { get; set; }
+        public string StoreName { get; set; }
+
+        [Required]
+        public string UserName { get; set; }
 
         [StringLength(20)]
         public string PhoneNumber { get; set; }
@@ -31,13 +34,5 @@ namespace MoneyTransferApp.Web.Models.UserViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        public int? LanguageId { get; set; }
-
-        [StringLength(3)]
-        public string CountryVatCode { get; set; }
-
-        [StringLength(50)]
-        public string VatRegistrationNo { get; set; }
     }
 }

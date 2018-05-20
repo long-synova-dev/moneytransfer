@@ -5,16 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using MoneyTransferApp.Web.Utilities;
 using MoneyTransferApp.Auth;
-using MoneyTransferApp.Core.Entities.Client;
 using MoneyTransferApp.Core.Entities.Users;
 using MoneyTransferApp.Web.Common;
-using MoneyTransferApp.Web.Interfaces;
 using MoneyTransferApp.Web.Models.AuthViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using MoneyTransferApp.Web.Interfaces;
 
 namespace MoneyTransferApp.Web.Controllers
 {
@@ -47,28 +46,14 @@ namespace MoneyTransferApp.Web.Controllers
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> GenerateToken([FromBody] GenerateTokenViewModel model)
         {
-            var user = _userService.GetUserByEmail(model.Email, model.CompanyNumber);
+            var user = _userService.GetUserByPhone_UserName(model.UserName);
             if (user == null)
             {
                 return new OkObjectResult(new { Errors = new[] { "IncorrectLogin" } });
             }
             return await GenerateTokenWithRoles(user, model, RoleConstant.CaiRoleList);
         }
-
-        /// <summary>
-        /// Verifies username and password then generates a JWT token if user is a SAI user
-        /// </summary>
-        /// <param name="model">GenerateTokenViewModel</param>
-        /// <returns></returns>
-        [HttpPost("[action]")]
-        [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> GenerateTokenForSai([FromBody] GenerateTokenViewModel model)
-        {
-            // Look up the user
-            var user = _userService.GetUserByEmail(model.Email);
-            return await GenerateTokenWithRoles(user, model, RoleConstant.SaiRoleList);
-        }
-
+        
         /// <summary>
         /// Verifies the refresh token and reissue a new token
         /// </summary>
@@ -131,8 +116,6 @@ namespace MoneyTransferApp.Web.Controllers
 
         private async Task<IActionResult> GenerateTokenWithRoles(User user, GenerateTokenViewModel model, List<string> requiredRoles)
         {
-          
-
             if (user == null)
             {
                 return Ok(new { Errors = new[] { "IncorrectLogin" } });
@@ -157,25 +140,8 @@ namespace MoneyTransferApp.Web.Controllers
                 return Ok(new { Errors = new[] { "IncorrectLogin" } });
             }
             
-            Company company = null;
             var activePlanId = string.Empty;
-
-            if (requiredRoles == RoleConstant.CaiRoleList)
-            {
-                if (string.IsNullOrEmpty(model.CompanyNumber))
-                {
-                    await _userManager.AccessFailedAsync(user);
-                    return Ok(new { Errors = new[] { "IncorrectLogin" } });
-                }
-
-                company = _userService.VerifyCompanyNumber(model.Email, model.CompanyNumber);
-                if (company == null)
-                {
-                    await _userManager.AccessFailedAsync(user);
-                    return Ok(new { Errors = new[] { "IncorrectLogin" } });
-                }
-            }
-
+            
             // Get roles of current user
             var roles = await _userManager.GetRolesAsync(user);
             if (!requiredRoles.Any(requiredRole => roles.Contains(requiredRole)))
@@ -184,10 +150,10 @@ namespace MoneyTransferApp.Web.Controllers
             }
 
             // Generate claims and JWT token
-            var claims = ClaimHelper.GetClaims(user, roles, activePlanId, company?.CompanyId, company?.CompanyNumber);
+            var claims = ClaimHelper.GetClaims(user, roles);
             _userService.UpdateLastLogin(user.Id);
             // Generate token
-            var token = TokenGenerator.Generate(claims, roles, subscriptionState?.Plan, subscriptionState?.State, subscriptionState?.InTrial, _config, user.SecurityStamp);
+            var token = TokenGenerator.Generate(claims, roles, _config, user.SecurityStamp);
             return Ok(token);
         }
 

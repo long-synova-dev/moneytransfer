@@ -54,11 +54,7 @@ namespace MoneyTransferApp.Web.Controllers
                     FullName = claims.FirstOrDefault(c => c.Type == CustomClaimTypes.Name)?.Value,
                     Email = claims.FirstOrDefault(c => c.Type == CustomClaimTypes.Email)?.Value,
                     Roles = claims.Where(c => c.Type == CustomClaimTypes.Roles).Select(c => c.Value).ToArray(),
-                    Plan = claims.FirstOrDefault(c => c.Type == CustomClaimTypes.Plan)?.Value,
-                    Locale = claims.FirstOrDefault(c => c.Type == CustomClaimTypes.Locale)?.Value,
-                    Language = int.Parse(claims.FirstOrDefault(c => c.Type == CustomClaimTypes.Language)?.Value ?? throw new InvalidOperationException("User Language not found in the JWT token")),
-                    CompanyId = !string.IsNullOrEmpty(claims.FirstOrDefault(c => c.Type == CustomClaimTypes.CompanyId)?.Value) ? Guid.Parse(claims.FirstOrDefault(c => c.Type == CustomClaimTypes.CompanyId)?.Value ?? throw new InvalidOperationException("Company Id not found in the JWT token")) : Guid.Empty,
-                    CompanyNumber = claims.FirstOrDefault(c => c.Type == CustomClaimTypes.CompanyNo)?.Value,
+                    Locale = claims.FirstOrDefault(c => c.Type == CustomClaimTypes.Locale)?.Value
                 };
                 return user;
             }
@@ -91,7 +87,7 @@ namespace MoneyTransferApp.Web.Controllers
         protected async Task<IActionResult> RefreshUserToken(Guid userId)
         {
             // Look up the user by its refresh token
-            var user = _userService.GetUserByToken(userId);
+            var user = _userService.GetUserById(userId);
 
             if (user == null)
             {
@@ -108,10 +104,10 @@ namespace MoneyTransferApp.Web.Controllers
             var roles = await _userManager.GetRolesAsync(user);
 
             // Generate claims and JWT token
-            var claims = ClaimHelper.GetClaims(user, roles, CurrentUserIdentity.Plan, CurrentUserIdentity.CompanyId, CurrentUserIdentity.CompanyNumber);
+            var claims = ClaimHelper.GetClaims(user, roles);
 
             // Generate token
-            var token = TokenGenerator.Generate(claims, roles, CurrentUserIdentity.Plan, string.Empty, null, _config, user.SecurityStamp);
+            var token = TokenGenerator.Generate(claims, roles, _config, user.SecurityStamp);
             return Ok(token);
         }
     }
