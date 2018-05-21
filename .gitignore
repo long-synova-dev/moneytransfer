@@ -983,3 +983,4 @@ MoneyTransferApp.Core/bin/Debug/net47/System.IO.FileSystem.dll
 MoneyTransferApp.Core/bin/Debug/net47/System.IO.FileSystem.Watcher.dll
 MoneyTransferApp.Core/bin/Debug/net47/System.IO.FileSystem.Primitives.dll
 MoneyTransferApp.FrontEnd/dist/
+MoneyTransferApp.Web/obj/

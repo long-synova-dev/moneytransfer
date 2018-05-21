@@ -13,7 +13,7 @@ using MoneyTransferApp.Core.Entities.Users;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 
-namespace MoneyTransferApp.Web.Controllers.CaiControllers
+namespace MoneyTransferApp.Web.Controllers
 {
     [Route("api/[controller]")]
     [Authorize(Roles = RoleConstant.GodOnly)]

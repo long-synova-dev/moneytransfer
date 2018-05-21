@@ -75,7 +75,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-  <Folder Include="Services\" />
+  <Folder Include="Models\CustomerViewModels\" />
   <Folder Include="StaticFiles\" />
   <Folder Include="UploadFiles\" />
 	</ItemGroup>
