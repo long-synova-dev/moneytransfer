@@ -5,22 +5,18 @@ using MoneyTransferApp.Core.Interfaces;
 using MoneyTransferApp.Web.Common;
 using MoneyTransferApp.Web.Interfaces;
 using MoneyTransferApp.Web.Models.UserViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Text;
-using MoneyTransferApp.Core.Entities.Client;
 using MoneyTransferApp.Core.Entities.Users;
-using MoneyTransferApp.Infrastructure.Common;
-using MoneyTransferApp.Web.Models.AuthViewModels;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
-namespace MoneyTransferApp.Web.Controllers.CaiControllers
+namespace MoneyTransferApp.Web.Controllers
 {
     [Route("api/[controller]")]
-    //[AutoValidateAntiforgeryToken]
+    [Authorize(Roles = RoleConstant.GodOnly)]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
@@ -62,7 +58,7 @@ namespace MoneyTransferApp.Web.Controllers.CaiControllers
         /// <returns></returns>
         [HttpPost("[action]")]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> CreateAccount([FromBody] RegisterViewModel model)
         {
             var usersList = _userService.GetUserByPhone_UserName(model.UserName);
             if(usersList != null)
@@ -72,6 +68,7 @@ namespace MoneyTransferApp.Web.Controllers.CaiControllers
             //Instantiate a new application user
             var user = new User
             {
+                StoreName = model.StoreName,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 UserName = model.UserName,

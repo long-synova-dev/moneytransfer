@@ -118,7 +118,6 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
     this._data.isGdprProgramGenerated.subscribe(value => {
       this.gdprRoute = value.isGenerated ? 'gdpr' : 'gdpr-wizard';
-      this.goLiveDate = value.goLiveDate
     });
   }
 

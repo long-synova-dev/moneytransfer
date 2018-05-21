@@ -8,7 +8,6 @@ using MoneyTransferApp.Web.Interfaces;
 using MoneyTransferApp.Web.Models.PagingViewModels;
 using MoneyTransferApp.Web.Models.UserViewModels;
 using MoneyTransferApp.Web.Models.BaseViewModels;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -114,38 +113,6 @@ namespace MoneyTransferApp.Web.Services
 
         }
 
-        public async Task<string> SaveUser(UserExtendRegisterViewModel model, UserIdentityViewModel CurrentUserIdentity)
-        {
-            try
-            {
-                if (model.Id == null)
-                {
-                    return await CreateUser(model, CurrentUserIdentity);
-                }
-                return await UpdateUser(model, CurrentUserIdentity);
-            }
-            catch (Exception ex)
-            {
-                return "User.SaveError";
-            }
-        }
-
-        public async Task<string> CreateUser(UserExtendRegisterViewModel model, UserIdentityViewModel CurrentUserIdentity)
-        {
-            return "User.SaveSuccess";
-        }
-
-        public async Task<bool> ResendEmail(UserExtendInfoViewModel model)
-        {
-            return true;
-        }
-
-        public async Task<string> UpdateUser(UserExtendRegisterViewModel model, UserIdentityViewModel CurrentUserIdentity)
-        {
-            return "User.SaveError";
-
-        }
-
         public void DeleteUser(Guid id, UserIdentityViewModel CurrentUserIdentity)
         {
             var user = _unitOfWork.UserRepository.All().FirstOrDefault(s => s.Id == id);
@@ -159,12 +126,7 @@ namespace MoneyTransferApp.Web.Services
         {
             var listRoles = new List<RoleViewModel>();
             var roles = _unitOfWork.RoleRepository.All().Where(s => !s.IsDeleted && s.Name != "R0" && s.Name != "R1").Select(s => new { value = s.Id, label = s.Name });
-            //var accountandadmin = string.Join(",", roles.Where(s => s.label == "r2" || s.label == "r3").Select(s => s.value));
-            //listRoles.Add(new RoleViewModel
-            //{
-            //    value = accountandadmin,
-            //    label = "Account Owner & Administrator"
-            //});
+            
             var accountowner = roles.FirstOrDefault(s => s.label == "R2")?.value.ToString();
             listRoles.Add(new RoleViewModel
             {
