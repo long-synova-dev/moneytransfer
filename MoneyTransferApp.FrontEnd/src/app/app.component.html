@@ -4,11 +4,7 @@
     </div>
     <nav class="navbar navbar-default navbar--account">
         <div class="container-fluid" [ngClass]="{'container-response': !userInfo}">
-            <div class="navbar-header">
-                <a class="navbar-brand" routerLink="home">
-                    <img alt="Brand" src="assets/images/logo.png" class="img-responsive">
-                </a>
-            </div>
+
             <div class="nav navbar-nav navbar-right dropdown pmd-dropdown clearfix hidden-xs navbar__user-btn" [ngClass]="{hidden : !userInfo}">
                 <button class="btn pmd-ripple-effect btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                     <span class="btn-avatar">
@@ -35,12 +31,7 @@
                     <li role="presentation"><a href="javascript:void(0);" (click)="userLogout()">{{'Header.LogOut' | translate}}</a></li>
                 </ul>
             </div>
-            <span class="dropdown pmd-dropdown clearfix pull-right language-btn navbar__icon-btn hidden-xs" [ngClass]="{hidden: userInfo}">
-                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default" type="button" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">language</i></button>
-                <ul aria-labelledby="dropdownMenuDivider" role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li *ngFor="let lang of allLanguages" role="presentation"><a [ngClass]="{'active': lang.languageCode == preferredLang}" href="javascript:void(0);" tabindex="-1" role="menuitem" (click)="switchLanguage(lang)">{{lang.languageName}}</a></li>
-                </ul>
-            </span>
+            
             <span class="pull-right help-btn navbar__icon-btn hidden-xs" [ngClass]="{hidden : !userInfo}">
                 <a class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default" title="Help" href="http://help.complyto.com/" target="_blank"><i class="material-icons">help_outline</i></a>
             </span>
