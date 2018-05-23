@@ -13,12 +13,10 @@ import { SelectModule } from 'ng-select';
 import { AppRouting } from './app.routing.module';
 import { AuthGuard, AuthGuardComponent } from './shared/guards/authenticator.guard';
 import { RoleGuard } from './shared/guards/role.guard';
-import { PlanGuard } from './shared/guards/plan.guard';
 import { IsCompleteWizardComponent } from './shared/guards/complete-wizard.guard';
 import { AppComponent } from './app.component';
 import { UserService } from './shared/services/user.service';
 import { DataService } from './shared/services/data.service';
-import { CompanyInfoService } from './shared/services/company-info.service';
 import { HttpCustomInterceptor } from './shared/interceptors/http-custom.interceptor';
 
 import { AlertComponent } from './shared/directives/alert.component';
@@ -65,12 +63,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
         UserSettingComponent
     ],
     providers: [
-        { provide: LOCALE_ID, useValue: "en-US" },
+        { provide: LOCALE_ID, useValue: "vi-VN" },
         AlertService,
         AuthGuard,
         AuthGuardComponent,
         RoleGuard,
-        PlanGuard,
         IsCompleteWizardComponent,
         {
             provide: HTTP_INTERCEPTORS,
@@ -80,7 +77,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
         DataService,
         UserService,
         SessionManagementService,
-        CompanyInfoService,
         ScriptLoaderService,
         CommonService
     ],

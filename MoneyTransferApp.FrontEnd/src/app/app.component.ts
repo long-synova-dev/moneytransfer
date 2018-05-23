@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { DataService } from './shared/services/data.service';
 import { UserService } from './shared/services/user.service';
-import { CompanyInfoService } from './shared/services/company-info.service';
 import { SessionManagementService } from './shared/services/session-management.service';
 import { ScriptLoaderService } from './shared/services/load-script.service';
 import { Intercom } from 'ng-intercom';
@@ -47,7 +46,6 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     private _cdRef: ChangeDetectorRef,
     private _elementRef: ElementRef,
     private _render: Renderer2,
-    private _companyInfoService: CompanyInfoService,
     private _script: ScriptLoaderService,
     private _activatedRoute: ActivatedRoute,
     private _interCom: Intercom
@@ -74,18 +72,6 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
       }
     });
 
-    this._activatedRoute.queryParams.subscribe(params => {
-      if (params.lang == "da") {
-        localStorage.setItem("lang", '{"languageId":2,"languageCode":"da-DK"}');
-        let url: string = this.route.url.substring(0, this.route.url.indexOf("?"));
-        this.route.navigateByUrl(url);
-      }
-      else if (params.lang == "en") {
-        localStorage.setItem("lang", '{"languageId":1,"languageCode":"en-UK"}');
-        let url: string = this.route.url.substring(0, this.route.url.indexOf("?"));
-        this.route.navigateByUrl(url);
-      }
-    });
     this.preferredLang = this._data.getDefaultLanguage();
     this._translate.setDefaultLang(this.preferredLang);
     this._userService.getLanguages()
@@ -112,13 +98,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     if (this._data.checkToken()) {
       this._userService.getCurrentUser()
         .then(response => this._data.updateUserInfo(response));
-      this._companyInfoService.isGdprProgramGenerated()
-        .then(value => this._data.setGdprProgramGenerated(value));
     }
-
-    this._data.isGdprProgramGenerated.subscribe(value => {
-      this.gdprRoute = value.isGenerated ? 'gdpr' : 'gdpr-wizard';
-    });
   }
 
   userLogout() {
@@ -134,10 +114,6 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     this.userInfo = null;
     this.isAppLoading = false;
     this.route.navigate(['/account']);
-  }
-
-  changeRoute() {
-    this.route.navigateByUrl('/plan-upgrade', { skipLocationChange: true });
   }
 
   switchLanguage(lang) {
@@ -157,10 +133,6 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     } else {
       window.location.reload();
     }
-  }
-
-  goToBilling() {
-    window.location.href = '/billing-plan';
   }
 
   _getLogoName(fullName) {

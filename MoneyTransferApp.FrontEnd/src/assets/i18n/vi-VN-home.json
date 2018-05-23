@@ -1,5 +1,6 @@
 {
     "Home": {
+        "Title": "Danh sách khách",
         "TodoList": "To Do list",
         "ProjectProgress": "Project Progress",
         "Chart": "Chart"

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
  
 import { AuthGuard, AuthGuardComponent } from './shared/guards/authenticator.guard';
 import { RoleGuard } from './shared/guards/role.guard';
-import { PlanGuard } from './shared/guards/plan.guard';
 import { IsCompleteWizardComponent } from './shared/guards/complete-wizard.guard';
 
 import { NotFoundComponent } from './404.component';
@@ -15,7 +14,7 @@ import { UserSettingComponent } from './user-setting/user-setting.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '',
+    redirectTo: '/home/dashboard',
     pathMatch: 'full'
   },
   {

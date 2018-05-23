@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
-import { User } from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
 import { MatchPasswordValidation } from '../../shared/services/match-password.service';
 import { Globals } from '../../shared/global/global';
@@ -11,6 +10,7 @@ import { DataService } from '../../shared/services/data.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { Intercom } from 'ng-intercom';
 import { ModalDialog } from '../../shared/models/modal-dialog.model';
+import { User } from '../../shared/models/user.model';
 
 @Component({
     templateUrl: './user-signup.component.html',
@@ -51,13 +51,6 @@ export class UserSignupComponent implements OnInit {
         this.successModal = new ModalDialog('SignUp Success', 'modal-md', false);
     }
     ngOnInit(): void {
-        this._userService.checkRestrictIP();
-        this._userService.getListVats()
-            .then(vats =>  {
-                this.listVats = vats;
-                this.signupForm.controls['countryVatCode'].setValue(vats[0].value);
-            });
-
         let lang = localStorage.getItem("lang");
         if(JSON.parse(lang).languageCode == 'da-DK')
         {
@@ -90,7 +83,7 @@ export class UserSignupComponent implements OnInit {
 
         console.log(user);
         //Call api
-        this._userService.registerService(user)
+        this._userService.createAccountService(user)
             .then((response) => {
                 if (response && response.errors && response.errors.length > 0) {
                     this._data.changeLoadStatus(false);

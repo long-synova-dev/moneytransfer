@@ -11,7 +11,6 @@ import { DataService } from '../../shared/services/data.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { ModalDialog } from '../../shared/models/modal-dialog.model';
 import { ModalComponent } from '../../shared/directives/modal.component';
-import { CompanyInfoService } from '../../shared/services/company-info.service';
 import { Intercom } from 'ng-intercom';
 
 @Component({
@@ -40,13 +39,12 @@ export class UserLoginComponent implements OnInit {
         private _translate: TranslateService,
         private _data: DataService,
         private _alert: AlertService,
-        private _companyInfoService: CompanyInfoService,
         private _intercom: Intercom
     ) {
         this._translate.get('Login.NotificationTitle').subscribe(value => this.confirmDialog = new ModalDialog(value, 'modal-md', false));
     }
     ngOnInit() {
-        //this._UserService.checkRestrictIP();
+
         this.userLogout();
         this._data.updateActiveToken(false);
         
@@ -55,7 +53,6 @@ export class UserLoginComponent implements OnInit {
             this.isRememberMe = true;
             let rememberValue = {};
             rememberValue['userName'] = localStorage.getItem('userName');
-            rememberValue['email'] = localStorage.getItem('email');
             this.formInit(rememberValue);
         } else {
             this.formInit(null);
@@ -66,7 +63,6 @@ export class UserLoginComponent implements OnInit {
     formInit(value) {
         this.loginForm = this._formBuilder.group({
             'userName': [value && value.userName ? value.userName : null, Validators.required],
-            //'email': [value && value.email ? value.email : null, Validators.compose([Validators.required, Validators.pattern(Globals.EMAIL_REGEX_VALIDATE)])],
             'password': [null, Validators.required]
         });
     }
@@ -129,32 +125,6 @@ export class UserLoginComponent implements OnInit {
                         .then(response => {
                             localStorage.setItem("lang", JSON.stringify({ languageId: response.language, languageCode: response.locale }));
                         });
-
-                    this._companyInfoService.isGdprProgramGenerated()
-                        .then(value => {
-                            this._data.setGdprProgramGenerated(value);
-                            if (response.inTrial || response.state === 'active') {
-                                if (value.isGenerated) {
-                                    this._router.navigate([this.returnUrl]);
-                                } else {
-                                    this._router.navigate(['/gdpr-wizard']);
-                                }
-                            } else {
-                                if (response.roles.indexOf("R2") > -1 || response.roles.indexOf("R3") > -1) {
-                                    if (response.state === 'no_subscription') {
-                                        this._translate.get(`Login.${response.state}`).subscribe(value => this.subscriptionMessage = value);
-                                        this.redirectTo = '/billing-plan';
-                                    } else {
-                                        this._translate.get(`Login.${response.state}`).subscribe(value => this.subscriptionMessage = value);
-                                        this.redirectTo = '/billing-plan/current';
-                                    }
-                                } else {
-                                    this._translate.get(`Login.SubsriptionExpiredForPerformerReviewer`).subscribe(value => this.subscriptionMessage = value);
-                                }
-                                this._translate.get('Login.NotificationTitle').subscribe(value => this.confirmDialog = new ModalDialog(value, 'modal-md', false));
-                                this.confirmDialog.visible = true;
-                            }
-                        });
                 }
             })
     }
@@ -170,11 +140,9 @@ export class UserLoginComponent implements OnInit {
     isRememberMeCheck(isMember) {
         if (isMember) {
             localStorage.setItem('isRememberMe', this.isRememberMe);
-            localStorage.setItem('companyNumber', this.loginForm.value.companyNumber);
             localStorage.setItem('email', this.loginForm.value.email);
         } else {
             localStorage.removeItem('isRememberMe');
-            localStorage.removeItem('companyNumber');
             localStorage.removeItem('email');
         }
     }

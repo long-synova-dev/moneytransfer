@@ -7,7 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Globals } from '../shared/global/global';
 import { CommonService } from '../shared/services/common.service';
 import { UserService } from '../shared/services/user.service';
-import { UserInfo } from '../shared/models/userinfo.model';
 import { SelectModule } from 'ng-select';
 import { ModalDialog } from '../shared/models/modal-dialog.model';
 import { errorHandler } from '@angular/platform-browser/src/browser';
