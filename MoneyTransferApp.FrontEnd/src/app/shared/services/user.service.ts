@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Globals } from '../global/global';
-import { User } from '../models/user.model';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -34,7 +33,7 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    public registerService(user: any) {
+    public createAccountService(user: any) {
         return this._http
             .post(Globals.REGISTER_DATA_URL, JSON.stringify(user))
             .toPromise()
@@ -45,14 +44,6 @@ export class UserService {
     public getCurrentUser() {
         return this._http
             .get(Globals.GET_CURRENT_USER_DATA_URL)
-            .toPromise()
-            .then(response => response)
-            .catch(this.handleError);
-    }
-
-    public getUsersInCompany() {
-        return this._http
-            .get(Globals.GET_USER_IN_COMPANY)
             .toPromise()
             .then(response => response)
             .catch(this.handleError);
@@ -77,14 +68,6 @@ export class UserService {
     public changeLanguage(languageId: number) {
         return this._http
             .post(Globals.CHANGE_LANGUAGE_URL, { languageId: languageId })
-            .toPromise()
-            .then((response) => response)
-            .catch(this.handleError);
-    }
-
-    public pingHome() {
-        return this._http
-            .get(Globals.PING_HOME_URL)
             .toPromise()
             .then((response) => response)
             .catch(this.handleError);
@@ -117,15 +100,19 @@ export class UserService {
         .toPromise()
         .then(response => response);
     }
+
     public saveUser(user: any) {
         return this._http.post(Globals.SAVE_USER_URL,user).toPromise().then(response => response).catch(this.handleError);
     }
+
     public deleteUser(id) {
         return this._http.delete(`${Globals.DELETE_USER_URL}/${id}`).toPromise().then(response => response).catch(this.handleError);
     }
+
     public getRoles() {
         return this._http.get(Globals.GET_ROLES_URL).toPromise().then(response => response).catch(this.handleError);
     }
+
     public getUserById(id){
         return this._http
         .get(`${Globals.GET_USER_BY_ID_URL}/${id}`)
@@ -158,31 +145,6 @@ export class UserService {
         .catch(this.handleError);
     }
     
-    public getListVats() {
-        return this._http
-            .get(`${Globals.GET_MASTER_TAGS_BY_CATEGORY_URL}/${Globals.CATEGORY_COUNTRY_VAT_CODE}`)
-            .toPromise()
-            .then(response => response)
-            .catch(this.handleError);
-    }
-
-    public GetUserStatus()
-    {
-        return this._http
-        .get(Globals.GET_USER_STATUS_URL)
-        .toPromise()
-        .then(response=>response)
-        .catch(this.handleError);
-    }
-
-    public getMaxUsers(){
-        return this._http
-        .get(Globals.GET_MAX_USERS_URL)
-        .toPromise()
-        .then(response=> response)
-        .catch(this.handleError);
-    }
-
     public changeRole(userId)
     {
         return this._http
@@ -201,21 +163,6 @@ export class UserService {
         .catch(this.handleError);
     }
 
-    public getOverView() {
-        return this._http
-            .get(Globals.GET_OVERVIEW_URL)
-            .toPromise()
-            .then(response => response)
-            .catch(this.handleError);
-    }
-
-    public checkRestrictIP()
-    {
-        return this._http.get(Globals.CHECK_RESTRICTED_IP)
-        .toPromise()
-        .then(response => response)
-        .catch(this.handleError);
-    }
 
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);

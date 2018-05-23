@@ -2,7 +2,6 @@ import { Component, ViewChild, TemplateRef, Pipe, PipeTransform } from '@angular
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Rx';
-import { User } from '../shared/models/user.model';
 import { UserService } from '../shared/services/user.service';
 import { MatchPasswordValidation } from '../shared/services/match-password.service';
 import { Globals } from '../shared/global/global';
@@ -96,33 +95,6 @@ export class UserManageComponent implements OnInit {
                         this.changeOwnership = v;
                      });
                 });
-                this._userService.GetUserStatus()
-                    .then(u => {
-                        this._data.changeLoadStatus(false);
-                        this.userStatusInfo = u;
-                        if (u.plan) {
-                            let totalUsers = this.rows.filter(u => u.active).length;
-                            var tpl = `Manage.${u.plan.planName}`;
-                            if (u.plan.planName != "NoPlanSelected") {
-                                this.planName = u.plan.planName;
-                                this.maxUsers = u.plan.maximumUser - totalUsers;
-                                this.seatLeft = `${this.maxUsers} / ${u.plan.maximumUser}`;
-                            } else {
-                                this._translate.get(`${tpl}`).subscribe(v => {
-                                    this.planName = v;
-                                });
-                                this.seatLeft = `${totalUsers} / ?`;
-                            }
-
-                        }
-
-                        if (!u.isAddNew) {
-                            this._translate.get('Manage.MaximumNumberError').subscribe(v => {
-                                this.subscriptionMessage = v;
-                            });
-
-                        }
-                    });
             });
     }
 
@@ -184,23 +156,6 @@ export class UserManageComponent implements OnInit {
                 this.openChangeRoleDialog.visible = false;
             }
         });
-    }
-
-    getUserStatus() {
-        this._userService.GetUserStatus()
-            .then(u => {
-                this.userStatusInfo = u;
-                if (u.plan) {
-                    this.maxUsers = u.plan.maximumUser;
-                }
-                if (!u.isAddNew) {
-                    this._translate.get('Manage.UnableToAddUsers').subscribe(v => {
-                        console.log(v);
-                        this.subscriptionMessage = v;
-                    });
-
-                }
-            });
     }
 
     isCanAssignAsOwner(row)

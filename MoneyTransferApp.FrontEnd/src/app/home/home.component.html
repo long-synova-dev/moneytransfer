@@ -1,111 +1,83 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="pmd-card pmd-z-depth todos">     
-        <div class="pmd-card-title">
-          <h2 class="pmd-card-title-text typo-fill-secondary">{{'Home.TodoList' | translate}}</h2>
+    <h2>{{ Home.Title }}</h2>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="page.keyword" (keyup)="filter($event)" placeholder="Type a keyword and press Enter to filter...">
+            </div>
         </div>
-        <ul class="list-group pmd-card-list pmd-list todo-lists">
-          <li class="list-group-item">
-            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
-              <input type="checkbox" value="" checked=""><span class="pmd-checkbox-label">&nbsp;</span>
-              <span>Release Update</span>
-            </label>
-          </li>
-          <li class="list-group-item">
-            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
-              <input type="checkbox" value=""><span class="pmd-checkbox-label">&nbsp;</span>
-              <span>Take a backup of the files</span>
-            </label>
-          </li>
-          <li class="list-group-item">
-            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
-              <input type="checkbox" value=""><span class="pmd-checkbox-label">&nbsp;</span>
-              <span>Resolve Issues which have been listed down</span>
-            </label>
-          </li>
-          <li class="list-group-item">
-            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
-              <input type="checkbox" value=""><span class="pmd-checkbox-label">&nbsp;</span>
-              <span>Be sure to add FAQs and Terms &amp; Conditions page</span>
-            </label>
-          </li>
-          <li class="list-group-item">
-            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
-              <input type="checkbox" value="" checked=""><span class="pmd-checkbox-label">&nbsp;</span>
-              <span>Code enhancement of the HTML files</span>
-            </label>
-          </li>
-          <li class="list-group-item">
-            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
-              <input type="checkbox" value=""><span class="pmd-checkbox-label">&nbsp;</span>
-              <span>Proper monitoring to plan the next marketing attempt</span>
-            </label>
-          </li>
-        </ul>
-        <span class="btn-loader loader hidden">Loading...</span>
-      </div>
     </div>
-    <div class="col-lg-4">
-      <div class="pmd-card pmd-z-depth project-progress">      
-        <div class="pmd-card-title">
-          <h2 class="pmd-card-title-text typo-fill-secondary">{{'Home.ProjectProgress' | translate}}</h2>
-        </div>
-        <div class="content-section">
-          <ul class="list-group pmd-card-list pmd-list todo-lists">
-            <li class="list-group-item timeline project-info">Graphics changes. Need to change icons for few sections.
-              <h5 class="typo-fill-secondary">Low Priority</h5>
-            </li>
-    
-            <li class="list-group-item timeline project-notification">Clean html/css/js code. Remove commented code from all the files. Also, enhance the code.
-              <h5 class="typo-fill-secondary">High Priority</h5>
-            </li>
-    
-            <li class="list-group-item timeline  project-notification">Make website responsive. Need to check the website in devices like Mobile and Ipad.
-              <h5 class="typo-fill-secondary">High Priority</h5>
-            </li>
-          </ul>
-          <div class="blank-state-section hidden">	
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 90 90" enable-background="new 0 0 90 90" xml:space="preserve">
-              <g>
-                <g>
-                  <g>
-                    <path fill="#CAC8C8" d="M61.364,73.637h-4.091H32.727h-4.091H6.982l9.381-9.381v-2.892V40.909
-                      c0-15.791,12.845-28.636,28.637-28.636c15.791,0,28.636,12.846,28.636,28.636v20.456v2.892l9.38,9.381H61.364z M45,85.909
-                      c-5.327,0-9.823-3.432-11.521-8.182h23.04C54.823,82.478,50.326,85.909,45,85.909L45,85.909z M89.404,74.234L77.729,62.563
-                      V40.909c0-16.613-12.551-30.408-28.638-32.441V4.09c0-2.258-1.832-4.091-4.09-4.091s-4.092,1.833-4.092,4.091v4.377
-                      C24.823,10.5,12.272,24.295,12.272,40.909v21.654L0.596,74.234c-0.581,0.589-0.757,1.465-0.442,2.229
-                      c0.315,0.767,1.064,1.265,1.89,1.265h27.168C31.041,84.772,37.382,90.001,45,90.001c7.618,0,13.958-5.229,15.788-12.273h27.168
-                      c0.825,0,1.575-0.498,1.89-1.265C90.161,75.699,89.985,74.823,89.404,74.234L89.404,74.234z"></path>
-                  </g>
-                </g>
-                <line fill="#CAC8C8" stroke="#CAC8C8" stroke-width="3" stroke-miterlimit="10" x1="7.854" y1="7.834" x2="86.679" y2="86.659"></line>
-              </g>
-            </svg>
-            <h4>You Don't Have Any Notifications</h4>						
-          </div>
-          </div>
-          <span class="btn-loader loader hidden">Loading...</span>
-      </div>
+    <div class="data-table">
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40" [rowHeight]="'auto'"
+            [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber - 1" [limit]="page.itemsPerPage" (page)='paginate($event)'
+            (sort)="sort($event)">
+            <ngx-datatable-column prop="customerNumber">
+                <ng-template let-sort="sortFn" ngx-datatable-header-template>
+                    <span (click)="sort()">Number</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>{{value}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="fullName">
+                <ng-template let-sort="sortFn" ngx-datatable-header-template>
+                    <span (click)="sort()">Full name</span>
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>{{value}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="email">
+                <ng-template let-sort="sortFn" ngx-datatable-header-template>
+                    <span (click)="sort()">Email Address</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <a href="mailto:{{value}}">{{value}}</a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="phone">
+                <ng-template let-sort="sortFn" ngx-datatable-header-template>
+                    <span (click)="sort()">Phone</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template> {{value}} </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="companyName">
+                <ng-template let-sort="sortFn" ngx-datatable-header-template>
+                    <span (click)="sort()">Company Name</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template> {{value}} </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="companyNumber">
+                <ng-template let-sort="sortFn" ngx-datatable-header-template>
+                    <span (click)="sort()">Company Number</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template> {{value}} </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="roles" [sortable]="false">
+                <ng-template ngx-datatable-header-template>
+                    <span>Roles</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span *ngFor="let role of value">{{role}}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="isActive" [sortable]="false">
+                <ng-template ngx-datatable-header-template>
+                    <span>Status</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>{{value ? 'Active' : 'Inactive'}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="lockedOutEnd" [sortable]="false">
+                <ng-template ngx-datatable-header-template>
+                    <span>Locked Until</span>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>{{value | date : 'medium'}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false">
+                <ng-template ngx-datatable-header-template>
+                    <span>Actions</span>
+                </ng-template>
+                <ng-template let-row='row' ngx-datatable-cell-template>
+                    <button *ngIf="row.isActive" class="btn btn-sm btn-warning" (click)="deactivate(row)">Deactivate</button>
+                    <button *ngIf="!row.isActive" class="btn btn-sm btn-default" (click)="reactivate(row)">Reactivate</button>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
     </div>
-    <div class="col-lg-4">
-      <div class="pmd-card pmd-z-depth project-progress">      
-        <div class="pmd-card-title">
-          <h2 class="pmd-card-title-text typo-fill-secondary">{{'Home.Chart' | translate}}</h2>
-        </div>
-        <div class="content-section">
-          <div class="chart-section">
-            <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

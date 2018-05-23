@@ -58,10 +58,10 @@ export class DataService {
   }
 
   getDefaultLanguage() {
-    let preferredLang = 'en-UK';
+    let preferredLang = 'vi-VN';
     let lang = localStorage.getItem("lang");
     if (!lang) {
-      localStorage.setItem("lang", '{"languageId":1,"languageCode":"en-UK"}');
+      localStorage.setItem("lang", '{"languageId":1,"languageCode":"vi-VN"}');
     } else {
       preferredLang = JSON.parse(lang).languageCode;
     }

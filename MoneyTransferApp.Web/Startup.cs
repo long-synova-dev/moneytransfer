@@ -24,13 +24,10 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
-using Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider;
 using MoneyTransferApp.Web.ExceptionHandlers;
+using MoneyTransferApp.Web.Interfaces;
+using MoneyTransferApp.Web.Services;
 
 //this is the startup class
 namespace MoneyTransferApp.Web
@@ -229,35 +226,7 @@ namespace MoneyTransferApp.Web
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IEmailServices, EmailServices>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        }
-
-        private static ClientCredential _clientCredential;
-
-        private static void InitializeAzureKeyVaultProvider(string appId, string appKey)
-        {
-            _clientCredential = new ClientCredential(appId, appKey);
-
-            var azureKeyVaultProvider = new SqlColumnEncryptionAzureKeyVaultProvider(GetToken);
-
-            var providers = new Dictionary<string, SqlColumnEncryptionKeyStoreProvider>
-                {
-                    {SqlColumnEncryptionAzureKeyVaultProvider.ProviderName, azureKeyVaultProvider}
-                };
-
-            SqlConnection.RegisterColumnEncryptionKeyStoreProviders(providers);
-        }
-
-        public static async Task<string> GetToken(string authority, string resource, string scope)
-        {
-            var authContext = new AuthenticationContext(authority);
-            var result = await authContext.AcquireTokenAsync(resource, _clientCredential);
-
-            if (result == null)
-            {
-                throw new InvalidOperationException("Failed to obtain the access token");
-            }
-
-            return result.AccessToken;
+            services.AddSingleton<IUserService, UserService>();
         }
     }
 }
