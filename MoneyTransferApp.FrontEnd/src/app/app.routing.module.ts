@@ -15,12 +15,12 @@ import { UserSettingComponent } from './user-setting/user-setting.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/gdpr/dashboard',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {
     path: 'home',
-    redirectTo: '/gdpr/dashboard'
+    redirectTo: ''
   },
   {
     path: 'account',

@@ -46,7 +46,7 @@ export class UserLoginComponent implements OnInit {
         this._translate.get('Login.NotificationTitle').subscribe(value => this.confirmDialog = new ModalDialog(value, 'modal-md', false));
     }
     ngOnInit() {
-        this._UserService.checkRestrictIP();
+        //this._UserService.checkRestrictIP();
         this.userLogout();
         this._data.updateActiveToken(false);
         
@@ -66,7 +66,7 @@ export class UserLoginComponent implements OnInit {
     formInit(value) {
         this.loginForm = this._formBuilder.group({
             'companyNumber': [value && value.companyNumber ? value.companyNumber : null, Validators.required],
-            'email': [value && value.email ? value.email : null, Validators.compose([Validators.required, Validators.pattern(Globals.EMAIL_REGEX_VALIDATE)])],
+            //'email': [value && value.email ? value.email : null, Validators.compose([Validators.required, Validators.pattern(Globals.EMAIL_REGEX_VALIDATE)])],
             'password': [null, Validators.required]
         });
     }
@@ -94,10 +94,11 @@ export class UserLoginComponent implements OnInit {
             this.isOpenMobileAlert = true;
             return;
         }
-        this.resendEmail = false;
         this._data.changeLoadStatus(true);
         this._UserService.getTokenService(loginInfo)
             .then((response) => {
+                console.log("aaaaaaaaaaa");
+                console.log(response);
                 // return error
                 if (response && response.errors && response.errors.length > 0) {
                     this._data.changeLoadStatus(false);
