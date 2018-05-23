@@ -54,7 +54,7 @@ export class UserLoginComponent implements OnInit {
         if (checkIsRemember) {
             this.isRememberMe = true;
             let rememberValue = {};
-            rememberValue['companyNumber'] = localStorage.getItem('companyNumber');
+            rememberValue['userName'] = localStorage.getItem('userName');
             rememberValue['email'] = localStorage.getItem('email');
             this.formInit(rememberValue);
         } else {
@@ -65,7 +65,7 @@ export class UserLoginComponent implements OnInit {
     }
     formInit(value) {
         this.loginForm = this._formBuilder.group({
-            'companyNumber': [value && value.companyNumber ? value.companyNumber : null, Validators.required],
+            'userName': [value && value.userName ? value.userName : null, Validators.required],
             //'email': [value && value.email ? value.email : null, Validators.compose([Validators.required, Validators.pattern(Globals.EMAIL_REGEX_VALIDATE)])],
             'password': [null, Validators.required]
         });
@@ -95,6 +95,7 @@ export class UserLoginComponent implements OnInit {
             return;
         }
         this._data.changeLoadStatus(true);
+        console.log(loginInfo);
         this._UserService.getTokenService(loginInfo)
             .then((response) => {
                 console.log("aaaaaaaaaaa");

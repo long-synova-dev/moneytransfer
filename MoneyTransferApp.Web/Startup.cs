@@ -31,6 +31,8 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
 using Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider;
 using MoneyTransferApp.Web.ExceptionHandlers;
+using MoneyTransferApp.Web.Interfaces;
+using MoneyTransferApp.Web.Services;
 
 //this is the startup class
 namespace MoneyTransferApp.Web
@@ -229,6 +231,7 @@ namespace MoneyTransferApp.Web
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IEmailServices, EmailServices>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IUserService, UserService>();
         }
 
         private static ClientCredential _clientCredential;

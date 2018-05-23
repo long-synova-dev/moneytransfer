@@ -21,16 +21,16 @@
               <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
                     <div class="form-group pmd-textfield pmd-textfield-floating-label"
                     [ngClass]="{
-                        'pmd-textfield-floating-label-completed': loginForm.controls['companyNumber'].value,
-                        'has-error':!loginForm.controls['companyNumber'].valid && loginForm.controls['companyNumber'].touched
+                        'pmd-textfield-floating-label-completed': loginForm.controls['userName'].value,
+                        'has-error':!loginForm.controls['userName'].valid && loginForm.controls['userName'].touched
                     }">
-                        <label for="companyNumber" class="control-label pmd-input-group-label">{{'Login.CompanyNumb' | translate}}</label>
+                        <label for="userName" class="control-label pmd-input-group-label">{{'Login.UserName' | translate}}</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="material-icons">account_balance</i></div>
-                            <input class="form-control" id="companyNumber" type="text" name="companyNumber" [formControl]="loginForm.controls['companyNumber']"><span class="pmd-textfield-focused"></span>
+                            <input class="form-control" id="userName" type="text" name="userName" [formControl]="loginForm.controls['userName']"><span class="pmd-textfield-focused"></span>
                         </div>
-                        <div *ngIf="loginForm.controls['companyNumber'].hasError('required') && loginForm.controls['companyNumber'].touched" class="help-block">
-                              {{'Login.CompanyNumbRequired' | translate}}
+                        <div *ngIf="loginForm.controls['userName'].hasError('required') && loginForm.controls['userName'].touched" class="help-block">
+                              {{'Login.UserNameRequired' | translate}}
                         </div>
                     </div>
 
