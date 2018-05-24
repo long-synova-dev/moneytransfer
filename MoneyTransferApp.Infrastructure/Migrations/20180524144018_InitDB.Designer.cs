@@ -8,12 +8,13 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using MoneyTransferApp.Infrastructure.Data;
 using System;
 
-namespace MoneyTransferApp.Infrastructure.Data.Migrations
+namespace MoneyTransferApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180524144018_InitDB")]
+    partial class InitDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,8 +140,6 @@ namespace MoneyTransferApp.Infrastructure.Data.Migrations
 
                     b.Property<int>("CurrencyId");
 
-                    b.Property<int>("CustomerId");
-
                     b.Property<Guid?>("DeletedBy");
 
                     b.Property<DateTimeOffset?>("DeletedOn");
@@ -158,8 +157,6 @@ namespace MoneyTransferApp.Infrastructure.Data.Migrations
                     b.Property<DateTimeOffset?>("UpdatedOn");
 
                     b.HasKey("TransactionId");
-
-                    b.HasIndex("CustomerId");
 
                     b.HasIndex("ReceiverId");
 
@@ -244,6 +241,8 @@ namespace MoneyTransferApp.Infrastructure.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(128);
+
+                    b.Property<int?>("LanguageId");
 
                     b.Property<DateTimeOffset?>("LastLogin");
 
@@ -379,11 +378,6 @@ namespace MoneyTransferApp.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("MoneyTransferApp.Core.Entities.Client.Transaction", b =>
                 {
-                    b.HasOne("MoneyTransferApp.Core.Entities.Client.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("MoneyTransferApp.Core.Entities.Client.Receiver", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")

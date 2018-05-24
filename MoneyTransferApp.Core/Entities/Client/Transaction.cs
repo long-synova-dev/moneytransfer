@@ -8,9 +8,7 @@ namespace MoneyTransferApp.Core.Entities.Client
     public class Transaction
     {
         public int TransactionId { get; set; }
-
-        public int CustomerId { get; set; }
-
+        
         public int ReceiverId { get; set; }
 
         public int CurrencyId { get; set; }
@@ -22,9 +20,6 @@ namespace MoneyTransferApp.Core.Entities.Client
         public string TransactionNo { get; set; }
         
         public double Amount { get; set; }
-
-        [ForeignKey("CustomerId")]
-        public virtual Customer Customer { get; set; }
 
         [ForeignKey("ReceiverId")]
         public virtual Receiver Receiver { get; set; }

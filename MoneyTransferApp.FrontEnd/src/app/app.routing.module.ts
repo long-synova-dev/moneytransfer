@@ -14,7 +14,7 @@ import { UserSettingComponent } from './user-setting/user-setting.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home/dashboard',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {

@@ -23,59 +23,18 @@
                 </ng-template>
                 <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>{{value}}</ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="email">
-                <ng-template let-sort="sortFn" ngx-datatable-header-template>
-                    <span (click)="sort()">Email Address</span>
-                </ng-template>
-                <ng-template let-value="value" ngx-datatable-cell-template>
-                    <a href="mailto:{{value}}">{{value}}</a>
-                </ng-template>
-            </ngx-datatable-column>
             <ngx-datatable-column prop="phone">
                 <ng-template let-sort="sortFn" ngx-datatable-header-template>
                     <span (click)="sort()">Phone</span>
                 </ng-template>
                 <ng-template let-value="value" ngx-datatable-cell-template> {{value}} </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="companyName">
-                <ng-template let-sort="sortFn" ngx-datatable-header-template>
-                    <span (click)="sort()">Company Name</span>
-                </ng-template>
-                <ng-template let-value="value" ngx-datatable-cell-template> {{value}} </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column prop="companyNumber">
-                <ng-template let-sort="sortFn" ngx-datatable-header-template>
-                    <span (click)="sort()">Company Number</span>
-                </ng-template>
-                <ng-template let-value="value" ngx-datatable-cell-template> {{value}} </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column prop="roles" [sortable]="false">
-                <ng-template ngx-datatable-header-template>
-                    <span>Roles</span>
-                </ng-template>
-                <ng-template let-value="value" ngx-datatable-cell-template>
-                    <span *ngFor="let role of value">{{role}}</span>
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column prop="isActive" [sortable]="false">
-                <ng-template ngx-datatable-header-template>
-                    <span>Status</span>
-                </ng-template>
-                <ng-template let-value="value" ngx-datatable-cell-template>{{value ? 'Active' : 'Inactive'}}</ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column prop="lockedOutEnd" [sortable]="false">
-                <ng-template ngx-datatable-header-template>
-                    <span>Locked Until</span>
-                </ng-template>
-                <ng-template let-value="value" ngx-datatable-cell-template>{{value | date : 'medium'}}</ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column [sortable]="false">
                 <ng-template ngx-datatable-header-template>
                     <span>Actions</span>
                 </ng-template>
                 <ng-template let-row='row' ngx-datatable-cell-template>
-                    <button *ngIf="row.isActive" class="btn btn-sm btn-warning" (click)="deactivate(row)">Deactivate</button>
-                    <button *ngIf="!row.isActive" class="btn btn-sm btn-default" (click)="reactivate(row)">Reactivate</button>
+                    <button class="btn btn-sm btn-warning" (click)="addReceiver(row)">{{Table.AddReceiver | translate}}</button>
+                    <button class="btn btn-sm btn-default" (click)="createTransaction(row)">{{Table.CreateTransaction | translate}}</button>
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>

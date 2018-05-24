@@ -20,6 +20,8 @@ namespace MoneyTransferApp.Core.Entities.Users
         [StringLength(512)]
         [Column(TypeName = "varchar(512)")]
         public string Address { get; set; }
+
+        public int? LanguageId { get; set; }
         
         public virtual ICollection<UserRole> UserRoles { get; set; }
 

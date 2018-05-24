@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MoneyTransferApp.Infrastructure.Migrations
 {
-    public partial class InitDatabase : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,6 +72,7 @@ namespace MoneyTransferApp.Infrastructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    LanguageId = table.Column<int>(type: "int", nullable: true),
                     LastLogin = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
@@ -274,7 +275,6 @@ namespace MoneyTransferApp.Infrastructure.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     CurrencyId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     ReceiverId = table.Column<int>(type: "int", nullable: false),
@@ -286,13 +286,6 @@ namespace MoneyTransferApp.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transaction", x => x.TransactionId);
-                    table.ForeignKey(
-                        name: "FK_Transaction_Customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalSchema: "Client",
-                        principalTable: "Customer",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Transaction_Receiver_ReceiverId",
                         column: x => x.ReceiverId,
@@ -306,12 +299,6 @@ namespace MoneyTransferApp.Infrastructure.Migrations
                 name: "IX_Receiver_CustomerId",
                 schema: "Client",
                 table: "Receiver",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Transaction_CustomerId",
-                schema: "Client",
-                table: "Transaction",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(

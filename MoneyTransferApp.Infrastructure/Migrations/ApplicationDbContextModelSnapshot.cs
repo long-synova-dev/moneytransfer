@@ -11,10 +11,9 @@ using System;
 namespace MoneyTransferApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180520135619_InitDatabase")]
-    partial class InitDatabase
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,8 +139,6 @@ namespace MoneyTransferApp.Infrastructure.Migrations
 
                     b.Property<int>("CurrencyId");
 
-                    b.Property<int>("CustomerId");
-
                     b.Property<Guid?>("DeletedBy");
 
                     b.Property<DateTimeOffset?>("DeletedOn");
@@ -159,8 +156,6 @@ namespace MoneyTransferApp.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("UpdatedOn");
 
                     b.HasKey("TransactionId");
-
-                    b.HasIndex("CustomerId");
 
                     b.HasIndex("ReceiverId");
 
@@ -245,6 +240,8 @@ namespace MoneyTransferApp.Infrastructure.Migrations
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(128);
+
+                    b.Property<int?>("LanguageId");
 
                     b.Property<DateTimeOffset?>("LastLogin");
 
@@ -380,11 +377,6 @@ namespace MoneyTransferApp.Infrastructure.Migrations
 
             modelBuilder.Entity("MoneyTransferApp.Core.Entities.Client.Transaction", b =>
                 {
-                    b.HasOne("MoneyTransferApp.Core.Entities.Client.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("MoneyTransferApp.Core.Entities.Client.Receiver", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")
