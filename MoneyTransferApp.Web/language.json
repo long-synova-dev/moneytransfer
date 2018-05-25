@@ -1,14 +1,12 @@
-{
-    "Language": [
-        {
-            "id": "1",
-            "name": "Vietnamese",
-            "code": "vi-VN"
-        },
-        {
-            "id": "2",
-            "name": "Taiwan",
-            "code": "zh-TW"
-        }
-    ]
-}
+[
+    {
+        "id": "1",
+        "name": "Vietnamese",
+        "code": "vi-VN"
+    },
+    {
+        "id": "2",
+        "name": "Taiwan",
+        "code": "zh-TW"
+    }
+]

@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     private _userService: UserService,
     public route: Router,
     private _translate: TranslateService,
-    private _sessionManagementService: SessionManagementService,
+    //private _sessionManagementService: SessionManagementService,
     private _cdRef: ChangeDetectorRef,
     private _elementRef: ElementRef,
     private _render: Renderer2,
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this._interCom.boot();
+    //this._interCom.boot();
 
     //Show loading icon for lazy load module
     this.route.events.subscribe(event => {

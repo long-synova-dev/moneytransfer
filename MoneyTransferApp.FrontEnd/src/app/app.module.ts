@@ -13,7 +13,6 @@ import { SelectModule } from 'ng-select';
 import { AppRouting } from './app.routing.module';
 import { AuthGuard, AuthGuardComponent } from './shared/guards/authenticator.guard';
 import { RoleGuard } from './shared/guards/role.guard';
-import { IsCompleteWizardComponent } from './shared/guards/complete-wizard.guard';
 import { AppComponent } from './app.component';
 import { UserService } from './shared/services/user.service';
 import { DataService } from './shared/services/data.service';
@@ -30,10 +29,12 @@ import { IntercomModule } from 'ng-intercom';
 import { ModalModule } from './shared/directives/modal.module';
 import { UserSettingComponent } from './user-setting/user-setting.component'
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
     imports: [
         CommonModule,
+        HomeModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -68,7 +69,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
         AuthGuard,
         AuthGuardComponent,
         RoleGuard,
-        IsCompleteWizardComponent,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpCustomInterceptor,

@@ -8,7 +8,7 @@ export class Globals {
     static REFRESH_TOKEN_DATA_URL = '/api/auth/RefreshToken';
     static CLEAN_TOKEN_DATA_URL = '/api/Auth/Logout';
     static GET_CURRENT_USER_DATA_URL = '/api/auth/currentUser';
-    static GET_LANGUAGES_URL = '/api/language/languages';
+    static GET_LANGUAGES_URL = '/api/language/all';
     static CHANGE_LANGUAGE_URL = '/api/user/changeLanguage';
     static GET_USER_FROM_LOGIN_URL = '/api/user/GetUserFromLogin';
     static DELETE_USER_URL = '/api/user/DeleteUser';
@@ -36,4 +36,6 @@ export class Globals {
     static NUMBER_REGEX = /^\d+$/;
 
     static MAX_FILE_SIZE_TO_UPLOAD = 10 * 1024 * 1024;
+    static VIETNAMESE = "vi-VN";
+    static TAIWAN = "zh-TW";
 }

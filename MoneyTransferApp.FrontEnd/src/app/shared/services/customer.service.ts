@@ -11,9 +11,9 @@ export class CustomerService {
         private _http: HttpClient
     ) { }
 
-    public getAllCustomer() {
+    public getAllCustomer(page) : any {
         return this._http
-            .get(Globals.GET_ALL_CUSTOMER_URL)
+            .get(`${Globals.GET_ALL_CUSTOMER_URL}?keyword=${page.keyword}&PageNumber=${page.pageNumber}&ItemsPerPage=${page.itemsPerPage}&OrderBy=${page.orderBy}&IsDesc=${page.isDesc}`)
             .toPromise()
             .then((response) => response)
             .catch(this.handleError);
