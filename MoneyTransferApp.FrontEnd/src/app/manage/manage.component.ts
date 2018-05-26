@@ -11,14 +11,14 @@ import { Page } from '../shared/models/page.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'customer-page',
+    selector: 'management',
     template: `
         <router-outlet></router-outlet>
     `,
-    styleUrls: ['./home.component.css']
+    styleUrls: ['./manage.component.css']
 })
 
-export class HomeComponent implements OnInit {
+export class ManageComponent implements OnInit {
     constructor(
         private _data: DataService,
         private _translate: TranslateService,

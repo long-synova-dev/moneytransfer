@@ -1,22 +1,23 @@
 <div class="container"> 
     <div class="form-horizontal">
-        <div class="form-group">
-            <div class="col-xs-10">
-                <h2>{{'Home' | translate}}</h2>
-            </div>
-            <div class="col-xs-2">
-                <button type="submit" class="btn btn-primary" (click)="newCustomer()">{{ 'Home.AddNewBtn' | translate }}</button>
-            </div>
-        </div>
+        
     </div>
     <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="page.keyword" (keyup)="filter($event)" placeholder="Type a keyword and press Enter to filter...">
+        <div class="form-group">
+            <div class="col-xs-3">
+                <h2>{{'Home.Title' | translate}}</h2>
             </div>
         </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="page.keyword" (keyup)="filter($event)" placeholder="{{ 'Home.SearchBox' | translate }}">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <button type="submit" class="btn btn-primary" (click)="newCustomer()">{{ 'Home.AddNewBtn' | translate }}</button>
+        </div>
     </div>
-    <div class="data-table mt30">
+    <div class="data-table mt20">
         <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40" [rowHeight]="'auto'"
             [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber - 1" [limit]="page.itemsPerPage" (page)='paginate($event)'
             (sort)="sort($event)">

@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180520135619_InitDatabase.cs" />
     <Compile Remove="Migrations\20180524143506_InitDB.cs" />
+    <Compile Remove="Migrations\DatabaseSeeder.cs" />
   </ItemGroup>
 
   <ItemGroup>

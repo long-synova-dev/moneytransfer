@@ -20,7 +20,8 @@ export class CustomerManagement implements OnInit{
         private _activeRoute: ActivatedRoute,
         private _dataService: DataService,
         private _customerService: CustomerService,
-        private _commonService: CommonService
+        private _commonService: CommonService,
+        private _translate: TranslateService
     ) { }
 
     ngOnInit() {

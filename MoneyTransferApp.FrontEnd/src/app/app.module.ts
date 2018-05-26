@@ -29,12 +29,12 @@ import { IntercomModule } from 'ng-intercom';
 import { ModalModule } from './shared/directives/modal.module';
 import { UserSettingComponent } from './user-setting/user-setting.component'
 import { MatExpansionModule } from '@angular/material/expansion';
-import { HomeModule } from './home/home.module';
+import { ManageModule } from './manage/manage.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        HomeModule,
+        ManageModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,

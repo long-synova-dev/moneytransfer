@@ -28,6 +28,7 @@ using Microsoft.Net.Http.Headers;
 using MoneyTransferApp.Web.ExceptionHandlers;
 using MoneyTransferApp.Web.Interfaces;
 using MoneyTransferApp.Web.Services;
+using MoneyTransferApp.Infrastructure.Data.Migrations;
 
 //this is the startup class
 namespace MoneyTransferApp.Web
@@ -217,6 +218,8 @@ namespace MoneyTransferApp.Web
                 name: "default",
                 template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
+
+            DatabaseSeeder.EnsureSeeded(app.ApplicationServices.GetRequiredService<ApplicationDbContext>());
         }
 
         private static void ConfigureBusinessServices(IServiceCollection services)

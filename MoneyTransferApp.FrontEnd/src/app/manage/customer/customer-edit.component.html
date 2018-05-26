@@ -6,7 +6,7 @@
                 <div class="form-horizontal mt20">
                     <div class="form-group">
                         <label for="customerNumber" class="control-label col-sm-3">
-                            Number:
+                            {{ Customer.Code | translate }}:
                         </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="customerNumber" [(ngModel)]="customerDetail.customerCode" />
@@ -14,7 +14,7 @@
                     </div>
                     <div class="form-group">
                         <label for="customerName" class="control-label col-sm-3">
-                            Name:
+                            {{ Customer.Name | translate }}:
                         </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="customerName" [(ngModel)]="customerDetail.fullName" />
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone" class="control-label col-sm-3">
-                            Phone Number:
+                            {{ Customer.Phone | translate }}:
                         </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="phone" [(ngModel)]="customerDetail.phoneNumber" />
@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group">
                         <label for="address" class="control-label col-sm-3">
-                            Address:
+                            {{ Customer.Address | translate }}:
                         </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="address" [(ngModel)]="customerDetail.address" />
@@ -39,8 +39,8 @@
                 </div>
             </div>
             <div class="mt20">
-                <button class="btn btn-default" (click)="cancel()">Cancel</button>
-                <button class="btn btn-info" (click)="save()">Save</button>
+                <button class="btn btn-default" (click)="cancel()">{{ Customer.BtnCancel | translate }}</button>
+                <button class="btn btn-info" (click)="save()">{{ Customer.Save | translate }}</button>
             </div>
             <div class="mt20"></div>
         </div>

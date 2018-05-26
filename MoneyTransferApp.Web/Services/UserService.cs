@@ -54,7 +54,7 @@ namespace MoneyTransferApp.Web.Services
 
         public User GetUserByPhone_UserName(string input)
         {
-            return _unitOfWork.UserRepository.All().FirstOrDefault(s => s.DeletedBy != null
+            return _unitOfWork.UserRepository.All().FirstOrDefault(s => s.DeletedBy == null
                     && (s.UserName.Equals(input) || s.PhoneNumber.Equals(input)));
         }
 
