@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    redirectTo: ''
+    loadChildren: './home/home.module#HomeModule'
   },
   {
     path: 'account',

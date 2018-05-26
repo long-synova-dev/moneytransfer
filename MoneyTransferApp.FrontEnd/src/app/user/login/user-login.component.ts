@@ -94,7 +94,6 @@ export class UserLoginComponent implements OnInit {
         console.log(loginInfo);
         this._UserService.getTokenService(loginInfo)
             .then((response) => {
-                console.log("aaaaaaaaaaa");
                 console.log(response);
                 // return error
                 if (response && response.errors && response.errors.length > 0) {
