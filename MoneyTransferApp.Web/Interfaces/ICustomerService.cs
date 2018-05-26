@@ -10,6 +10,7 @@ namespace MoneyTransferApp.Web.Interfaces
     public interface ICustomerService
     {
         PagingOutputViewModel<CustomerInfoViewModel> GetAllCustomer(PagingInputViewModel param);
+        CustomerInfoViewModel GetCustomerById(int id);
         Task<string> SaveCustomer(UserIdentityViewModel user, CustomerInfoViewModel model);
         Task<string> DeleteCustomer(UserIdentityViewModel user, int id);
 

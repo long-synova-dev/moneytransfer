@@ -44,7 +44,7 @@ namespace MoneyTransferApp.Web.Services
                 FullName = customer.FullName,
                 CustomerCode = customer.CustomerCode,
                 Email = customer.Email,
-                Phone = customer.Phone,
+                PhoneNumber = customer.Phone,
                 Address = customer.Address
             });
 
@@ -62,10 +62,25 @@ namespace MoneyTransferApp.Web.Services
             return output;
         }
 
+        public CustomerInfoViewModel GetCustomerById(int id)
+        {
+            var customer = _unitOfWork.CustomerRepository.All().FirstOrDefault(s => s.CustomerId == id);
+            if (customer == null) return null;
+            return new CustomerInfoViewModel
+            {
+                CustomerId = customer.CustomerId,
+                FullName = customer.FullName,
+                CustomerCode = customer.CustomerCode,
+                PhoneNumber = customer.Phone,
+                Address = customer.Address,
+                Email = customer.Email
+            };
+        }
+
         public async Task<string> SaveCustomer(UserIdentityViewModel user, CustomerInfoViewModel model)
         {
             string result = string.Empty;
-            if(model.CustomerId > 0)
+            if(model.CustomerId == 0)
             {
                 result = await CreateCustomer(user, model);
             }
@@ -156,16 +171,16 @@ namespace MoneyTransferApp.Web.Services
                     CustomerCode = model.CustomerCode,
                     Email = model.Email,
                     Address = model.Address,
-                    Phone = model.Phone,
+                    Phone = model.PhoneNumber,
                     CreatedOn = DateTimeOffset.Now,
-                    CreatedBy = user.UserId
+                    CreatedBy = user?.UserId
                 };
                 _unitOfWork.CustomerRepository.Add(customer);
                 await _unitOfWork.SaveChangeAsync();
 
                 return "Save.Success";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "Save.Error";
             }
@@ -179,7 +194,7 @@ namespace MoneyTransferApp.Web.Services
                 customer.FullName = model.FullName;
                 customer.Email = model.Email;
                 customer.Address = model.Address;
-                customer.Phone = model.Phone;
+                customer.Phone = model.PhoneNumber;
                 customer.UpdatedBy = user.UserId;
                 customer.UpdatedOn = DateTimeOffset.Now;
                 await _unitOfWork.SaveChangeAsync();

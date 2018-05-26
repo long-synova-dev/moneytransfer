@@ -44,7 +44,8 @@ import { HomeModule } from './home/home.module';
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
-          }
+          },
+          isolate: true
         }),
         HttpModule,
         NgxDatatableModule,
@@ -64,7 +65,7 @@ import { HomeModule } from './home/home.module';
         UserSettingComponent
     ],
     providers: [
-        { provide: LOCALE_ID, useValue: "vi-VN" },
+        { provide: LOCALE_ID, useValue: "en-US" },
         AlertService,
         AuthGuard,
         AuthGuardComponent,

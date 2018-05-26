@@ -2,8 +2,8 @@ namespace MoneyTransferApp.Web.Models.CommonViewModels
 {
     public class LanguageViewModel
     {
-        public int Id { get; set; }
-        public string Name{ get; set; }
-        public string Code { get; set; }
+        public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
+        public string LanguageCode { get; set; }
     }
 }

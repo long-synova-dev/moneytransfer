@@ -15,8 +15,6 @@
                     </div>
                 </button>
                 <ul aria-labelledby="dropdownMenu2" role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li *ngIf="userRole == 'R2' && userPlan != 'trial' || userRole == 'R2,R3' && userPlan != 'trial'" role="presentation"><a href="javascript:void(0);" routerLink="billing-plan/history">{{'Header.BillingHistory' | translate}}</a></li>
-                    <li *ngIf="userRole == 'R2' || userRole == 'R2,R3'" role="presentation"><a class="pmd-ripple-effect" href="javascript:void(0)" (click)="goToBilling()">{{'Header.BillingPlans' | translate}}</a></li>
                     <!-- <li role="presentation"><a href="javascript:void(0);">{{'Header.AnotherAction' | translate}}</a></li> -->
                     <li role="presentation" class="language-item">
                         <a href="javascript:void(0);" tabindex="-1" role="menuitem">{{'Header.Language' | translate}}</a>
@@ -31,9 +29,11 @@
                     <li role="presentation"><a href="javascript:void(0);" (click)="userLogout()">{{'Header.LogOut' | translate}}</a></li>
                 </ul>
             </div>
-            
-            <span class="pull-right help-btn navbar__icon-btn hidden-xs" [ngClass]="{hidden : !userInfo}">
-                <a class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default" title="Help" href="http://help.complyto.com/" target="_blank"><i class="material-icons">help_outline</i></a>
+            <span class="dropdown pmd-dropdown clearfix pull-right language-btn navbar__icon-btn hidden-xs" [ngClass]="{hidden: userInfo}">
+                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default" type="button" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">language</i></button>
+                <ul aria-labelledby="dropdownMenuDivider" role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li *ngFor="let lang of allLanguages" role="presentation"><a [ngClass]="{'active': lang.languageCode == preferredLang}" href="javascript:void(0);" tabindex="-1" role="menuitem" (click)="switchLanguage(lang)">{{lang.languageName}}</a></li>
+                </ul>
             </span>
         </div>
     </nav>

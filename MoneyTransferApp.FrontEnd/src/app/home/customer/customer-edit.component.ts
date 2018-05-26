@@ -53,6 +53,7 @@ export class EditCustomerComponent implements OnInit {
     {
         this._customerService.saveCustomer(this.customerDetail)
         .then(result => {
+            console.log(result);
             if(result.Message = "success")
             this._translate.get('Customer.SavedSuccessfully').subscribe(value => this._alertService.success(value));
         })

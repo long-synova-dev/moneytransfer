@@ -1,8 +1,11 @@
 {
     "Home": {
         "Title": "Danh sách khách",
-        "TodoList": "\"To do\" liste",
-        "ProjectProgress": "Status på projektet",
-        "Chart": "Grafisk overblik"
+        "BtnCreateTransaction": "Tạo giao dịch",
+        "BtnAddReceiver": "Thêm người nhận"
+    },
+    "Table": {
+        "AddReceiver": "Người nhận",
+        "CreateTransaction": "Tạo giao dịch"
     }
 }

@@ -22,6 +22,12 @@ namespace MoneyTransferApp.Web.Controllers
             return Ok(_customerService.GetAllCustomer(page));
         }
 
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(_customerService.GetCustomerById(id));
+        }
+
         [HttpPost("[action]")]
         public IActionResult Save([FromBody] CustomerInfoViewModel customer)
         {

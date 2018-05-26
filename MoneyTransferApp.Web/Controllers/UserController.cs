@@ -121,5 +121,14 @@ namespace MoneyTransferApp.Web.Controllers
             await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
             return Ok(new { Errors = string.Empty });
         }
+
+        [HttpPost("[action]")]
+        [Authorize(Roles = RoleConstant.AllRoles)]
+        public async Task<IActionResult> ChangeLanguage([FromBody] ChangeLanguageViewModel model)
+        {
+            _userService.ChangeLanguage(CurrentUserIdentity.UserId, model.LanguageId);
+
+            return await RefreshUserToken(CurrentUserIdentity.UserId);
+        }
     }
 }

@@ -1,7 +1,7 @@
 {
-    "Home": {
-        "Title": "Danh sách khách",
-        "BtnCreateTransaction": "Tạo giao dịch",
-        "BtnAddReceiver": "Thêm người nhận"
+    "Home": "Danh sach",
+    "Table": {
+        "AddReceiver": "Người nhận",
+        "CreateTransaction": "Tạo giao dịch"
     }
 }

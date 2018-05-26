@@ -9,7 +9,6 @@ import * as moment from 'moment';
 export class DataService {
 
   private userInfo = new Subject<any>();
-  private gdprProgramGenerated = new Subject<any>();
   private appLoading = new Subject<boolean>();
   private IOptions = new Subject<Array<IOption>>();
   private activeToken = new Subject<boolean>();
@@ -17,7 +16,6 @@ export class DataService {
   currentUser = this.userInfo.asObservable();
   appLoadStatus = this.appLoading.asObservable();
   getIOptions = this.IOptions.asObservable();
-  isGdprProgramGenerated = this.gdprProgramGenerated.asObservable();
   isActiveToken = this.activeToken.asObservable();
 
   constructor(private _translate: TranslateService) { }
@@ -32,10 +30,6 @@ export class DataService {
 
   changeIOpitons(options) {
     this.IOptions.next(options)
-  }
-
-  setGdprProgramGenerated(value) {
-    this.gdprProgramGenerated.next(value);
   }
   
   updateActiveToken(status) {

@@ -10,6 +10,7 @@ using MoneyTransferApp.Web.Models.UserViewModels;
 using MoneyTransferApp.Web.Models.BaseViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace MoneyTransferApp.Web.Services
 {
@@ -113,6 +114,52 @@ namespace MoneyTransferApp.Web.Services
 
         }
 
+        public async Task<string> CreateUser(RegisterViewModel model, UserIdentityViewModel CurrentUserIdentity)
+        {
+            var user = new User
+            {
+
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                StoreName = model.StoreName,
+                UserName = model.UserName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                LanguageId = model.LanguageId,
+                CreatedOn = DateTimeOffset.UtcNow,
+            };
+            
+            string passWord = "qweR123$"; //UserCommon.GeneratePassword();
+            var existed = _unitOfWork.UserRepository.All().Any(s => s.DeletedBy == null &&
+                                (s.UserName == user.UserName || s.PhoneNumber == model.PhoneNumber));
+            if (existed)
+            {
+                return "User.Existed";
+            }
+            user.EmailConfirmed = true;
+            var result = await _userManager.CreateAsync(user, passWord);
+
+            //If failed, return bad request
+            if (result.Succeeded)
+            {
+                // set user as active (already confirm the email)
+
+                var role = _unitOfWork.RoleRepository.All().FirstOrDefault(s => s.Name == "R2").Id;
+                var userRole = new UserRole()
+                {
+                    RoleId = role,
+                    UserId = user.Id
+                };
+                _unitOfWork.UserRoleRepository.Add(userRole);
+                await _unitOfWork.SaveChangeAsync();
+
+                //If failed, return bad request
+
+                return "SignUp.SavedSucess";
+            }
+            return "User.CreateUserFailed";
+        }
+
         public void DeleteUser(Guid id, UserIdentityViewModel CurrentUserIdentity)
         {
             var user = _unitOfWork.UserRepository.All().FirstOrDefault(s => s.Id == id);
@@ -199,6 +246,20 @@ namespace MoneyTransferApp.Web.Services
 
             return string.Empty;
 
+        }
+
+        public void ChangeLanguage(Guid userId, int languageId)
+        {
+            var user = _unitOfWork.UserRepository.All().FirstOrDefault(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new NullReferenceException("User not found");
+            }
+
+            user.LanguageId = languageId;
+            _unitOfWork.UserRepository.Update(user);
+            _unitOfWork.SaveChange();
         }
     }
 }
