@@ -121,7 +121,6 @@ namespace MoneyTransferApp.Web.Services
 
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                StoreName = model.StoreName,
                 UserName = model.UserName,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,

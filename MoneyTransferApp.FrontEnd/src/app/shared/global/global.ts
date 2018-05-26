@@ -1,6 +1,6 @@
 export class Globals {
     // API URL
-    static REGISTER_DATA_URL = '/api/user/register';
+    static REGISTER_DATA_URL = '/api/user/CreateAccount';
     static RESET_PASSWORD_URL = '/api/user/ResetPassword';
     static FORGOT_PASSWORD_URL = '/api/user/ForgotPassword';
     static CONFIRM_SIGNUP_URL = '/api/user/ConfirmEmail';

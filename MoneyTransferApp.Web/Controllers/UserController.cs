@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MoneyTransferApp.Web.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = RoleConstant.GodOnly)]
+    //[Authorize(Roles = RoleConstant.GodOnly)]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
@@ -68,7 +68,6 @@ namespace MoneyTransferApp.Web.Controllers
             //Instantiate a new application user
             var user = new User
             {
-                StoreName = model.StoreName,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 UserName = model.UserName,
