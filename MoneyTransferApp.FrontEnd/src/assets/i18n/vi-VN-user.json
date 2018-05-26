@@ -80,7 +80,6 @@
         "SavedSucess": "Lưu thành công",
         "DeleteSuccess": "Xóa thành công",
         "DeleteUnSuccess": "Deleted un-sucessfully. Please make sure delete all data",
-        "AccountOwnerExisted": "Email is already connected to another accounts as the 'Account owner'",
         "AccountExisted": "Tên đăng nhập đã được sử dụng"
     },
     "ResetPass": {
