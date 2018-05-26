@@ -13,10 +13,6 @@ namespace MoneyTransferApp.Web.Models.UserViewModels
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(300)]
-        public string StoreName { get; set; }
-
-        [Required]
         public string UserName { get; set; }
 
         [StringLength(20)]

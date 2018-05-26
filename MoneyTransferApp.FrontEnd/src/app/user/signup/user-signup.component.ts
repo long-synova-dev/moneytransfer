@@ -21,7 +21,7 @@ export class UserSignupComponent implements OnInit {
     signupForm: FormGroup;
     errorMessenger: string[];
     listVats;
-    isDK = false;
+    //isDK = false;
     successModal: ModalDialog;
 
     constructor(
@@ -34,17 +34,14 @@ export class UserSignupComponent implements OnInit {
         private _intercom: Intercom
     ) {
         this.signupForm = _formBuilder.group({
+            'userName': [null, Validators.required],
             'firstName': [null, Validators.required],
             'lastName': [null, Validators.required],
-            'companyName': [null, Validators.required],
             'phoneNumber': [null, Validators.required],
             'email': [null, Validators.compose([Validators.required, Validators.pattern(Globals.EMAIL_REGEX_VALIDATE)])],
             'password': [null, Validators.compose([Validators.required, Validators.pattern(Globals.PASSWORD_REGEX_VALIDATE)])],
             'confirmPassword': [null, Validators.compose([Validators.required])],
-            'acceptedPolicy': [null, Validators.requiredTrue],
-            'languageId': [null],
-            'countryVatCode': [null, Validators.required],
-            'vatRegistrationNo': [null, Validators.required],
+            'languageId': [null]
         }, {
                 validator: MatchPasswordValidation.MatchPassword
             });
@@ -52,10 +49,10 @@ export class UserSignupComponent implements OnInit {
     }
     ngOnInit(): void {
         let lang = localStorage.getItem("lang");
-        if(JSON.parse(lang).languageCode == 'da-DK')
-        {
-            this.isDK = true;
-        }
+//        if(JSON.parse(lang).languageCode == 'da-DK')
+//        {
+//            this.isDK = true;
+//        }
     }
 
     shutdownChat() {

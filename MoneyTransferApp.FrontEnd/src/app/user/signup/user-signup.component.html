@@ -6,11 +6,10 @@
 </modal-dialog>
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default pmd-z-depth">
                 <div class="panel-body">
-                    <h2 class="title text-center">{{'SignUp.SignUpFormTitle' | translate}}</h2>
-                    <div class="text-center">{{'SignUp.SignUpFormSubTitle' | translate}}</div>
+                    <h2 class="title text-center">{{'SignUp.SignUp' | translate}}</h2>
 
                     <div class="from-error bg-danger" *ngIf="errorMessenger">
                         <div *ngFor="let error of errorMessenger">{{error}}</div>
@@ -18,19 +17,20 @@
 
                     <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)">
 
-                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'has-error':!signupForm.controls['companyName'].valid && signupForm.controls['companyName'].touched}">
-                            <label for="companyName" class="control-label pmd-input-group-label">{{'SignUp.CompanyName' | translate}}</label>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'has-error':!signupForm.controls['userName'].valid && signupForm.controls['userName'].touched}">
+                            <label for="firstName" class="control-label pmd-input-group-label"> {{'SignUp.UserName' | translate}}</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
-                                    <i class="material-icons">account_balance</i>
+                                    <i class="material-icons">perm_identity</i>
                                 </div>
-                                <input maxlength="256" class="form-control" id="companyName" type="text" [formControl]="signupForm.controls['companyName']">
+                                <input maxlength="128" class="form-control" id="userName" type="text" [formControl]="signupForm.controls['userName']">
                                 <span class="pmd-textfield-focused"></span>
                             </div>
-                            <div *ngIf="signupForm.controls['companyName'].hasError('required') && signupForm.controls['companyName'].touched" class="help-block">
-                                {{'SignUp.CompanyNameRequired' | translate}}
+                            <div *ngIf="signupForm.controls['userName'].hasError('required') && signupForm.controls['userName'].touched" class="help-block">
+                                {{'SignUp.UserNameRequired' | translate}}
                             </div>
                         </div>
+
                         <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'has-error':!signupForm.controls['firstName'].valid && signupForm.controls['firstName'].touched}">
                             <label for="firstName" class="control-label pmd-input-group-label"> {{'SignUp.firstName' | translate}}</label>
                             <div class="input-group">
@@ -89,29 +89,6 @@
                                 {{'SignUp.EmailInvalid' | translate}}
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3 col-xs-4">
-                                <div class="form-group pmd-textfield vat-selectbox">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="material-icons">local_atm</i>
-                                        </div>
-                                        <ng-select id="vat" [options]="listVats" noFilter="true" formControlName="countryVatCode"></ng-select>                                
-                                        <span class="pmd-textfield-focused"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-9 col-xs-8">
-                                <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'has-error':!signupForm.controls['vatRegistrationNo'].valid && signupForm.controls['vatRegistrationNo'].touched}">
-                                    <label for="email" class="control-label"> {{'SignUp.VatRegistrationNo' | translate}}</label>
-                                    <input maxlength="50" class="form-control" id="vat-number" type="text" [formControl]="signupForm.controls['vatRegistrationNo']">
-                                    <span class="pmd-textfield-focused"></span>
-                                    <div *ngIf="signupForm.controls['vatRegistrationNo'].hasError('required') && signupForm.controls['vatRegistrationNo'].touched" class="help-block">
-                                        {{'SignUp.VatNumberRequired' | translate}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="form-group pmd-textfield pmd-textfield-floating-label" [ngClass]="{'has-error':!signupForm.controls['password'].valid && signupForm.controls['password'].touched}">
                             <label for="password" class="control-label pmd-input-group-label"> {{'SignUp.Password' | translate}}</label>
@@ -151,63 +128,10 @@
                                 {{'SignUp.ConfirmPasswordInvalid' | translate}}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
-                                <input type="checkbox" value="" checked="" [formControl]="signupForm.controls['acceptedPolicy']">
-                                <span class="pmd-checkbox-label">&nbsp;</span>
-                                <span> {{'SignUp.Accepted' | translate}}
-                                    <a *ngIf="isDK" href="https://www.complyto.com/da/terms" target="_blank" title="{{'SignUp.PrivacyPolicy' | translate}}"> {{'SignUp.PrivacyPolicy' | translate}}.</a>
-                                    <a *ngIf="!isDK" href="https://www.complyto.com/en/terms" target="_blank" title="{{'SignUp.PrivacyPolicy' | translate}}"> {{'SignUp.PrivacyPolicy' | translate}}.</a>
-                                </span>
-                            </label>
-                        </div>
+                        
                         <button type="submit" class="btn pmd-ripple-effect btn-primary btn-block" [disabled]="signupForm.invalid"> {{'SignUp.SignUp' | translate}}</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="help-feature__item pmd-z-depth">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="help-feature__icon">
-                            <i class="material-icons">playlist_add_check</i>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3 class="help-feature__title"> {{'SignUp.ExpriesAutomatically' | translate}}</h3>
-                        <p>{{'SignUp.ExpriesAutomaticallyText' | translate}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="help-feature__item pmd-z-depth">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="help-feature__icon">
-                            <i class="material-icons">phone</i>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3 class="help-feature__title">{{'SignUp.FreeSupport' | translate}}</h3>
-                        <p>{{'SignUp.FreeSupportText' | translate}}</p>
-                        <p><a (click)="startChat()" role="button">{{'Login.Read' | translate}}</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="help-feature__item pmd-z-depth">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="help-feature__icon">
-                            <i class="material-icons">library_books</i>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3 class="help-feature__title">{{'SignUp.VideosDemos' | translate}}</h3>
-                        <p>{{'SignUp.VideosDemosText' | translate}}</p>
-                        <p><a href="http://help.complyto.com/videos" target="_blank" role="button">{{'Login.Read' | translate}}</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
