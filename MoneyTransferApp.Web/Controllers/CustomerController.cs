@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MoneyTransferApp.Web.Common;
 using MoneyTransferApp.Web.Interfaces;
+using MoneyTransferApp.Web.Models.CustomerViewModels;
 using MoneyTransferApp.Web.Models.PagingViewModels;
 
 namespace MoneyTransferApp.Web.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = RoleConstant.AllRoles)]
+    //[Authorize(Roles = RoleConstant.AllRoles)]
     public class CustomerController : BaseController
     {
         private readonly ICustomerService _customerService;
@@ -16,9 +16,17 @@ namespace MoneyTransferApp.Web.Controllers
             _customerService = customerService;
         }
 
-        public IActionResult GetAllCustomer(PagingInputViewModel page)
+        [HttpGet("[action]")]
+        public IActionResult GetAll(PagingInputViewModel page)
         {
             return Ok(_customerService.GetAllCustomer(page));
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult Save([FromBody] CustomerInfoViewModel customer)
+        {
+            var result = _customerService.SaveCustomer(CurrentUserIdentity, customer);
+            return Ok(new { Message = result });
         }
     }
 }

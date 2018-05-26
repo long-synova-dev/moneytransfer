@@ -1,0 +1,103 @@
+.change-log {
+    max-height: 250px !important; 
+    overflow-y: auto;
+}
+
+.change-log li.list-group-item {
+    padding: 2px 10px;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow:hidden;
+    white-space: nowrap;
+}
+
+.change-log li.list-group-item:hover {
+    overflow: visible; 
+    white-space: initial;
+}
+
+.rule-box {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 0 10px 10px 10px;
+    margin: 5px 15px;
+    width: 98%;
+}
+
+.rule-box .condition {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 7px;
+    width: 99%;
+    left: 7px;
+    border-radius: 6px;
+    border: 1px;
+}
+.rule-box .condition.has-error {
+    border: 1px solid #a94442;
+}
+
+.rule-box .operator {
+    text-align: center;
+}
+
+.rule-box .inner-box {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 0px 0px 5px;
+    margin: 15px 0px;
+    background-color: #fcfcfc;
+}
+
+.rule-box .button {
+    right: 13px;
+}
+
+.rule-box li.list-group-item{
+    padding: 2px 10px;
+}
+
+.rule-box li.list-group-item:hover{
+    background-color: lightgray;
+}
+
+.rule-box li.list-group-item:after{
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 100;
+    position: absolute;
+    font-size: 85%;
+    right: 3px;
+}
+
+.rule-box .source-list li.list-group-item:after{
+    content: "\e258";
+}
+
+.rule-box .dest-list li.list-group-item:after{
+    content: "\e020";
+}
+
+.rule-engine-output {
+    height: 300px;
+    overflow-y: auto;
+}
+
+.rule-engine-output p {
+    margin: 0;
+    font-size: smaller;
+    font-family: monospace;
+}
+.scroll-history
+{
+    height: 350px;
+    overflow-y: auto;
+}
+.list-material-icons__item {
+    padding: 5px;
+    cursor: pointer;
+}
+.list-material-icons__item .material-icons {
+    font-size: 32px;
+}
+.list-material-icons__item:hover {opacity: .5;}

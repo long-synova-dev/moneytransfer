@@ -19,6 +19,6 @@ namespace MoneyTransferApp.Web.Models.CustomerViewModels
         public string Address { get; set; }
 
         [StringLength(50)]
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

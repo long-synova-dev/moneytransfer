@@ -1,18 +1,33 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
+import { EditCustomerComponent } from './customer/customer-edit.component';
+import { CustomerManagement } from './customer/customer-management.component';
 
-const HomeRoutes: Routes = [
+const routes: Routes = [
     {
-        path: 'home',
+        path: '',
         component: HomeComponent,
         children: [
             {
                 path: '',
-                component: HomeComponent
+                redirectTo: 'customer',
+                pathMatch: 'full'
+            },
+            {
+                path: 'customer',
+                component: CustomerManagement
+            },
+            {
+                path: 'customer/new',
+                component: EditCustomerComponent
+            },
+            {
+                path: 'customer/edit/:customerId',
+                component: EditCustomerComponent
             }
         ]
     }
 ];
 
-export const HomeRouting = RouterModule.forChild(HomeRoutes);
+export const HomeRouting = RouterModule.forChild(routes);

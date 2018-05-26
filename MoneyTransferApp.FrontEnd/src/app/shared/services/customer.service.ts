@@ -4,6 +4,7 @@ import { URLSearchParams, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Globals } from '../global/global';
 import { Subject } from 'rxjs';
+import { Customer } from '../models/customer.model';
 
 @Injectable()
 export class CustomerService {
@@ -28,7 +29,14 @@ export class CustomerService {
             .catch(this.handleError);
     }
 
-    public
+    public saveCustomer(customer: Customer)
+    {
+        return this._http
+        .post(Globals.SAVE_CUSTOMER_URL, customer)
+        .toPromise()
+        .then(response => response)
+        .catch(this.handleError);
+    }
 
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);

@@ -227,7 +227,7 @@ namespace MoneyTransferApp.Web
             services.AddScoped<IEmailServices, EmailServices>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IUserService, UserService>();
-
+            services.AddSingleton<ICustomerService, CustomerService>();
         }
     }
 }

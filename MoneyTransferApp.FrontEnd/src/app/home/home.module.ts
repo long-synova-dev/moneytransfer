@@ -9,6 +9,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CustomerService } from '../shared/services/customer.service';
 import { HomeComponent } from './home.component';
 import { HomeRouting } from './home.routing';
+import { EditCustomerComponent } from './customer/customer-edit.component';
+import { CustomerManagement } from './customer/customer-management.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { HomeRouting } from './home.routing';
         NgxDatatableModule
     ],
     declarations: [
-        HomeComponent
+        HomeComponent,
+        CustomerManagement,
+        EditCustomerComponent
     ],
     providers: [
         CustomerService
