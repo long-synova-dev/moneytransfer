@@ -194,6 +194,7 @@ namespace MoneyTransferApp.Web.Services
             try
             {
                 var customer = _unitOfWork.CustomerRepository.All().FirstOrDefault(s => s.CustomerId == model.CustomerId);
+                customer.CustomerCode = model.CustomerCode;
                 customer.FullName = model.FullName;
                 customer.Email = model.Email;
                 customer.Address = model.Address;
