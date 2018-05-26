@@ -93,7 +93,7 @@ export class UserSignupComponent implements OnInit {
                     }
                     else
                     {
-                        this._translate.get(`SignUp.AccountOwnerExisted`).subscribe(value => this.errorMessenger.push(value));
+                        this._translate.get(`SignUp.AccountExisted`).subscribe(value => this.errorMessenger.push(value));
                     }
                     
                 } else {

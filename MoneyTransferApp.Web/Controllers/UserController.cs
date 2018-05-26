@@ -86,7 +86,7 @@ namespace MoneyTransferApp.Web.Controllers
             }
 
             _userService.AddUserToRole(user.Id, RoleConstant.R2);
-            
+            user.EmailConfirmed = true;
             await _userManager.UpdateAsync(user);
             
             //Return ok

@@ -58,7 +58,7 @@ export class UserLoginComponent implements OnInit {
             this.formInit(null);
         }
         // returnUrl
-        this.returnUrl = this._activatedRouter.snapshot.queryParams['returnUrl'] || '/';
+        //this.returnUrl = this._activatedRouter.snapshot.queryParams['returnUrl'] || '/';
     }
     formInit(value) {
         this.loginForm = this._formBuilder.group({
@@ -101,10 +101,6 @@ export class UserLoginComponent implements OnInit {
                     this.errorMessenger = [];
                     response.errors.forEach(err => {
                         this._translate.get(`Login.${err}`).subscribe(value => this.errorMessenger.push(value));
-
-                        if (err === 'EmailNotConfirmed') {
-                            this.resendEmail = true;
-                        }
                     });
                 }
                 // login success
@@ -124,6 +120,7 @@ export class UserLoginComponent implements OnInit {
                         .then(response => {
                             localStorage.setItem("lang", JSON.stringify({ languageId: response.language, languageCode: response.locale }));
                         });
+                    this._router.navigate(['home']);
                 }
             })
     }
