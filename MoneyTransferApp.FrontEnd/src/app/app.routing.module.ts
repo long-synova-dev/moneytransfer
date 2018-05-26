@@ -18,10 +18,6 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    redirectTo: '/account/login',
-  },
-  {
-    path: 'manage',
     loadChildren: './manage/manage.module#ManageModule'
   },
   {
