@@ -29,6 +29,8 @@ namespace MoneyTransferApp.Core.Entities.Client
         [Column(TypeName = "varchar(50)")]
         public string Phone { get; set; }
 
+        public int? SelectedReceiverId { get; set; }
+
         public int? CustomerType { get; set; }
 
         public DateTimeOffset? CreatedOn { get; set; }

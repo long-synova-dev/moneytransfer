@@ -34,5 +34,19 @@ namespace MoneyTransferApp.Web.Controllers
             var result = _customerService.SaveCustomer(CurrentUserIdentity, customer);
             return Ok(new { Message = result });
         }
+
+        [HttpPost("[action]")]
+        public IActionResult GetReceiverByCustomer([FromBody] int id)
+        {
+            var result = _customerService.GetReceiversByCustomer(id);
+            return Ok(result);
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetReceiverById(int id)
+        {
+            var result = _customerService.GetReceiverInfoById(id);
+            return Ok(result);
+        }
     }
 }

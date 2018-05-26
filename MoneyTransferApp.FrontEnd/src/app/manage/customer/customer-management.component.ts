@@ -74,4 +74,9 @@ export class CustomerManagement implements OnInit{
     {
         this._router.navigate(['new'], {relativeTo: this._activeRoute});
     }
+
+    edit(row)
+    {
+        this._router.navigate(['home', 'customer', 'edit', row.customerId]);
+    }
 }

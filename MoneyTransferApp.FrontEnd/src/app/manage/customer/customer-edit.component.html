@@ -1,4 +1,26 @@
 <div class="side-container">
+    <modal-dialog [(modalDialog)]="addReceiverDiablog">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="panel panel-default">
+                    <div class="form-horizontal mt20">
+                        <div class="form-group">
+                            <label for="receiverName" class="control-label col-sm-3">
+                                {{ 'Receiver.Name' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="receiverName" [(ngModel)]="receiver.fullName" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-default" (click)="receiverCancel()">{{'Receiver.Cancel'|translate}}</button>
+            <button type="submit" class="btn btn-danger" (click)="receiverSave()">{{'Receiver.Save'|translate}}</button>
+        </div>
+    </modal-dialog>
     <h2>{{ 'Customer.AddNewTitle' | translate }}</h2>
     <div class="row">
         <div class="col-xs-8">
@@ -34,6 +56,22 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="address" [(ngModel)]="customerDetail.address" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal mt20">
+                <h2>{{ 'Receiver.SelectedReceiver' | translate }}</h2>
+                <div class="form-horizontal mt20">
+                    <div class="form-group">
+                        <label for="receiver" class="control-label col-sm-3">
+                            {{ 'Customer.Receiver' | translate}}:
+                        </label>
+                        <div class="col-sm-7">
+                            <ng-select id="receiver" [options]="receiverList" [(ngModel)]="customerDetail.selectedReceiverId" noFilter="10"></ng-select>
+                        </div>
+                        <div>
+                            <img src="../../../assets/images/add.png" style="cursor: pointer; margin-top: -15" (click)="openAddReceiverDialog()">
                         </div>
                     </div>
                 </div>

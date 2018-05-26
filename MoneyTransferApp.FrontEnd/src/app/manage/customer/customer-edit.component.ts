@@ -6,6 +6,8 @@ import { Customer } from "../../shared/models/customer.model";
 import { CustomerService } from "../../shared/services/customer.service";
 import { AlertService } from "../../shared/services/alert.service";
 import { TranslateService } from "@ngx-translate/core";
+import { Receiver } from "../../shared/models/receiver.model";
+import { ModalDialog } from "../../shared/models/modal-dialog.model";
 
 @Component({
     templateUrl: './customer-edit.component.html',
@@ -15,13 +17,19 @@ import { TranslateService } from "@ngx-translate/core";
 export class EditCustomerComponent implements OnInit {
     customerId;
     customerDetail = new Customer();
+    receiverList;
+    receiver = new Receiver();
+    addReceiverDiablog: ModalDialog;
+
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _router: Router,
         private _customerService: CustomerService,
         private _alertService: AlertService,
         private _translate: TranslateService,
-    ) { }
+    ) { 
+        this.addReceiverDiablog = new ModalDialog("Receiver", "modal-md", true);
+    }
     ngOnInit() {
         this._activatedRoute.params.subscribe(params => {
             this.customerId = params['customerId'];
@@ -38,6 +46,10 @@ export class EditCustomerComponent implements OnInit {
 
     _loadData()
     {
+        this._customerService.getListReceiver(this.customerId)
+            .then(response => {
+                this.receiverList = response;
+            })
         this._customerService.getCustomerById(this.customerId)
             .then(response => {
                 this.customerDetail = response;
@@ -55,7 +67,29 @@ export class EditCustomerComponent implements OnInit {
         .then(result => {
             console.log(result);
             if(result.Message = "success")
-            this._translate.get('Customer.SavedSuccessfully').subscribe(value => this._alertService.success(value));
+            {
+                this._translate.get('Customer.SavedSuccessfully').subscribe(value => this._alertService.success(value));
+                this._router.navigate(['home', 'customer']);
+            }
+            else{
+                this._translate.get('Customer.SaveError').subscribe(value => this._alertService.error(value));
+            }
         })
+    }
+
+    openAddReceiverDialog()
+    {
+        this._customerService.getCustomerById
+        this.addReceiverDiablog.visible = true;
+    }
+
+    receiverSave()
+    {
+
+    }
+
+    receiverCancel()
+    {
+        this.addReceiverDiablog.visible = false;
     }
 }

@@ -28,6 +28,10 @@ export class Globals {
     static SAVE_CUSTOMER_URL = '/api/customer/save';
     static DELETE_CUSTOMER_URL = '/api/customer/delete';
 
+    // Receiver
+    static GET_RECEIVER_BY_CUSTOMER_URL = '/api/customer/getReceiverByCustomer';
+    static GET_RECEIVER_BY_ID_URL = '/api/customer/getReceiverById';
+
     // REGEX
     static PASSWORD_REGEX_VALIDATE = /^(?=.*[A-ZÆÅØ])(?=.*\d)[\wÆæÅåØø\W]{6,}$/;
     //static EMAIL_REGEX_VALIDATE = /^.*[ÆæÅåØø\w]+([\.-]?[ÆæÅåØø\w]+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

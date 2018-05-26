@@ -4,4 +4,5 @@ export class Customer {
     fullName: string;
     phoneNumber: string;
     address: string;
+    selectedReceiverId: string;
 }

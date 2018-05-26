@@ -45,7 +45,8 @@ namespace MoneyTransferApp.Web.Services
                 CustomerCode = customer.CustomerCode,
                 Email = customer.Email,
                 PhoneNumber = customer.Phone,
-                Address = customer.Address
+                Address = customer.Address,
+                SelectedReceiverId = customer.SelectedReceiverId
             });
 
             if (!string.IsNullOrEmpty(param.OrderBy))
@@ -73,7 +74,8 @@ namespace MoneyTransferApp.Web.Services
                 CustomerCode = customer.CustomerCode,
                 PhoneNumber = customer.Phone,
                 Address = customer.Address,
-                Email = customer.Email
+                Email = customer.Email,
+                SelectedReceiverId = customer.SelectedReceiverId
             };
         }
 
@@ -172,6 +174,7 @@ namespace MoneyTransferApp.Web.Services
                     Email = model.Email,
                     Address = model.Address,
                     Phone = model.PhoneNumber,
+                    SelectedReceiverId = model.SelectedReceiverId,
                     CreatedOn = DateTimeOffset.Now,
                     CreatedBy = user?.UserId
                 };
@@ -195,6 +198,7 @@ namespace MoneyTransferApp.Web.Services
                 customer.Email = model.Email;
                 customer.Address = model.Address;
                 customer.Phone = model.PhoneNumber;
+                customer.SelectedReceiverId = model.SelectedReceiverId;
                 customer.UpdatedBy = user.UserId;
                 customer.UpdatedOn = DateTimeOffset.Now;
                 await _unitOfWork.SaveChangeAsync();

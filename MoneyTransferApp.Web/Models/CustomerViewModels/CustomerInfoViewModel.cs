@@ -20,5 +20,7 @@ namespace MoneyTransferApp.Web.Models.CustomerViewModels
 
         [StringLength(50)]
         public string PhoneNumber { get; set; }
+
+        public int? SelectedReceiverId { get; set; }
     }
 }

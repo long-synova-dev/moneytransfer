@@ -11,6 +11,8 @@ import { ManageComponent } from './manage.component';
 import { ManageRouting } from './manage.routing';
 import { EditCustomerComponent } from './customer/customer-edit.component';
 import { CustomerManagement } from './customer/customer-management.component';
+import { ModalModule } from '../shared/directives/modal.module';
+import { SelectModule } from 'ng-select';
 
 @NgModule({
     imports: [
@@ -18,6 +20,7 @@ import { CustomerManagement } from './customer/customer-management.component';
         ManageRouting,
         ChartsModule,
         FormsModule,
+        ModalModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
@@ -26,7 +29,8 @@ import { CustomerManagement } from './customer/customer-management.component';
             },
             isolate: true
         }),
-        NgxDatatableModule
+        NgxDatatableModule,
+        SelectModule
     ],
     declarations: [
         ManageComponent,
