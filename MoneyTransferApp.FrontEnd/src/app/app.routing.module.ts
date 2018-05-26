@@ -1,6 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
- 
+
 import { AuthGuard, AuthGuardComponent } from './shared/guards/authenticator.guard';
 import { RoleGuard } from './shared/guards/role.guard';
 
@@ -13,17 +13,21 @@ import { UserSettingComponent } from './user-setting/user-setting.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/account/login',
     pathMatch: 'full'
   },
   {
     path: 'home',
-    loadChildren: './home/home.module#HomeModule'
+    redirectTo: '/account/login',
+  },
+  {
+    path: 'manage',
+    loadChildren: './manage/manage.module#ManageModule'
   },
   {
     path: 'account',
     loadChildren: './user/user.module#UserModule'
   }
 ];
- 
+
 export const AppRouting = RouterModule.forRoot(routes);

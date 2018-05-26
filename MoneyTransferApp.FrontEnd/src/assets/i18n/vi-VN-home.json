@@ -1,7 +1,20 @@
 {
-    "Home": "Danh sach",
+    "Home": {
+        "Title": "Danh sách khách hàng",
+        "AddNewBtn": "Thêm mới",
+        "SearchBox": "Điền từ khóa và nhấn Enter để tìm kiếm..."
+    },
     "Table": {
         "AddReceiver": "Người nhận",
-        "CreateTransaction": "Tạo giao dịch"
+        "CreateTransaction": "Lập bảng"
+    },
+    "Customer": {
+        "AddNewTitle": "Khách hàng",
+        "Code": "Mã số",
+        "Name": "Họ Tên",
+        "Phone": "Số điện thoại",
+        "Address": "Địa chỉ",
+        "BtnCancel": "Hủy",
+        "BtnSave": "Lưu"
     }
 }

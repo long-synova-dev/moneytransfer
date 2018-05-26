@@ -7,16 +7,15 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CustomerService } from '../shared/services/customer.service';
-import { HomeComponent } from './home.component';
-import { HomeRouting } from './home.routing';
+import { ManageComponent } from './manage.component';
+import { ManageRouting } from './manage.routing';
 import { EditCustomerComponent } from './customer/customer-edit.component';
 import { CustomerManagement } from './customer/customer-management.component';
-
 
 @NgModule({
     imports: [
         CommonModule,
-        HomeRouting,
+        ManageRouting,
         ChartsModule,
         FormsModule,
         TranslateModule.forChild({
@@ -30,7 +29,7 @@ import { CustomerManagement } from './customer/customer-management.component';
         NgxDatatableModule
     ],
     declarations: [
-        HomeComponent,
+        ManageComponent,
         CustomerManagement,
         EditCustomerComponent
     ],
@@ -39,7 +38,7 @@ import { CustomerManagement } from './customer/customer-management.component';
     ]
 })
 
-export class HomeModule {
+export class ManageModule {
 }
 
 export function HttpLoaderFactory(http: HttpClient) {

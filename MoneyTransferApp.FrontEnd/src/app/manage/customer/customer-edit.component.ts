@@ -46,7 +46,7 @@ export class EditCustomerComponent implements OnInit {
 
     cancel()
     {
-        this._router.navigate(['customer']);
+        this._router.navigate(['home', 'customer']);
     }
 
     save()

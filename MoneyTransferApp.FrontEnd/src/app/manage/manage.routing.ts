@@ -1,18 +1,18 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home.component';
+import { ManageComponent } from './manage.component';
 import { EditCustomerComponent } from './customer/customer-edit.component';
 import { CustomerManagement } from './customer/customer-management.component';
 
-const routes: Routes = [
+const manageRoutes: Routes = [
     {
         path: '',
-        component: HomeComponent,
+        component: ManageComponent,
         children: [
             {
                 path: '',
                 redirectTo: 'customer',
-                pathMatch: 'full'
+                pathMatch: 'prefix'
             },
             {
                 path: 'customer',
@@ -30,4 +30,4 @@ const routes: Routes = [
     }
 ];
 
-export const HomeRouting = RouterModule.forChild(routes);
+export const ManageRouting = RouterModule.forChild(manageRoutes);
