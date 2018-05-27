@@ -69,10 +69,18 @@ export class EditCustomerComponent implements OnInit {
             if(result.Message = "success")
             {
                 this._translate.get('Customer.SavedSuccessfully').subscribe(value => this._alertService.success(value));
-                this._router.navigate(['home', 'customer']);
+                this.customerId = result.customerId;
+                if(result.receiverId > 0)
+                {
+                    this._router.navigate(['home', 'customer']);
+                }
+                
             }
             else{
                 this._translate.get('Customer.SaveError').subscribe(value => this._alertService.error(value));
+                if(result.customerId == -1) {
+                    this.customerId = 0;
+                }
             }
         })
     }
@@ -85,14 +93,15 @@ export class EditCustomerComponent implements OnInit {
 
     receiverSave()
     {
+        this.receiver.customerId = this.customerId;
         this._customerService.saveReceiver(this.receiver)
         .then(result => {
             console.log(result);
             if(result.Message = "success")
             {
                 this._translate.get('Receiver.SavedSuccessfully').subscribe(value => this._alertService.success(value));
-                //this._router.navigate(['home', 'customer', 'new']);
                 this.addReceiverDiablog.visible = false;
+                this._loadData();
             }
             else{
                 this._translate.get('Receiver.SaveError').subscribe(value => this._alertService.error(value));

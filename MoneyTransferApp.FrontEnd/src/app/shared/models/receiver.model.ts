@@ -1,4 +1,5 @@
 export class Receiver {
+    customerId: number;
     receiverId: number;
     receiverName: string;
     idNumber: string;

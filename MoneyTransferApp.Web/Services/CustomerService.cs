@@ -138,7 +138,7 @@ namespace MoneyTransferApp.Web.Services
         public async Task<string> SaveReceiver(UserIdentityViewModel user, ReceiverInfoViewModel model)
         {
             string result = string.Empty;
-            if (model.ReceiverId > 0)
+            if (model.ReceiverId == 0)
             {
                 result = await CreateReceiver(user, model);
             }

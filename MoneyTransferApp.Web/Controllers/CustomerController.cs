@@ -35,10 +35,14 @@ namespace MoneyTransferApp.Web.Controllers
             var result = await _customerService.SaveCustomer(CurrentUserIdentity, customer);
             if (int.TryParse(result, out int id))
             {
-                return Ok(new { Message = "Save.Success", CustomerId = id });
+                if (int.TryParse(result, out int receiverId))
+                {
+                    return Ok(new { Message = "Save.Success", CustomerId = id , ReceiverId = receiverId});
+                }
+                return Ok(new { Message = "Save.Success", CustomerId = id, ReceiverId = 0 });
             }
 
-            return Ok(new { Message = result, CustomerId = -1 });
+            return Ok(new { Message = result, CustomerId = -1, ReceiverId = 0 });
         }
 
         [HttpPost("[action]")]

@@ -16,7 +16,9 @@
         "Address": "Địa chỉ",
         "BtnCancel": "Hủy",
         "BtnSave": "Lưu",
-        "Receiver": "Người nhận"
+        "Receiver": "Người nhận",
+        "SavedSuccessfully": "Lưu thông tin khách hàng thành công",
+        "SaveError": "Lưu thất bại"
     },
     "Receiver":{
         "Info": "Thông tin người nhận",
@@ -31,7 +33,7 @@
         "ReceiverPhone2": "Số điện thoại 2",
         "Cancel": "Hủy",
         "Save": "Lưu",
-        "SavedSuccessfully": "Lưu thành công",
+        "SavedSuccessfully": "Lưu thông người nhận thành công",
         "SaveError": "Lưu thất bại"
     }
 }
