@@ -6,6 +6,7 @@ using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using MoneyTransferApp.Web.Models.CommonViewModels;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace MoneyTransferApp.Web.Common
 {
@@ -70,5 +71,24 @@ namespace MoneyTransferApp.Web.Common
             return result;
         }
         
+        public static ICollection<LanguageViewModel> GetAllLanguages()
+        {
+            using (StreamReader r = new StreamReader(Constant.LANGUAGE_JSON))
+            {
+                var json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<LanguageViewModel>>(json);
+                return items;
+            }
+        }
+
+        public static SenderViewModel GetSenderInfo()
+        {
+            using (StreamReader r = new StreamReader(Constant.SENDER_JSON))
+            {
+                var json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<SenderViewModel>(json);
+                return items;
+            }
+        }
     }
 }

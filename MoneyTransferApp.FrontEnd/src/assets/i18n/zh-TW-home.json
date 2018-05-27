@@ -16,5 +16,12 @@
         "Address": "Địa chỉ",
         "BtnCancel": "Hủy",
         "BtnSave": "Lưu"
+    },
+    "Transaction":
+    {
+        "CustomerNotExist": "Vui lòng chọn khách để thực hiện giao dịch",
+        "SaveSuccess": "Lưu thành công",
+        "SaveError": "Lưu thất bại",
+        "DeleteSuccess": "Xóa thành công"
     }
 }

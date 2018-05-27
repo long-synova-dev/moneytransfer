@@ -57,15 +57,6 @@ export class CustomerService {
             .catch(this.handleError);
     }
 
-    public saveReceiver(receiver: Receiver)
-    {
-        return this._http
-        .post(Globals.SAVE_RECEIVER_URL, receiver)
-        .toPromise()
-        .then(response => response)
-        .catch(this.handleError);
-    }
-
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);
     }

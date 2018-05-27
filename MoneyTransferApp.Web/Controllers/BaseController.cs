@@ -14,6 +14,7 @@ using MoneyTransferApp.Web.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using MoneyTransferApp.Web.Common;
 
 namespace MoneyTransferApp.Web.Controllers
 {
@@ -104,7 +105,7 @@ namespace MoneyTransferApp.Web.Controllers
             var roles = await _userManager.GetRolesAsync(user);
 
             // Generate claims and JWT token
-            var langs = _userService.GetAllLanguages();
+            var langs = Utils.GetAllLanguages();
             var claims = ClaimHelper.GetClaims(user, roles, langs);
 
             // Generate token

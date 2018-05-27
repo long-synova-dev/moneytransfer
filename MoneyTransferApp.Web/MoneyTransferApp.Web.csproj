@@ -19,16 +19,12 @@
 
 	<ItemGroup>
 	  <Compile Remove="Areas\**" />
-	  <Compile Remove="Data\**" />
 	  <Compile Remove="wwwroot_backup\**" />
 	  <Content Remove="Areas\**" />
-	  <Content Remove="Data\**" />
 	  <Content Remove="wwwroot_backup\**" />
 	  <EmbeddedResource Remove="Areas\**" />
-	  <EmbeddedResource Remove="Data\**" />
 	  <EmbeddedResource Remove="wwwroot_backup\**" />
 	  <None Remove="Areas\**" />
-	  <None Remove="Data\**" />
 	  <None Remove="wwwroot_backup\**" />
 	</ItemGroup>
 

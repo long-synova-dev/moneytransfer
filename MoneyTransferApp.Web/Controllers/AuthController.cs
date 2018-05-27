@@ -149,7 +149,7 @@ namespace MoneyTransferApp.Web.Controllers
             }
 
             // Generate claims and JWT token
-            var langs = _userService.GetAllLanguages();
+            var langs = Utils.GetAllLanguages();
             var claims = ClaimHelper.GetClaims(user, roles, langs);
             _userService.UpdateLastLogin(user.Id);
             // Generate token

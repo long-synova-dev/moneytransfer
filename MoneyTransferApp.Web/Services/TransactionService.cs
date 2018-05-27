@@ -87,6 +87,38 @@ namespace MoneyTransferApp.Web.Services
             }
         }
 
+        public TransactionDetailViewModel GetTransactionDetail(UserIdentityViewModel user, int customerId)
+        {
+            var storeName = _unitOfWork.UserRepository.All().FirstOrDefault(s => s.Id == user.UserId)?.StoreName;
+            var customer = _unitOfWork.CustomerRepository.All().FirstOrDefault(s => s.CustomerId == customerId);
+            var defaultReceiver = _unitOfWork.ReceiverRepository.All().FirstOrDefault(s => s.ReceiverId == customer.SelectedReceiverId);
+            var sender = Utils.GetSenderInfo();
+
+            return new TransactionDetailViewModel
+            {
+                TransactionNo = GenerateTransactionNo(customerId),
+                StoreName = storeName,
+                CustomerId = customer.CustomerId,
+                CustomerCode = customer.CustomerCode,
+                CustomerName = customer.FullName,
+                CustomerPhone = customer.Phone,
+
+                ReceiverId = defaultReceiver.ReceiverId,
+                ReceiverName = defaultReceiver.ReceiverName,
+                ReceiverPhone = defaultReceiver.ReceiverPhone1,
+                ReceiverAccountNumber = defaultReceiver.BankAccount,
+                BankName = defaultReceiver.BankName,
+                BranchName = defaultReceiver.BranchName,
+                Province = defaultReceiver.Province,
+                District = defaultReceiver.District,
+                IDNumber = defaultReceiver.ReceiverIdentityCard,
+                IDIssueDate = defaultReceiver.IDIssueDate,
+
+                SenderName = sender.Name,
+                SenderPhone = sender.Phone
+            };
+        }
+
         #region Private Method
 
         private async Task<string> CreateTransaction(UserIdentityViewModel user, TransactionDetailViewModel model)
