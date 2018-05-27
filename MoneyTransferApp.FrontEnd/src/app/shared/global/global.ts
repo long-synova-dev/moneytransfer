@@ -31,6 +31,7 @@ export class Globals {
     // Receiver
     static GET_RECEIVER_BY_CUSTOMER_URL = '/api/customer/getReceiverByCustomer';
     static GET_RECEIVER_BY_ID_URL = '/api/customer/getReceiverById';
+    static SAVE_RECEIVER_URL = '/api/customer/saveReceiver';
 
     // REGEX
     static PASSWORD_REGEX_VALIDATE = /^(?=.*[A-ZÆÅØ])(?=.*\d)[\wÆæÅåØø\W]{6,}$/;

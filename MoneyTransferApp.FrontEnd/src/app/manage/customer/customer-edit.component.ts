@@ -28,7 +28,7 @@ export class EditCustomerComponent implements OnInit {
         private _alertService: AlertService,
         private _translate: TranslateService,
     ) { 
-        this.addReceiverDiablog = new ModalDialog("Receiver", "modal-md", true);
+        this._translate.get('Receiver.Info').subscribe(value => this.addReceiverDiablog = new ModalDialog(value, "modal-md", true));
     }
     ngOnInit() {
         this._activatedRoute.params.subscribe(params => {
@@ -85,7 +85,19 @@ export class EditCustomerComponent implements OnInit {
 
     receiverSave()
     {
-
+        this._customerService.saveReceiver(this.receiver)
+        .then(result => {
+            console.log(result);
+            if(result.Message = "success")
+            {
+                this._translate.get('Receiver.SavedSuccessfully').subscribe(value => this._alertService.success(value));
+                //this._router.navigate(['home', 'customer', 'new']);
+                this.addReceiverDiablog.visible = false;
+            }
+            else{
+                this._translate.get('Receiver.SaveError').subscribe(value => this._alertService.error(value));
+            }
+        })
     }
 
     receiverCancel()

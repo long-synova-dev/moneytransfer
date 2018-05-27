@@ -1,7 +1,7 @@
 <div class="side-container">
     <modal-dialog [(modalDialog)]="addReceiverDiablog">
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="form-horizontal mt20">
                         <div class="form-group">
@@ -9,7 +9,64 @@
                                 {{ 'Receiver.Name' | translate }}:
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="receiverName" [(ngModel)]="receiver.fullName" />
+                                <input type="text" class="form-control" id="receiverName" [(ngModel)]="receiver.receiverName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankAccount" class="control-label col-sm-3">
+                                {{ 'Receiver.BankAccount' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="bankAccount" [(ngModel)]="receiver.bankAccount" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankName" class="control-label col-sm-3">
+                                {{ 'Receiver.BankName' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="bankName" [(ngModel)]="receiver.bankName" />
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="branchName" class="control-label col-sm-3">
+                                {{ 'Receiver.BranchName' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="branchName" [(ngModel)]="receiver.branchName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="district" class="control-label col-sm-3">
+                                {{ 'Receiver.District' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="district" [(ngModel)]="receiver.district" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="province" class="control-label col-sm-3">
+                                {{ 'Receiver.Province' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="province" [(ngModel)]="receiver.province" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="receiverPhone1" class="control-label col-sm-3">
+                                {{ 'Receiver.ReceiverPhone1' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="receiverPhone1" [(ngModel)]="receiver.receiverPhone1" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="receiverPhone2" class="control-label col-sm-3">
+                                {{ 'Receiver.ReceiverPhone2' | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="receiverPhone2" [(ngModel)]="receiver.receiverPhone2" />
                             </div>
                         </div>
                     </div>

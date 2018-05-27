@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { Globals } from '../global/global';
 import { Subject } from 'rxjs';
 import { Customer } from '../models/customer.model';
+import { Receiver } from '../models/receiver.model';
 
 @Injectable()
 export class CustomerService {
@@ -54,6 +55,15 @@ export class CustomerService {
             .toPromise()
             .then((response) => response)
             .catch(this.handleError);
+    }
+
+    public saveReceiver(receiver: Receiver)
+    {
+        return this._http
+        .post(Globals.SAVE_RECEIVER_URL, receiver)
+        .toPromise()
+        .then(response => response)
+        .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

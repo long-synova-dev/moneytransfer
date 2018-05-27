@@ -1,13 +1,13 @@
 export class Receiver {
     receiverId: number;
-    fullName: string;
-    phoneNumber: string;
+    receiverName: string;
     idNumber: string;
-    idIssueDate: string;
-    address: string;
-    bankAccount: string;
+	bankAccount: string;
     bankName: string;
     branchName: string;
-    province: string;
+	province: string;
     district: string;
+    idIssueDate: string;
+	receiverPhone1: string;
+	receiverPhone2: string;
 }

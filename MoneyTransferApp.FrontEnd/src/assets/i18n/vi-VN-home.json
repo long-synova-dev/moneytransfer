@@ -15,6 +15,23 @@
         "Phone": "Số điện thoại",
         "Address": "Địa chỉ",
         "BtnCancel": "Hủy",
-        "BtnSave": "Lưu"
+        "BtnSave": "Lưu",
+        "Receiver": "Người nhận"
+    },
+    "Receiver":{
+        "Info": "Thông tin người nhận",
+        "SelectedReceiver": "Chọn người nhận",
+        "Name": "Tên người nhận",
+        "BankAccount": "Tài khoản NH",
+        "BankName": "Tên ngân hàng",
+        "BranchName":"Tên chi nhánh",
+        "District": "Quận/Huyện",
+        "Province":"Tỉnh/Thành phố",
+        "ReceiverPhone1": "Số điện thoại 1",
+        "ReceiverPhone2": "Số điện thoại 2",
+        "Cancel": "Hủy",
+        "Save": "Lưu",
+        "SavedSuccessfully": "Lưu thành công",
+        "SaveError": "Lưu thất bại"
     }
 }
