@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MoneyTransferApp.Web.Interfaces;
 using MoneyTransferApp.Web.Models.CustomerViewModels;
 using MoneyTransferApp.Web.Models.PagingViewModels;
+using System.Threading.Tasks;
 
 namespace MoneyTransferApp.Web.Controllers
 {
@@ -29,10 +30,15 @@ namespace MoneyTransferApp.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Save([FromBody] CustomerInfoViewModel customer)
+        public async Task<IActionResult> Save([FromBody] CustomerInfoViewModel customer)
         {
-            var result = _customerService.SaveCustomer(CurrentUserIdentity, customer);
-            return Ok(new { Message = result });
+            var result = await _customerService.SaveCustomer(CurrentUserIdentity, customer);
+            if (int.TryParse(result, out int id))
+            {
+                return Ok(new { Message = "Save.Success", CustomerId = id });
+            }
+
+            return Ok(new { Message = result, CustomerId = -1 });
         }
 
         [HttpPost("[action]")]

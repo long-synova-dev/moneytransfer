@@ -157,7 +157,7 @@ namespace MoneyTransferApp.Web.Services
             _unitOfWork.ReceiverRepository.Delete(receiver);
             await _unitOfWork.SaveChangeAsync();
 
-            return "Save.Success";
+            return "Delete.Success";
         }
 
 
@@ -181,7 +181,7 @@ namespace MoneyTransferApp.Web.Services
                 _unitOfWork.CustomerRepository.Add(customer);
                 await _unitOfWork.SaveChangeAsync();
 
-                return "Save.Success";
+                return customer.CustomerId.ToString();
             }
             catch (Exception ex)
             {
@@ -204,7 +204,7 @@ namespace MoneyTransferApp.Web.Services
                 customer.UpdatedOn = DateTimeOffset.Now;
                 await _unitOfWork.SaveChangeAsync();
 
-                return "Save.Success";
+                return customer.CustomerId.ToString();
             }
             catch(Exception)
             {
