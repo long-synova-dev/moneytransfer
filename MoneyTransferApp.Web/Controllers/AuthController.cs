@@ -67,13 +67,12 @@ namespace MoneyTransferApp.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        [IgnoreAntiforgeryToken]
         [Authorize(Roles = RoleConstant.AllRoles)]
         public async Task<IActionResult> Logout()
         {
             // Get the current user
-            var userName = CurrentUserIdentity.Email;
-            var user = await _userManager.FindByEmailAsync(userName);
+            var userId = CurrentUserIdentity.UserId;
+            var user = await _userManager.FindByIdAsync(userId.ToString());
 
             if (user == null)
             {
@@ -150,7 +149,8 @@ namespace MoneyTransferApp.Web.Controllers
             }
 
             // Generate claims and JWT token
-            var claims = ClaimHelper.GetClaims(user, roles);
+            var langs = _userService.GetAllLanguages();
+            var claims = ClaimHelper.GetClaims(user, roles, langs);
             _userService.UpdateLastLogin(user.Id);
             // Generate token
             var token = TokenGenerator.Generate(claims, roles, _config, user.SecurityStamp);

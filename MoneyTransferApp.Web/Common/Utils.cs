@@ -69,24 +69,6 @@ namespace MoneyTransferApp.Web.Common
             }
             return result;
         }
-
-        /// <summary>
-        /// Get Duedate without weekend day (Saturday & Sunday)
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="offset"></param>
-        public static DateTimeOffset? GetDueDate(DateTimeOffset? date, int offset)
-        {
-            for (int i = 1; i <= offset; i++)
-            {
-                if (date != null)
-                {
-                    var nextday = date.Value.AddDays(i);
-                    if (nextday.DayOfWeek == DayOfWeek.Saturday) offset += 1;
-                    if (nextday.DayOfWeek == DayOfWeek.Sunday) offset += 1;
-                }
-            }
-            return date.Value.AddDays(offset);
-        }
+        
     }
 }

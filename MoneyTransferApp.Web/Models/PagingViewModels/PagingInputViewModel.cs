@@ -1,4 +1,3 @@
-using MoneyTransferApp.Core.Entities.Client;
 using System.ComponentModel.DataAnnotations;
 
 namespace MoneyTransferApp.Web.Models.PagingViewModels

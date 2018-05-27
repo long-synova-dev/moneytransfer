@@ -12,11 +12,11 @@ using Microsoft.Extensions.Logging;
 using MoneyTransferApp.Core.Entities.Users;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using MoneyTransferApp.Web.Models.PagingViewModels;
 
 namespace MoneyTransferApp.Web.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = RoleConstant.GodOnly)]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
@@ -44,6 +44,7 @@ namespace MoneyTransferApp.Web.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpGet("[action]")]
+        [Authorize(Roles = RoleConstant.GodOnly)]
         public IActionResult IsUsernameAvailable(string username)
         {
             var result = _userService.IsUsernameAvailable(username);
@@ -58,6 +59,7 @@ namespace MoneyTransferApp.Web.Controllers
         /// <returns></returns>
         [HttpPost("[action]")]
         [IgnoreAntiforgeryToken]
+        [Authorize(Roles = RoleConstant.GodOnly)]
         public async Task<IActionResult> CreateAccount([FromBody] RegisterViewModel model)
         {
             var usersList = _userService.GetUserByPhone_UserName(model.UserName);
@@ -94,6 +96,7 @@ namespace MoneyTransferApp.Web.Controllers
         }
         
         [HttpDelete("[action]/{id}")]
+        [Authorize(Roles = RoleConstant.GodOnly)]
         public IActionResult DeleteUser(string id)
         {
             var Id = Guid.Parse(id);
@@ -102,6 +105,7 @@ namespace MoneyTransferApp.Web.Controllers
         }
         
         [HttpGet("[action]/{id}")]
+        [Authorize(Roles = RoleConstant.GodOnly)]
         public IActionResult GetUserById(Guid id)
         {
             var item = _userService.GetUserById(id);
@@ -109,6 +113,7 @@ namespace MoneyTransferApp.Web.Controllers
         }
         
         [HttpPost("[action]")]
+        [Authorize(Roles = RoleConstant.AllRoles)]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel model)
         {
             var user = _userService.GetUserById(CurrentUserIdentity.UserId);
@@ -128,6 +133,14 @@ namespace MoneyTransferApp.Web.Controllers
             _userService.ChangeLanguage(CurrentUserIdentity.UserId, model.LanguageId);
 
             return await RefreshUserToken(CurrentUserIdentity.UserId);
+        }
+
+        [HttpGet("[action]")]
+        [Authorize(Roles = RoleConstant.R0)]
+        public IActionResult GetAllUser(PagingInputViewModel input)
+        {
+            var result = _userService.GetAll(input);
+            return Ok(result);
         }
     }
 }

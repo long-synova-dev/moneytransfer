@@ -1,8 +1,10 @@
 using MoneyTransferApp.Core.Entities.Users;
 using MoneyTransferApp.Web.Models.BaseViewModels;
+using MoneyTransferApp.Web.Models.CommonViewModels;
 using MoneyTransferApp.Web.Models.PagingViewModels;
 using MoneyTransferApp.Web.Models.UserViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MoneyTransferApp.Web.Interfaces
@@ -18,5 +20,6 @@ namespace MoneyTransferApp.Web.Interfaces
         void AddUserToRole(Guid userId, string roleName);
         void DeleteUser(Guid id, UserIdentityViewModel CurrentUserIdentity);
         void ChangeLanguage(Guid userId, int languageId);
+        ICollection<LanguageViewModel> GetAllLanguages();
     }
 }
