@@ -11,6 +11,9 @@ using MoneyTransferApp.Web.Models.BaseViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using MoneyTransferApp.Web.Models.CommonViewModels;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace MoneyTransferApp.Web.Services
 {
@@ -245,6 +248,16 @@ namespace MoneyTransferApp.Web.Services
 
             return string.Empty;
 
+        }
+
+        public ICollection<LanguageViewModel> GetAllLanguages()
+        {
+            using (StreamReader r = new StreamReader("language.json"))
+            {
+                var json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<LanguageViewModel>>(json);
+                return items;
+            }
         }
 
         public void ChangeLanguage(Guid userId, int languageId)

@@ -10,7 +10,7 @@ export class Globals {
     static GET_CURRENT_USER_DATA_URL = '/api/auth/currentUser';
     static GET_LANGUAGES_URL = '/api/language/all';
     static CHANGE_LANGUAGE_URL = '/api/user/changeLanguage';
-    static GET_USER_FROM_LOGIN_URL = '/api/user/GetUserFromLogin';
+    static GET_ALL_USER_URL = '/api/user/GetAllUser';
     static DELETE_USER_URL = '/api/user/DeleteUser';
     static SAVE_USER_URL = '/api/user/saveUser';
     static GET_ROLES_URL = '/api/user/getroles';

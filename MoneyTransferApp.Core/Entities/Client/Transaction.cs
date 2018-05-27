@@ -39,8 +39,8 @@ namespace MoneyTransferApp.Core.Entities.Client
 
     public enum Currency
     {
-        TWD = 1,
-        VND = 2
+        VND = 1,
+        TWD = 2
     }
 
     public enum Status

@@ -4,15 +4,14 @@
     </div>
     <nav class="navbar navbar-default navbar--account">
         <div class="container-fluid" [ngClass]="{'container-response': !userInfo}">
-
             <div class="nav navbar-nav navbar-right dropdown pmd-dropdown clearfix hidden-xs navbar__user-btn" [ngClass]="{hidden : !userInfo}">
                 <button class="btn pmd-ripple-effect btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                     <span class="btn-avatar">
                         <div class="user_logo">{{userLogo}}</div>
                     </span>
-                    <div class="text-ellipsis navbar__user-btn-text">
+                    <!-- <div class="text-ellipsis navbar__user-btn-text">
                         {{firstName}}
-                    </div>
+                    </div> -->
                 </button>
                 <ul aria-labelledby="dropdownMenu2" role="menu" class="dropdown-menu dropdown-menu-right">
                     <!-- <li role="presentation"><a href="javascript:void(0);">{{'Header.AnotherAction' | translate}}</a></li> -->
@@ -22,10 +21,11 @@
                             <li *ngFor="let lang of allLanguages" role="presentation" ><a [ngClass]="{'active': lang.languageCode == preferredLang}" href="javascript:void(0);" tabindex="-1" role="menuitem" (click)="switchLanguage(lang)">{{lang.languageName}}</a></li>
                         </ul>
                     </li>
-                    <li *ngIf="userRole == 'R2' || userRole == 'R3' || userRole == 'R2,R3'" role="presentation">
+                    <li *ngIf="userRole == 'R0'" role="presentation">
                         <a href="javascript:void(0);" tabindex="-1" routerLink="user-manage" role="presentation">{{'Header.UserManagement' | translate}}</a>
+                        <a [routerLink]="['/account/change-password']">{{'Login.ChangePassword' | translate}}</a>
+                        <a [routerLink]="['/account/signup']" class="login-register">{{'Login.CreateAccount' | translate}}</a>
                     </li>
-                    <li role="presentation"><a href="javascript:void(0);" routerLink="/account-owner">{{'Header.AccountInfo' | translate}}</a></li>
                     <li role="presentation"><a href="javascript:void(0);" (click)="userLogout()">{{'Header.LogOut' | translate}}</a></li>
                 </ul>
             </div>

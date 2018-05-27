@@ -104,7 +104,8 @@ namespace MoneyTransferApp.Web.Controllers
             var roles = await _userManager.GetRolesAsync(user);
 
             // Generate claims and JWT token
-            var claims = ClaimHelper.GetClaims(user, roles);
+            var langs = _userService.GetAllLanguages();
+            var claims = ClaimHelper.GetClaims(user, roles, langs);
 
             // Generate token
             var token = TokenGenerator.Generate(claims, roles, _config, user.SecurityStamp);

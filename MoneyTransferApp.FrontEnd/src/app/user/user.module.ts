@@ -8,7 +8,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { UserComponent } from './user.component';
 import { UserLoginComponent } from './login/user-login.component';
 import { UserSignupComponent } from './signup/user-signup.component';
-import { UserForgotPassComponent } from './forgot-pass/user-forgot-pass.component';
 import { UserChangePassComponent } from './change-pass/user-change-pass.component';
 import { UserConfirmSignUpComponent } from './confirm-signup/user-confirm-signup.component';
 
@@ -41,7 +40,6 @@ import { NotHavePermissionComponent } from '../403.component';
         UserComponent,
         UserLoginComponent,
         UserSignupComponent,
-        UserForgotPassComponent,
         UserChangePassComponent,
         UserConfirmSignUpComponent,
         NotFoundComponent,

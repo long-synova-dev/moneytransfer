@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     private _userService: UserService,
     public route: Router,
     private _translate: TranslateService,
-    //private _sessionManagementService: SessionManagementService,
+    private _sessionManagementService: SessionManagementService,
     private _cdRef: ChangeDetectorRef,
     private _elementRef: ElementRef,
     private _render: Renderer2,
@@ -78,6 +78,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
       .then((response) => this.allLanguages = response);
 
     this._data.currentUser.subscribe(info => {
+      console.log("aaaa", info);
       this.userInfo = info;
       if (info != null) {
         this.userPlan = info.plan;
@@ -94,7 +95,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     });
 
     this._data.appLoadStatus.subscribe(status => this.isAppLoading = status);
-
+    console.log("checkToken ", this._data.checkToken());
     if (this._data.checkToken()) {
       this._userService.getCurrentUser()
         .then(response => this._data.updateUserInfo(response));
@@ -123,6 +124,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
     this.preferredLang = lang.languageCode;
 
     //Update api
+    console.log(this._data.checkToken());
     if (this._data.checkToken()) {
       this._userService.changeLanguage(lang.languageId)
         .then(data => {

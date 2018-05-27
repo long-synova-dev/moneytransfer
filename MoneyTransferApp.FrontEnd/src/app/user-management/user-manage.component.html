@@ -1,50 +1,29 @@
-<modal-dialog [(modalDialog)]="confirmDialog">
+<modal-dialog [(modalDialog)]="deleteConfirm">
     <p>{{subscriptionMessage}}</p>
     <div class="pmd-modal-bordered text-right">
         <button class="btn pmd-ripple-effect btn-primary" type="button" (click)="goToSubscription()">OK</button>
     </div>
 </modal-dialog>
-<modal-dialog [(modalDialog)]="openChangeRoleDialog">
-    <p>{{changeRoleMessg}}</p>
-    <div class="pmd-modal-bordered text-right">
-        <button class="btn pmd-ripple-effect btn-primary" type="button" (click)="changeRole()">OK</button>
-    </div>
-</modal-dialog>
 <div class="container">
-    <div class="form-horizontal">
+    <div class="row">
         <div class="form-group">
-            <div class="col-xs-8 align-header-text">
-                <h1>{{'Manage.UserManage' | translate}}</h1>
-                <div *ngIf="userStatusInfo">
-                    {{'Manage.LongDescription' | translate}}
-                </div>
-            </div>
-            <div class="col-xs-4 user-info">
-                <div class="panel panel-default" *ngIf="userStatusInfo">
-                    <div class="panel-heading">
-                        <strong>{{'Manage.SubscriptionInfo' | translate}}</strong>
-                    </div>
-                    <div class="panel-body">
-                        <div *ngIf="userStatusInfo && userStatusInfo.plan">
-                            <p>
-                                <strong>{{'Manage.PlanName' | translate}}</strong>: [{{planName}}]</p>
-                            <p>
-                                <strong>{{'Manage.UserSeatLeft' | translate}}</strong>: {{seatLeft}}
-                            </p>
-                            <p *ngIf="maxUsers == 0">
-                                <a (click)="goToBilling()">{{'Manage.UpgradeYourPlan' | translate}}</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-xs-3">
+                <h2>{{'Manage.UserManage' | translate}}</h2>
             </div>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-addnew" (click)="newUser(null)">{{'Manage.AddNew' | translate}}</button>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="page.keyword" (keyup)="filter($event)" placeholder="{{ 'Home.SearchBox' | translate }}">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <button type="submit" class="btn btn-primary btn-addnew" (click)="newUser()">{{'Manage.AddNew' | translate}}</button>
         </div>
     </div>
     <div class="data-table pmd-card pmd-card-default pmd-z-depth">
-        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40" [rowHeight]="'auto'">
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40" [rowHeight]="'auto'"
+            [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber - 1" [limit]="page.itemsPerPage" (page)='paginate($event)'
+            (sort)="sort($event)">
             <ngx-datatable-column prop="firstName">
                 <ng-template ngx-datatable-header-template>
                     <strong>{{'Manage.FirstName' | translate}}</strong>
@@ -57,9 +36,15 @@
                 </ng-template>
                 <ng-template let-value="value" ngx-datatable-cell-template>{{value ? value: "N/A"}}</ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="email">
+            <ngx-datatable-column prop="userName">
                 <ng-template ngx-datatable-header-template>
-                    <strong>{{'Manage.Email' | translate}}</strong>
+                    <strong>{{'Manage.UserName' | translate}}</strong>
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>{{value ? value: "N/A"}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="phoneNumber">
+                <ng-template ngx-datatable-header-template>
+                    <strong>{{'Manage.PhoneNumber' | translate}}</strong>
                 </ng-template>
                 <ng-template let-value="value" ngx-datatable-cell-template>{{value ? value: "N/A"}}</ng-template>
             </ngx-datatable-column>
@@ -71,12 +56,6 @@
                     <i *ngIf="value" class="material-icons pmd-xs">check_circle</i>
                     <i *ngIf="!value" class="material-icons pmd-xs">highlight_off</i>
                 </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column prop="roleName">
-                <ng-template ngx-datatable-header-template>
-                    <strong>{{'Manage.Roles' | translate}}</strong>
-                </ng-template>
-                <ng-template let-value="value" ngx-datatable-cell-template> {{value}} </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column prop="createOn">
                 <ng-template ngx-datatable-header-template>
@@ -100,13 +79,10 @@
                 </ng-template>
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <i style="cursor: pointer" *ngIf="!row.isAccountOwner" class="material-icons pmd-xs" (click)="edit(row)">edit</i>
-                    <i style="cursor: pointer" *ngIf="!row.isAccountOwner" class="material-icons pmd-xs" (click)="sendInvite(row)" title="{{resendInvitation}}" >autorenew</i>
-                    <i style="cursor: pointer" *ngIf="isCanAssignAsOwner(row)" class="material-icons pmd-xs" title="{{changeOwnership}}" (click)="openChangeRolePopup(row)">people</i>
+                    <i style="cursor: pointer" *ngIf="!row.isAccountOwner" class="material-icons pmd-xs" (click)="sendInvite(row)" title="{{resendInvitation}}">autorenew</i>
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>
-
-
     </div>
 </div>
 <router-outlet></router-outlet>

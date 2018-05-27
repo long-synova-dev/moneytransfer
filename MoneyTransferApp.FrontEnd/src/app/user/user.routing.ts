@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
 import { UserLoginComponent } from './login/user-login.component';
 import { UserSignupComponent } from './signup/user-signup.component';
-import { UserForgotPassComponent } from './forgot-pass/user-forgot-pass.component';
 import { UserChangePassComponent } from './change-pass/user-change-pass.component';
 import { UserConfirmSignUpComponent } from './confirm-signup/user-confirm-signup.component';
 import { RoleGuard } from '../shared/guards/role.guard';
@@ -26,10 +25,6 @@ const UserRoutes: Routes = [
             {
                 path: 'signup',
                 component: UserSignupComponent
-            },
-            {
-                path: 'forgot-password',
-                component: UserForgotPassComponent
             },
             {
                 path: 'change-password',

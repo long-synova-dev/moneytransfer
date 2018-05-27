@@ -1,26 +1,23 @@
-using System.Collections.Generic;
-using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MoneyTransferApp.Web.Models.CommonViewModels;
-using Newtonsoft.Json;
+using MoneyTransferApp.Web.Interfaces;
 
 namespace MoneyTransferApp.Web.Controllers
 {
     [Route("api/[controller]")]
     public class LanguageController : BaseController
     {
+        private readonly IUserService _userService;
+        public LanguageController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet("[action]")]
         [AllowAnonymous]
         public IActionResult All()
         {
-            using (StreamReader r = new StreamReader("language.json"))
-            {
-                var json = r.ReadToEnd();
-                var items = JsonConvert.DeserializeObject<List<LanguageViewModel>>(json);
-                return Ok(items);
-            }
-
+            return Ok(_userService.GetAllLanguages());
         }
     }
 }

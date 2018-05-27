@@ -95,8 +95,9 @@ export class UserService {
             .then(response => response);
     }
 
-    public getAllUser() {
-        return this._http.get(Globals.GET_USER_FROM_LOGIN_URL)
+    public getAllUser(page) {
+        return this._http
+        .get(`${Globals.GET_ALL_USER_URL}?keyword=${page.keyword}&PageNumber=${page.pageNumber}&ItemsPerPage=${page.itemsPerPage}&OrderBy=${page.orderBy}&IsDesc=${page.isDesc}`)
         .toPromise()
         .then(response => response);
     }

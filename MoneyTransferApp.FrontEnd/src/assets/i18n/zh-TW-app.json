@@ -1,39 +1,39 @@
 {
     "Header": {
-        "SearchFor": "Søg...",
-        "BillingHistory": "Faktura historik",
-        "AnotherAction": "Yderligere handling",
-        "Settings": "Indstillinger",
-        "Language": "Sprog",
-        "LogOut": "Log ud",
-        "Home": "Hjem",
+        "SearchFor": "Search for...",
+        "BillingHistory": "Billing History",
+        "AnotherAction": "Another Action",
+        "Settings": "Settings",
+        "Language": "Language",
+        "LogOut": "Log out",
+        "Home": "Home",
         "GDPRProgram": "GDPR Program",
-        "Notifications": "Notifikationer",
-        "ProFeature": "Pro version",
-        "BillingPlans": "Abonnementsmuligheder",
-        "HelpTitle": "Hjælp",
-        "HelpBtn": "Hjælp og support",
-        "HelpText": "...Brug vores hjælp og support center til at ...",
-        "LaunchTour": "Tag den guidede tour",
-        "KeyboarShortcuts": "Tastatur genveje",
-        "ShowDiagnostics": "Vis diagnostik",
-        "FeedbackTitle": "Send os feedback",
-        "FeedbackText": "Tak for at du tog dig tid til at give os din feedback",
-        "FeedbackBtn": "Send feedback",
-        "UserManagement": "Bruger administration",
+        "Notifications": "Notifications",
+        "ProFeature": "Pro Feature",
+        "BillingPlans": "Subscription plans",
+        "HelpTitle": "Help",
+        "HelpBtn": "Help + support",
+        "HelpText": "Visit the help and support center to create or track a support ticket and monitor heath",
+        "LaunchTour": "Launch guided tour",
+        "KeyboarShortcuts": "Keyboard shortcuts",
+        "ShowDiagnostics": "Show diagnostics",
+        "FeedbackTitle": "Send us feedback",
+        "FeedbackText": "Thank you for taking the time to give us feedback about",
+        "FeedbackBtn": "Submit feedback",
+        "UserManagement": "User Management",
         "AccountInfo": "Account info"
     },
     "Error": {
-        "UpgradeNow": "For at få fuld adgang til vores services skal du opgradere dit abonnemen",
-        "RestrictedArea": "Du har ikke adgangsrettigheder til denne funktion",
-        "NoConnection": "Det lader til vi har et problem med at tilgå vores server lige nu. Prøv venligst igen om et øjeblik.",
-        "SessionExpired": "Vi har logget dig ud af sikkerhedsmæssige grunde, da du har være inaktiv i en periode. Vi sender dig tilbage til log-in siden om et øjeblik, hvor du kan logge ind igen.",
-        "NotFoundResource": "Den webadresse som du søger kan ikke findes. Prøv venligst med en anden webadresse.",
-        "ServerError": "Det lader til der er sket en fejl på vores server. Prøv venligst igen",
-        "GatewayTimeout": "Det tager vist for lang tid. Prøv venligst igen"
+        "UpgradeNow": "Please upgrade your subscription to get full access to our service.",
+        "RestrictedArea": "You are not authorized to access this area.",
+        "NoConnection": "It seems that we cannot connect to our server at the moment. Please try again shortly.",
+        "SessionExpired": "Your session has expired. You will be redirected to the login screen shortly.",
+        "NotFoundResource": "Your requested URL cannot be found. Please try a different URL.",
+        "ServerError": "An error has occurred with our server. Please try again.",
+        "GatewayTimeout": "The request timed out. Please try again."
     },
     "Warning": {
-        "ConfirmDelete": "Er du sikker på du vil slette?"
+        "ConfirmDelete": "Are you sure you want to delete?"
     },
     "Success": {
         "SaveSuccess": "Save Success"
@@ -43,27 +43,23 @@
         "CancelBtn": "Cancel",
         "SaveBtn": "Save"
     },
-    "User": {
-        "Active": "aktiv",
-        "Expired": "Udløbet"
-    },
     "SessionExpiredModal": {
-        "ModalTitle": "Sessionen er udløbet",
-        "ModalDesc": "Sessionen er udløbet. Log venligst ind igen",
+        "ModalTitle": "Session expired",
+        "ModalDesc": "Session expired. Please login in again",
         "LoginBtn": "Login"
     },
     "UserOwner": {
         "Title": "Title",
         "Description": "Description",
         "BasicInfo": "BasicInfo",
-        "firstName": "firstName",
-        "lastName": "lastName",
-        "phone": "phone",
-        "email": "email",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone",
+        "email": "Email",
         "Security": "Security",
-        "oldPassword": "oldPassword",
-        "newPassword": "newPassword",
-        "renewPassword": "renewPassword",
+        "oldPassword": "Old Password",
+        "newPassword": "New Password",
+        "renewPassword": "Confirm Password",
         "Setting": "Setting",
         "Language": "Language"
     }

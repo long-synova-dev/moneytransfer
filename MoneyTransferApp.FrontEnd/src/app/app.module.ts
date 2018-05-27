@@ -44,8 +44,7 @@ import { ManageModule } from './manage/manage.module';
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
-          },
-          isolate: true
+          }
         }),
         HttpModule,
         NgxDatatableModule,

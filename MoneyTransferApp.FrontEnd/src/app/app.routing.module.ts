@@ -21,6 +21,14 @@ const routes: Routes = [
     loadChildren: './manage/manage.module#ManageModule'
   },
   {
+    path: 'user-manage',
+    loadChildren: './user-management/user-manage.module#UserManageModule',
+    canActivate: [AuthGuardComponent, RoleGuard],
+    data: {
+      roles: ['R0']
+    }
+  },
+  {
     path: 'account',
     loadChildren: './user/user.module#UserModule'
   }
